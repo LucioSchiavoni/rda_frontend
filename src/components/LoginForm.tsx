@@ -8,7 +8,8 @@ import { useNavigate} from "react-router-dom"
 const LoginForm = () => {
 
   const setToken = useAuthStore(state => state.setToken)
-  const setProfile = useAuthStore(state => state.profile)
+
+  const setProfile = useAuthStore(state => state.setProfile)
 
   const [message, setMessage] = useState<boolean>(false)
 
@@ -24,12 +25,14 @@ const LoginForm = () => {
 
       try {
           const res = await loginRequest(username, password)
-          if(res.data.status === 401){
+          if(res?.status === 401){
             setMessage(true)
+            console.log("Error aqui", res?.data.error)
           }else {
-            setToken(res.data)
+            setToken(res?.data.token)
             const data = await auth();
             setProfile(data)
+            console.log(data)
             navigate("/auth")
           }
 

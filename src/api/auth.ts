@@ -3,11 +3,17 @@ import { createUser } from "../interface/user";
 
 
 export const loginRequest = async (username: string, password: string) => {
+    try { 
     const dataLogin = {
         username,
         password
     }
-    return await clienteAxios.post("/login",dataLogin)
+        const res =  await clienteAxios.post("/login",dataLogin)
+        return res
+    } catch (error) {
+        console.log("Error del api login: ", error)
+    }
+
 }
 
 
@@ -17,7 +23,7 @@ export const auth = async() => {
         const res = await clienteAxios.get("/auth")
         return res.data
     } catch (error) {
-        console.log(error)        
+        console.log("Error del api auth: ", error)        
     }
 }
 

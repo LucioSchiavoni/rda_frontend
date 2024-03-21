@@ -5,7 +5,8 @@ import { useAuthStore } from '../context/auth/store';
 
 
 const clienteAxios = axios.create({
-    baseURL: import.meta.env.VITE_URL
+    baseURL: import.meta.env.VITE_URL,
+    withCredentials: true
 })
 
 clienteAxios.interceptors.request.use((config) => {
