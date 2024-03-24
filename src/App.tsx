@@ -4,7 +4,7 @@ import HomeAuth from "./pages/HomeAuth"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import { useAuthStore } from "./context/auth/store"
 import RegisterPage from "./pages/RegisterPage"
-import CreateNotas from "./pages/CreateNotas"
+import CreateNotasPage from "./pages/CreateNotasPage"
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
   <Route element={<ProtectedRoute isAllowed={isAuth} />} >
   <Route path="/auth" element={<HomeAuth/>}/>
   <Route path="/register" element={<RegisterPage/>}/> 
-  <Route path="/createNotas" element={<CreateNotas/>}/> 
+  <Route path="/createNotas" element={<CreateNotasPage/>}/> 
   </Route>
  </Routes>
  </BrowserRouter>

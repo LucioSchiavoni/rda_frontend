@@ -1,12 +1,17 @@
 import clienteAxios from "../config/axios";
-import { createNotas } from "../interface/notas";
+// import { NotaFormData } from "../types";
 
 
-export const createNotasRequest = async(data: createNotas) => {
+export const createNotasRequest = async (formData: FormData) => {
     try {
-        const res = await clienteAxios.post("/create", data)
-        return res.data
+        const response = await clienteAxios.post("/create", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        });
+        return response.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        throw error; 
     }
 }
