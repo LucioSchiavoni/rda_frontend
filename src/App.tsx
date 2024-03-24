@@ -5,6 +5,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute"
 import { useAuthStore } from "./context/auth/store"
 import RegisterPage from "./pages/RegisterPage"
 import CreateNotasPage from "./pages/CreateNotasPage"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/ReactToastify.css'
 
 function App() {
 
@@ -23,6 +25,11 @@ function App() {
   <Route path="/createNotas" element={<CreateNotasPage/>}/> 
   </Route>
  </Routes>
+    <ToastContainer 
+      position="top-right"
+      pauseOnHover={false}
+      pauseOnFocusLoss={false}
+    />
  </BrowserRouter>
     </>
   )

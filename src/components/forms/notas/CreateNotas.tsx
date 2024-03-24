@@ -4,6 +4,8 @@ import { NotaFormData } from "../../../types"
 import { createNotasRequest } from "../../../api/notas"
 import { useNavigate } from "react-router-dom"
 import { ChangeEvent, useState } from 'react';
+import { toast } from "react-toastify"
+import {useMutation} from '@tanstack/react-query'
 
 export default function CreateNotas() {
 
@@ -32,8 +34,22 @@ export default function CreateNotas() {
         }
     };
 
+    const mutation = useMutation({
+        mutationFn: createNotasRequest,
+        onError: (error) => {
+            console.log("desde onError")
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            console.log(data.success)
+            toast.success(data.success)
+            navigate("/auth")
+        }
+    })
+
    const handleForm = async (data: NotaFormData) => {
-        const formData = new FormData();
+    try {
+         const formData = new FormData();
         formData.append("motivo", data.motivo);
         formData.append("nro_pedido", data.nro_pedido);
         formData.append("estado", data.estado);
@@ -42,23 +58,27 @@ export default function CreateNotas() {
         if (file) {
             formData.append("seguimiento[archivo][ruta]", file);
         }
-
-        await createNotasRequest(formData);
-        navigate("/auth");
+        mutation.mutate(formData)
+     
+    } catch (error) {
+        console.log(error)
+    }
+       
     }
 
 
-  return (
+return (
 
     <div>
         <h2 className="text-center text-4xl mb-4 font-medium">Crear una nueva nota</h2>
+
         <form onSubmit={handleSubmit(handleForm)} className="border rounded-md px-3  py-4 shadow-xl" encType="multipart/form-data">
         <div className="flex flex-col-reverse">
  <NotasForm 
             register={register}
             errors={errors}
         />
-        <div className="mt-6  mb-6 ml-2 shadow-xl p-4 ">
+        <div className="mt-6  mb-6 ml-2 shadow-xl p-4 text-xl">
     <label htmlFor="file" className="block font-medium px-3 text-gray-600  mb-4">Subir archivo</label>
         <input  type="file" onChange={(e) => handleFileChange(e)}/>
 </div>

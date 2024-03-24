@@ -1,5 +1,5 @@
 import clienteAxios from "../config/axios";
-// import { NotaFormData } from "../types";
+import { isAxiosError } from "axios";
 
 
 export const createNotasRequest = async (formData: FormData) => {
@@ -11,7 +11,20 @@ export const createNotasRequest = async (formData: FormData) => {
         });
         return response.data;
     } catch (error) {
-        console.log(error);
-        throw error; 
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error);
+        }
+        
+    
+    }
+}
+
+
+export const getNotasRequest = async() => {
+    try {
+        const res = await clienteAxios.get("/allNotas")
+        return res.data
+    } catch (error) {
+        console.log(error)
     }
 }

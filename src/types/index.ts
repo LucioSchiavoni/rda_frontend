@@ -13,7 +13,7 @@ export const notaSchema = z.object({
             ruta: z.string(),
         }),
     }),
-});
+}); 
 
 export type Nota = z.infer<typeof notaSchema>
 export type NotaFormData = Pick<Nota, 'motivo' | 'nro_pedido'| 'estado' | 'observaciones' | "seguimiento" >
