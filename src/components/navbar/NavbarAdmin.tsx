@@ -8,7 +8,7 @@ const NavbarAdmin = () => {
       const logout = useAuthStore(state => state.logout)
 
   return (
-    <div className="gap-5 flex flex-col absolute left-0 border p-4 min-h-screen">
+    <div className="gap-5 flex flex-col absolute left-0 border p-4 min-h-screen bg-white">
         <p>{session.id}</p>
         <p>{session.username}</p>
         <p>{session.rol}</p>
