@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import HomeAuth from "./pages/HomeAuth"
+import EditNotas from "./pages/EditNotas"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import { useAuthStore } from "./context/auth/store"
 import RegisterPage from "./pages/RegisterPage"
@@ -23,6 +24,7 @@ function App() {
   <Route path="/auth" element={<HomeAuth/>}/>
   <Route path="/register" element={<RegisterPage/>}/> 
   <Route path="/createNotas" element={<CreateNotasPage/>}/> 
+ <Route path="/editNotas" element={<EditNotas/>}/> 
   </Route>
  </Routes>
     <ToastContainer 

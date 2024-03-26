@@ -15,8 +15,6 @@ export const notaSchema = z.object({
     }),
 }); 
 
-
-
 export const getNotaSchema = z.object({
     nro_referencia: z.string(),
     motivo: z.string(),
@@ -42,7 +40,7 @@ export const getNotaSchema = z.object({
 export type Nota = z.infer<typeof notaSchema>;
 
 
-
 export type GetNota = z.infer<typeof getNotaSchema>;
 export type NotaFormData = Omit<Nota, 'id'>;
+
 

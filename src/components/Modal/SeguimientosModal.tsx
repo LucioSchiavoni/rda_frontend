@@ -26,14 +26,14 @@ const SeguimientoModal: React.FC<SeguimientoProps> = ({id})  => {
         queryFn: () => getSeguimientoRequest(id),
     
     })
-console.log(data)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   if(isLoading) return <div>Cargando...</div>
   if(data)
 return (
     <>
- <button className='px-3 py-1 rounded-sm font-semibold border-b hover:bg-gray-100 transition-all' onClick={onOpen}>
+ <button className='px-3 py-1.5 rounded-sm font-semibold border-b hover:bg-gray-100 transition-all' onClick={onOpen}>
         Ver seguimiento
       </button>
       <Drawer placement={'right'} onClose={onClose} isOpen={isOpen}>
@@ -43,25 +43,30 @@ return (
           <DrawerBody>
         {
             data.map((item) => (
-                <div className='flex justify-between border w-full p-4'>
+                <div className='  border-b w-full p-4'>
                     <table className=''>
-                        <thead className='flex space-x-20 gap-10'>
+                        <div className=''>
+
+                        
+                        <thead className=''>
                             <th>
                                 Fecha
                             </th>
-                            <th>
-                                Archivo
+                        
+                            <th className=''>
+                                Destino
                             </th>
                         </thead>
-                        <tbody className='flex justify-between'>
+                        <tbody className=''>
                             <td>
                               <p>{item.fecha.substring(0, 10)}</p>  
                             </td>
+                         
                             <td>
-                                  <p className='underline underline-offset-2'>{item.archivo.nombre}</p>
-                            
+                                {item.destino}
                             </td>
                         </tbody>
+                        </div>
                     </table>
                     
               

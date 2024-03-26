@@ -1,6 +1,7 @@
 import clienteAxios from "../config/axios";
 import { isAxiosError } from "axios";
 import { Nota, Seguimiento } from "../interface/notas";
+import { toast } from "react-toastify";
 
 
 export const createNotasRequest = async (formData: FormData) => {
@@ -37,4 +38,28 @@ export const getSeguimientoRequest = async(id: number) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const createSeguimientoRequest = async(formdata:FormData) => {
+    try {
+        const res = await clienteAxios.post("/createFile", formdata, {
+            headers:{
+                "Content-Type": "multipart/form-data"
+            }
+        })
+           return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteNotaRequest = async(id: number) => {
+try {
+  
+    const res = await clienteAxios.delete(`/deleteNota/${id}`)
+    return res.data
+
+} catch (error) {
+    console.log(error)
+}
 }
