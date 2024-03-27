@@ -9,19 +9,19 @@ import {
   useDisclosure,
 
 } from '@chakra-ui/react'
-import { useMutation } from '@tanstack/react-query';
+
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createSeguimientoRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+
 
 interface ArchivoProps {
     id: number;
 }
 const SubirArchivo: React.FC<ArchivoProps> = ({id}) => {
 
-    const navigate = useNavigate()
+
  const {handleSubmit} = useForm()
 const idParam = id;
 

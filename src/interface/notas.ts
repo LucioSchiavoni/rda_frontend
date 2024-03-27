@@ -30,3 +30,12 @@ export type Archivo = {
     ruta: string;
     nombre: string;
 };
+
+
+export type EditData = {
+    [key: string]: any;
+    motivo?:string;
+    nro_pedido?: string;
+    estado?: string;
+    observaciones?: string;
+}

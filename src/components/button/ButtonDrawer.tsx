@@ -5,14 +5,18 @@ import { toast } from "react-toastify";
 
 interface ButtonProps {
     id: number;
+
 }
 
 const ButtonDrawer: React.FC<ButtonProps> = ({id}) => {
             const handleDelete = async() => {
         try {
             const data = await deleteNotaRequest(id)
+
+          window.location.reload()
+          setTimeout(() => {
             toast.info(data.succes)
-           window.location.reload()
+          }, 3000)
         } catch (error) {
             console.log(error)
         }
@@ -38,10 +42,10 @@ const ButtonDrawer: React.FC<ButtonProps> = ({id}) => {
             <p></p>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => handleDelete()}>
+            <Button  colorScheme='blue'  mr={3} onClick={() => handleDelete()}>
               Eliminar
             </Button>
-            <Button variant='ghost'>Cancelar</Button>
+            <Button variant='ghost' onClick={onClose}>Cancelar</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

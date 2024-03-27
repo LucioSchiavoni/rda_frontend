@@ -4,13 +4,14 @@ import {
   MenuButton,
   IconButton
 } from '@chakra-ui/react'
-import {  getNotasRequest } from "../../api/notas"
+import { getNotasRequest } from "../../api/notas"
 import { useQuery } from "@tanstack/react-query";
 import SeguimientoModal from '../Modal/SeguimientosModal';
 import SubirArchivo from "../Modal/ArchivoModal";
 
 import ButtonDrawer from '../button/ButtonDrawer';
-import { Link } from 'react-router-dom';
+
+import EditModal from '../Modal/EditModal';
 export default function NotasAdmin() {
     
 
@@ -18,6 +19,8 @@ export default function NotasAdmin() {
         queryKey: ['notas'],
         queryFn: getNotasRequest
     })
+
+  ;
 
 
     if(isLoading) return <div className="p-4 text-2xl text-black font-semibold text-center"><p>Cargando...</p></div>
@@ -76,7 +79,7 @@ export default function NotasAdmin() {
 
                         <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900" key={index} >
                             <tr>
-  <td className="px-4 py-4 text-sm font-medium text-gray-700 border-r-2 border-b-2 rounded-sm dark:text-gray-200 whitespace-nowrap">
+  <td className="px-4 py-4 text-sm font-medium text-gray-700  rounded-sm dark:text-gray-200 whitespace-nowrap">
       <div className="inline-flex items-center gap-x-3" >
 <p className="px-4 text-xl"> {item.nro_pedido}</p>
 
@@ -95,7 +98,6 @@ export default function NotasAdmin() {
     
    <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
       <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-white font-semibold bg-emerald-100/60 dark:bg-gray-800">
-       
 
           <h2 className="">{item.estado.replace(/_/g, ' ')}</h2>
       </div>
@@ -103,14 +105,8 @@ export default function NotasAdmin() {
   
    <td className="px-4 py-4 text-sm  whitespace-nowrap">
       <div className="flex items-center gap-x-6">
-        <ButtonDrawer id={item.nro_referencia}/>
-          <Link to='/editNotas' className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-              </svg>
-              
-          </Link>
-    
+        <ButtonDrawer id={item.nro_referencia} />
+        <EditModal id={item.nro_referencia}/>
       </div>
     
         
