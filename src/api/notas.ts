@@ -25,7 +25,7 @@ export const createNotasRequest = async (formData: FormData) => {
 export const editNotasRequest = async(id: number, data: EditData) => {
     try {
         const filterData = Object.fromEntries(
-            Object.entries(data).filter(([_key, value]) => value !== "")
+              Object.entries(data).filter(([_key, value]) => value !== "")
         );
         if(Object.keys(filterData).length > 0) {
             const response = await clienteAxios.put(`/updateNota/${id}`, filterData, {
@@ -33,7 +33,7 @@ export const editNotasRequest = async(id: number, data: EditData) => {
                     "Content-Type": "application/json"
                 }
             });
-            toast.success(response.data.succes);
+            return response.data
         } else {
             toast.info("No hay cambios para realizar");
         }

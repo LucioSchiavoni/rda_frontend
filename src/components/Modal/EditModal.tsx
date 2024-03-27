@@ -3,6 +3,8 @@ import EditForm from "../forms/notas/EditForm"
 import { useForm } from "react-hook-form"
 import { editNotasRequest } from "../../api/notas"
 import { EditData } from "../../interface/notas"
+import { toast } from "react-toastify"
+import { useMutation } from "@tanstack/react-query"
 // import { toast } from "react-toastify"
 // import { useMutation } from "@tanstack/react-query"
 
@@ -16,19 +18,20 @@ const EditModal: React.FC<EditProps> = ({id}) => {
 
      const {register, handleSubmit, formState: {errors}} = useForm<EditData>()
     
-    //      const mutation = useMutation({
-    //     mutationKey: ['updateNota', id],
-    //     mutationFn: (data: EditData) => editNotasRequest(id, data),
-    //     onError: (error) => {
-    //         console.log("desde onError")
-    //         toast.error(error.message)
-    //     },
-    //     onSuccess: (data) => {
-       
-    //         toast.success(data.succes)
-        
-    //     }
-    // })
+         const mutation = useMutation({
+        mutationKey: ['updateNota', id],
+        mutationFn: (data: EditData) => editNotasRequest(id, data),
+        onError: (error) => {
+            console.log("desde onError")
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            toast.success(data.succes)
+             setTimeout(() => {
+            window.location.reload()
+        },3000)
+        }
+    })
 
    const handleForm = async ( data: EditData) => {
     try {
@@ -38,10 +41,8 @@ const EditModal: React.FC<EditProps> = ({id}) => {
             nro_pedido: data.nro_pedido,
             observaciones: data.observaciones
         }
-        await editNotasRequest(id, jsonData)
-        setTimeout(() => {
-            window.location.reload()
-        },3000)
+        // await editNotasRequest(id, jsonData)
+        mutation.mutate(jsonData)
     } catch (error) {
         console.log(error)
     }

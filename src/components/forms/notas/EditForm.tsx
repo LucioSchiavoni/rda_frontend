@@ -43,6 +43,7 @@ export default function EditForm({errors, register}: NotasFormProps){
           <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
               absolute">Estado</p>
            <select id="estado" {...register("estado")} className="mt-2 text-gray-600 w-full bg-white border border-gray-400 shadow-inner px-4 py-2 pr-8  rounded focus:outline-none focus:border-blue-600">
+                                    <option value="">Cambiar estado</option>
                                     <option value="EN_PROCESO">En proceso</option>
                                     <option value="EN_CURSO">En curso</option>
                                     <option value="FINALIZADO">Finalizado</option>
