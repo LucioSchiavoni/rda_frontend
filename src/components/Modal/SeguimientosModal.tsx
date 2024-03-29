@@ -11,6 +11,7 @@ DrawerFooter,
 import { useDisclosure } from '@chakra-ui/react'
 import { useQuery } from "@tanstack/react-query";
 import { getSeguimientoRequest } from '../../api/notas';
+import ButtonDownload from '../button/ButtonDownload';
 
 interface SeguimientoProps {
     id: number;
@@ -61,9 +62,22 @@ return (
                             <td>
                               <p>{item.fecha.substring(0, 10)}</p>  
                             </td>
-                         
                             <td>
                                 {item.destino}
+
+                            </td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                              {
+                                item.archivo.ruta ?
+                                 <ButtonDownload fileId={item.archivo.id} />
+                                 :
+                                 <p>Sin archivos</p>
+                              }
+                          
+                             
                             </td>
                         </tbody>
                         </div>

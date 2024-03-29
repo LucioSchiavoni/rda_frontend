@@ -22,6 +22,15 @@ export const createNotasRequest = async (formData: FormData) => {
     }
 }
 
+export const downloadFileRequest= async(id:number) => {
+    try {
+        const res = await clienteAxios.get(`/download/${id}`)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const editNotasRequest = async(id: number, data: EditData) => {
     try {
         const filterData = Object.fromEntries(
