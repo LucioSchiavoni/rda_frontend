@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query"
 
 
 interface EditProps {
-    id: number;
+    id: string;
 }
 const EditModal: React.FC<EditProps> = ({id}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()

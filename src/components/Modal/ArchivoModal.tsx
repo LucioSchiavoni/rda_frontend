@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 
 
 interface ArchivoProps {
-    id: number;
+    id: string;
 }
 const SubirArchivo: React.FC<ArchivoProps> = ({id}) => {
 

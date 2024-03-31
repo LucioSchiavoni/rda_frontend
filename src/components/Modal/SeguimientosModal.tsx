@@ -14,7 +14,7 @@ import { getSeguimientoRequest } from '../../api/notas';
 import ButtonDownload from '../button/ButtonDownload';
 
 interface SeguimientoProps {
-    id: number;
+    id: string;
 }
 
 
@@ -37,50 +37,46 @@ return (
  <button className='px-3 py-1.5 rounded-sm font-semibold border-b hover:bg-gray-100 transition-all' onClick={onOpen}>
         Ver seguimiento
       </button>
-      <Drawer placement={'right'} onClose={onClose} isOpen={isOpen}>
+      <Drawer placement={'right'} onClose={onClose} isOpen={isOpen} size={'md'}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth='1px'>Seguimiento de la compra</DrawerHeader>
+        <DrawerContent className='dark:bg-gray-900 dark:text-white'>
+          <DrawerHeader borderBottomWidth='1px'>Seguimiento:</DrawerHeader>
           <DrawerBody>
         {
             data.map((item) => (
-                <div className='  border-b w-full p-4'>
-                    <table className=''>
-                        <div className=''>
-
+                <div className='border-b w-full p-4'>
+                    <table className='min-w-full divide-y divide-gray-200  dark:text-black '>
                         
-                        <thead className=''>
-                            <th>
+                        <thead className='bg-gray-50 dark:bg-gray-900 '>
+                            <th className='py-3.5 px-4 text-xl text-left rtl:text-right text-gray-900 dark:text-white font-medium'>
                                 Fecha
                             </th>
-                        
-                            <th className=''>
+
+                            <th className='dark:text-white text-xl '>
                                 Destino
                             </th>
+                            <th className='dark:text-white text-xl'>Archivo</th>
                         </thead>
-                        <tbody className=''>
-                            <td>
-                              <p>{item.fecha.substring(0, 10)}</p>  
+                        <tbody className='bg-white dark:bg-gray-900 dark:text-white divide-gray-200 dark:divide-gray-700 '>
+                            <td  className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
+                              <p className='dark:text-white text-xl'>{item.fecha.substring(0, 10)}</p>  
                             </td>
-                            <td>
+                            <td className='p-8 text-xl'>
                                 {item.destino}
-
+                                
                             </td>
-                            <td>
-                              
-                            </td>
-                            <td>
+                          
+                            <td className=''>
                               {
                                 item.archivo.ruta ?
-                                 <ButtonDownload fileId={item.archivo.id} />
-                                 :
-                                 <p>Sin archivos</p>
+                                <ButtonDownload fileId={item.archivo.id} />
+                                :
+                                <p className='text-sm ml-6 text-gray-600 underline underline-1'>Sin archivos para descargar</p>
                               }
                           
-                             
+                            
                             </td>
                         </tbody>
-                        </div>
                     </table>
                     
               
@@ -91,7 +87,7 @@ return (
            
           </DrawerBody>
      <DrawerFooter>
-            <Button variant='outline'  onClick={onClose}>
+            <Button variant='outline' className='dark:bg-white text-black'  onClick={onClose}>
               Cerrar
             </Button>
      </DrawerFooter>

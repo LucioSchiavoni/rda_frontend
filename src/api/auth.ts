@@ -1,17 +1,16 @@
+import { isAxiosError } from "axios";
 import clienteAxios from "../config/axios";
 import { createUser } from "../interface/user";
 
 
-export const loginRequest = async (username: string, password: string) => {
+export const loginRequest = async ( userData: {username: string, password: string}) => {
     try { 
-    const dataLogin = {
-        username,
-        password
-    }
-        const res =  await clienteAxios.post("/login",dataLogin)
-        return res
+        const response =  await clienteAxios.post("/login", userData)
+        return response
     } catch (error) {
-        console.log("Error del api login: ", error)
+            if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error);
+        }
     }
 
 }
@@ -30,7 +29,7 @@ export const auth = async() => {
 export const registerRequest = async(data:createUser): Promise<any> => {
     try {
         const res = await clienteAxios.post("/register", data)
-        return res
+        return res.data
     } catch (error) {
         console.log(error)
     }

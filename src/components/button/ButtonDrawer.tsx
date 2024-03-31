@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 
 interface ButtonProps {
-    id: number;
+    id: string;
 
 }
 

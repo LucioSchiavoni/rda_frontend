@@ -22,6 +22,15 @@ export const createNotasRequest = async (formData: FormData) => {
     }
 }
 
+export const getNotasByEstado = async(estado: string) => {
+    try {
+        const response = await clienteAxios.get(`/nota/estado/${estado}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const downloadFileRequest= async(id:number) => {
     try {
         const res = await clienteAxios.get(`/download/${id}`)
@@ -31,7 +40,7 @@ export const downloadFileRequest= async(id:number) => {
     }
 }
 
-export const editNotasRequest = async(id: number, data: EditData) => {
+export const editNotasRequest = async(id: string, data: EditData) => {
     try {
         const filterData = Object.fromEntries(
               Object.entries(data).filter(([_key, value]) => value !== "")
@@ -65,7 +74,7 @@ export const getNotasRequest = async() => {
     }
 }
 
-export const getNotasByIdRequest = async(id: number) => {
+export const getNotasByIdRequest = async(id: string) => {
     try {
         const {data} = await clienteAxios.get(`/nota/${id}`)
         return data as Nota[];
@@ -74,7 +83,7 @@ export const getNotasByIdRequest = async(id: number) => {
     }
 }
 
-export const getSeguimientoRequest = async(id: number) => {
+export const getSeguimientoRequest = async(id: string) => {
     try {
         const {data} = await clienteAxios.get(`/seguimiento/${id}`)
         return data as Seguimiento[];
@@ -96,7 +105,7 @@ export const createSeguimientoRequest = async(formdata:FormData) => {
     }
 }
 
-export const deleteNotaRequest = async(id: number) => {
+export const deleteNotaRequest = async(id: string) => {
 try {
   
     const res = await clienteAxios.delete(`/deleteNota/${id}`)

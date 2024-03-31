@@ -1,7 +1,10 @@
-import { useState } from "react"
+
 import { loginRequest, auth } from "../api/auth"
 import { useAuthStore } from "../context/auth/store"
 import { useNavigate} from "react-router-dom"
+import { toast } from "react-toastify"
+import { useMutation } from "@tanstack/react-query"
+import { error } from "console"
 
 
 
@@ -12,32 +15,42 @@ const LoginForm = () => {
   const setProfile = useAuthStore(state => state.setProfile)
 
 
-  const [message, setMessage] = useState<boolean>(false)
+  
 
 
 
   const navigate = useNavigate()
+
+const mutation = useMutation({
+  mutationFn: loginRequest,
+  onError: (error) => {
+    console.log("desde onError")
+    toast.error(error.message)
+  },
+  onSuccess: async(response) => {
+    if(response && response.data && response.data.token) {
+      const token = response.data.token;
+      setToken(token);
+      const isAuth = await auth();
+      setProfile(isAuth);
+      navigate("/auth");
+    } else {
+      toast.error("Credenciales incorrectas");
+    }
+  }
+});
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
 
       e.preventDefault()
       const username = (e.currentTarget.elements[0] as HTMLInputElement).value
       const password = (e.currentTarget.elements[1] as HTMLInputElement).value
+       const userData = { username, password };;
 
       try {
-          const res = await loginRequest(username, password)
-          if(res && res?.status === 401){
-            setMessage(true)
-            console.log("Error aqui", res?.data.error)
-          }else {
-            setToken(res?.data.token)
-            const data = await auth();
-            setProfile(data)
-            navigate("/auth")
-          }
-
+          mutation.mutate(userData)
       } catch (error) {
-        console.log("Error del componente login: ", error)
+       console.log(error)
       }
 
 
@@ -68,14 +81,7 @@ const LoginForm = () => {
         <div className="relative">
           <button type="submit" className="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-blue-800
               rounded-lg transition duration-200 hover:bg-blue-700 ease">Ingresar</button>
-              {
-                message && (
-
-                  <div>
-                    <p className="text-red-800">Datos incorrectos</p>
-                  </div>
-                )
-              }
+        
         </div>
       </form>
     </div>

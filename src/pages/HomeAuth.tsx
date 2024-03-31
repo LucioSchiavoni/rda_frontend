@@ -1,4 +1,5 @@
-import Navbar from "../components/navbar/Navbar"
+
+import Layout from "../Layout"
 import NotasAdmin from "../components/notas/NotasAdmin"
 
 
@@ -11,12 +12,12 @@ const HomeAuth = () => {
 
   return (
     <>
-   <Navbar/>
-   <div className="flex justify-center items-center py-24">
-    
-    <NotasAdmin/>
-   </div>
-   </>
+    <Layout>
+       <NotasAdmin/>
+    </Layout>
+   
+
+    </>
   )
 }
 
