@@ -44,7 +44,7 @@ return (
           <DrawerBody>
         {
             data.map((item) => (
-                <div className='border-b w-full p-4'>
+                <div className='border-b w-full p-4' key={item.id}>
                     <table className='min-w-full divide-y divide-gray-200  dark:text-black '>
                         
                         <thead className='bg-gray-50 dark:bg-gray-900 '>

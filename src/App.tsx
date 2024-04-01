@@ -14,7 +14,7 @@ function App() {
 
   const isAuth = useAuthStore((state) => state.isAuth)
   const user = useAuthStore(state => state.profile)
-  const userRol = user.rol
+  const userRol = user ? user.rol : null;
 
   return (
     <>
@@ -25,14 +25,14 @@ function App() {
 
    <Route element={<ProtectedRoute isAllowed={isAuth} />} >
             <Route path="/auth" element={<HomeAuth />} />
-            {/* Para el usuario USER */}
+           
             {userRol === 'USER' && (
               <>
                 <Route path="/password" element={<ChangePassword />} />
               </>
             )}
 
-            {/* Para el usuario ADMIN */}
+            
             {userRol === 'ADMIN' && (
               <>
                 <Route path="/register" element={<RegisterPage />} />

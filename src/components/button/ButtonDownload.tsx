@@ -9,16 +9,28 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId }) => {
     const handleDownload = async () => {
         try {
             const res = await downloadFileRequest(fileId);
-            const url = window.URL.createObjectURL(new Blob([res?.data]));
+            
+            const fileContent = res?.data
+                console.log("el file content: ", fileContent)
+            const blob = new Blob([fileContent], {type: 'application/pdf'})
+            
+            const url = window.URL.createObjectURL(blob);
+            
             const link = document.createElement('a');
+            
             link.href = url;
-            link.setAttribute('download', 'archivo.txt');
+            
+            link.setAttribute('download', 'archivo.pdf');
+            
             document.body.appendChild(link);
+            
             link.click();
+
+            window.URL.revokeObjectURL(url);
         } catch (error) {
             console.error('Error al descargar el archivo:', error);
         }
-    };
+    };        
 
     return (
          <button onClick={handleDownload} className="flex items-center px-4 py-2 text-sm font-medium  transition-colors duration-200 sm:text-base sm:px-6  rounded-md dark:hover:bg-blue-800 bg-blue-950 text-white gap-x-3 hover:bg-blue-700">
