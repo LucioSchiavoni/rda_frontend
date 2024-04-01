@@ -34,3 +34,12 @@ export const registerRequest = async(data:createUser): Promise<any> => {
         console.log(error)
     }
 }
+
+export const changePassword = async (id: number, password: string): Promise<any> => {
+  try {
+    const res = await clienteAxios.put(`/changePassword/${id}`, { password: password });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom"
+
+import ChangePasswordForm from "../components/forms/user/ChangePasswordForm"
+import Layout from "../Layout"
 
 
 const ChangePassword = () => {
   return (
-    <div>
-      <Link to='/auth' className="absolute top-10 left-10 border p-2">Volver</Link>
-      <p>ChangePassword</p></div>
-  )
+    <Layout>
+<div className="justify-center items-center flex">
+      <ChangePasswordForm/>
+     </div>
+  </Layout>
+   ) 
+    
 }
 
 export default ChangePassword

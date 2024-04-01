@@ -3,4 +3,3 @@ export interface createUser {
     password: string;
     rol: string;
 }
-

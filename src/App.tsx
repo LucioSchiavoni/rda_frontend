@@ -13,6 +13,8 @@ import ChangePassword from "./pages/ChangePassword"
 function App() {
 
   const isAuth = useAuthStore((state) => state.isAuth)
+  const user = useAuthStore(state => state.profile)
+  const userRol = user.rol
 
   return (
     <>
@@ -21,14 +23,25 @@ function App() {
   <Route path="/" element={<Home/>}/>
 
 
-  <Route element={<ProtectedRoute isAllowed={isAuth} />} >
-  <Route path="/auth" element={<HomeAuth/>}/>
-  
-  <Route path="/register" element={<RegisterPage/>}/> 
-  <Route path="/createNotas" element={<CreateNotasPage/>}/> 
-  <Route path="/password" element={<ChangePassword/>}/> 
-  </Route>
- </Routes>
+   <Route element={<ProtectedRoute isAllowed={isAuth} />} >
+            <Route path="/auth" element={<HomeAuth />} />
+            {/* Para el usuario USER */}
+            {userRol === 'USER' && (
+              <>
+                <Route path="/password" element={<ChangePassword />} />
+              </>
+            )}
+
+            {/* Para el usuario ADMIN */}
+            {userRol === 'ADMIN' && (
+              <>
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/createNotas" element={<CreateNotasPage />} />
+                <Route path="/password" element={<ChangePassword />} />
+              </>
+            )}
+          </Route>
+        </Routes>
     <ToastContainer 
       position="top-right"
       pauseOnHover={false}
