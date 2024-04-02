@@ -22,7 +22,7 @@ export default function NotasAdmin() {
     
     const [estado, setEstado] = useState("default")
     const [search, setSearch] = useState("");
-
+    
     const user = useAuthStore(state => state.profile)
 
     const {data , isLoading} = useQuery<GetNota[]>({
@@ -40,13 +40,16 @@ export default function NotasAdmin() {
       setEstado(estado)
     }
 
+
        const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(event.target.value);
     };
 
-const filteredData = search 
-  ? data?.filter(item => item.nro_pedido.toString().includes(search))
+  
+      const filteredData = search 
+  ? data?.filter(item => item.nro_pedido && item.nro_pedido.toString().includes(search))
   : data;
+
 
 
     if(isLoading) return <div className="flex justify-center items-center mt-32 text-3xl ">
