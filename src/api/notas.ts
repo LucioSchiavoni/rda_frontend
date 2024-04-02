@@ -33,7 +33,9 @@ export const getNotasByEstado = async(estado: string) => {
 
 export const downloadFileRequest= async(id:number) => {
     try {
-        const res = await clienteAxios.get(`/download/${id}`)
+        const res = await clienteAxios.get(`/download/${id}`, {
+            responseType: 'blob'
+        })
         return res
     } catch (error) {
         console.log(error)

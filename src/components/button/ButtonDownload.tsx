@@ -10,23 +10,36 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId }) => {
         try {
             const res = await downloadFileRequest(fileId);
             
-            const fileContent = res?.data
-                console.log("el file content: ", fileContent)
-            const blob = new Blob([fileContent], {type: 'application/pdf'})
-            
-            const url = window.URL.createObjectURL(blob);
-            
-            const link = document.createElement('a');
-            
-            link.href = url;
-            
-            link.setAttribute('download', 'archivo.pdf');
-            
-            document.body.appendChild(link);
-            
-            link.click();
+            if (res?.status === 200) {
+                
+                const fileData = res.data;
+                
+               
+                const blob = new Blob([fileData]);
+          
+                const url = window.URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
 
-            window.URL.revokeObjectURL(url);
+                if(res.data.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"){
+                     link.setAttribute('download', `archivo_${fileId}.docx`);
+                }else if(res.data.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+                    link.setAttribute('download', `archivo_${fileId}.xlsx`);
+                }else if (res.data.type === "application/pdf"){
+                    link.setAttribute('download', `archivo_${fileId}.pdf`);
+                }else {
+                    link.setAttribute('download', `archivo_${fileId}.txt`);
+                }
+          
+                
+                link.click();
+                
+                window.URL.revokeObjectURL(url);
+            } else {
+               
+                console.error('Error en la solicitud:', res?.statusText);
+            }
         } catch (error) {
             console.error('Error al descargar el archivo:', error);
         }
