@@ -18,11 +18,16 @@ import { useState } from 'react';
 import { GetNota } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../context/auth/store';
+import ReactPaginate from 'react-paginate';
+
+const pageSize = 8;
+
 export default function NotasAdmin() {
     
     const [estado, setEstado] = useState("default")
     const [search, setSearch] = useState("");
-    
+    const [currentPage, setCurrentPage] = useState(0);
+
     const user = useAuthStore(state => state.profile)
 
     const {data , isLoading} = useQuery<GetNota[]>({
@@ -45,11 +50,21 @@ export default function NotasAdmin() {
       setSearch(event.target.value);
     };
 
+    const handlePageChange = ({ selected }: any) => {
+      setCurrentPage(selected);
+    };
+
   
       const filteredData = search 
-  ? data?.filter(item => item.nro_pedido && item.nro_pedido.toString().includes(search))
-  : data;
+    ? data?.filter(item => 
+        (item.nro_pedido && item.nro_pedido.toString().includes(search)) ||
+        (item.motivo && item.motivo.toLowerCase().includes(search)) ||
+        (item.observaciones && item.observaciones.toLowerCase().includes(search))
+    )
+    : data;
 
+    const offset = currentPage * pageSize;
+    const currentPageData = filteredData?.slice(offset, offset + pageSize);
 
 
     if(isLoading) return <div className="flex justify-center items-center mt-32 text-3xl ">
@@ -98,9 +113,7 @@ export default function NotasAdmin() {
             </span>
           
             
-            <input type="text" value={search} placeholder="Buscar nro. pedido.." onChange={handleSearch} className="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 shadow-xl"  />  
-            
-    
+            <input type="text" value={search} placeholder="Nro. pedido, motivo, observacion.." onChange={handleSearch} className="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 shadow-xl"  />  
         </div>
         
           
@@ -158,7 +171,7 @@ export default function NotasAdmin() {
                             
                             </tr>
                         </thead>
-                        {filteredData?.map((item: GetNota, index: number) => (
+                        {currentPageData?.map((item: GetNota, index: number) => (
 
                         <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900" key={index} >
                             <tr>
@@ -234,11 +247,26 @@ export default function NotasAdmin() {
 </tbody> 
    
  ))
- 
+
  }
 
 </div>
   </div>
+  <ReactPaginate className='text-white flex gap-10 justify-center items-center mt-2'
+ pageCount={Math.ceil((filteredData?.length ?? 0) / pageSize)}
+ pageRangeDisplayed={5} // numero de paginas mostradas en el rango
+ marginPagesDisplayed={2} // numero de paginas mostradas en los margenes
+ onPageChange={handlePageChange}
+ containerClassName={'pagination'}
+ activeClassName={'active'}
+ previousLabel={'Página anterior'}
+  nextLabel={'Página siguiente'}
+  previousClassName={'custom-previous-button bg-blue-900 px-3 py-2 rounded-md hover:bg-blue-800 transition-all'} 
+  nextClassName={'custom-next-button bg-blue-900 px-3 py-2 rounded-md hover:bg-blue-800 transition-all'} 
+  breakClassName={'custom-break'} 
+  pageClassName={'custom-page underline underline-offset-2 text-black dark:text-white font-medium text-xl'} 
+  disabledClassName={'disabled'}
+/>
     </div>
       </div>
 

@@ -7,7 +7,7 @@ const Layout = ({children}: {children: React.ReactNode}) => {
      <div className='absolute left-0'>
         <Navbar/>
      </div>
-    <div className='py-40  dark:bg-gray-900 min-h-screen'>
+    <div className='py-24 dark:bg-gray-900 min-h-screen'>
        {children}
     </div>
     </>
