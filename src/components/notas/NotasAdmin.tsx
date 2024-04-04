@@ -18,15 +18,15 @@ import { useState } from 'react';
 import { GetNota } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../context/auth/store';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 
-const pageSize = 8;
+// const pageSize = 8;
 
 export default function NotasAdmin() {
     
     const [estado, setEstado] = useState("default")
     const [search, setSearch] = useState("");
-    const [currentPage, setCurrentPage] = useState(0);
+    // const [currentPage, setCurrentPage] = useState(0);
 
     const user = useAuthStore(state => state.profile)
 
@@ -50,9 +50,9 @@ export default function NotasAdmin() {
       setSearch(event.target.value);
     };
 
-    const handlePageChange = ({ selected }: any) => {
-      setCurrentPage(selected);
-    };
+    // const handlePageChange = ({ selected }: any) => {
+    //   setCurrentPage(selected);
+    // };
 
   
       const filteredData = search 
@@ -63,8 +63,8 @@ export default function NotasAdmin() {
     )
     : data;
 
-    const offset = currentPage * pageSize;
-    const currentPageData = filteredData?.slice(offset, offset + pageSize);
+    // const offset = currentPage * pageSize;
+    // const currentPageData = filteredData?.slice(offset, offset + pageSize);
 
 
     if(isLoading) return <div className="flex justify-center items-center mt-32 text-3xl ">
@@ -76,8 +76,8 @@ export default function NotasAdmin() {
     <>
 
        <div className="flex flex-col  justify-center items-center">
-               <div className="pb-4    whitespace-nowrap">
-<div className="flex   w-auto ">
+               <div className="pb-4 whitespace-nowrap">
+<div className="flex w-auto ">
 
         {
           user.rol === "ADMIN" ? 
@@ -97,7 +97,7 @@ export default function NotasAdmin() {
 <label htmlFor="" className='inline-flex items-center px-3 py-1 bg-gray-800 rounded-full gap-x-2 text-white dark:text-white font-semibold  dark:bg-gray-800 '>ESTADO:</label>
               </div>
           
- <select name="" id="" onChange={(e)=> handleEstado(e.target.value)} className='w-32 border shadow-xl text-xl rounded-md px-3'>
+ <select name="" id="" value={estado} onChange={(e)=> handleEstado(e.target.value)} className='w-32 border shadow-xl text-xl rounded-md px-3'>
   <option value="default">Todos</option>
   <option value="EN_PROCESO">En proceso</option>
   <option value="EN_CURSO">En curso</option>
@@ -171,7 +171,7 @@ export default function NotasAdmin() {
                             
                             </tr>
                         </thead>
-                        {currentPageData?.map((item: GetNota, index: number) => (
+                        {filteredData?.map((item: GetNota, index: number) => (
 
                         <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900" key={index} >
                             <tr>
@@ -252,7 +252,7 @@ export default function NotasAdmin() {
 
 </div>
   </div>
-  <ReactPaginate className='text-white flex gap-10 justify-center items-center mt-2'
+  {/* <ReactPaginate className='text-white flex gap-10 justify-center items-center mt-2'
  pageCount={Math.ceil((filteredData?.length ?? 0) / pageSize)}
  pageRangeDisplayed={5} // numero de paginas mostradas en el rango
  marginPagesDisplayed={2} // numero de paginas mostradas en los margenes
@@ -266,7 +266,7 @@ export default function NotasAdmin() {
   breakClassName={'custom-break'} 
   pageClassName={'custom-page underline underline-offset-2 text-black dark:text-white font-medium text-xl'} 
   disabledClassName={'disabled'}
-/>
+/> */}
     </div>
       </div>
 
