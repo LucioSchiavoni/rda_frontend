@@ -11,12 +11,9 @@ export default function CreateNotas() {
 
     const navigate = useNavigate()
     const initialValues: NotaFormData = {
-    motivo: "",
-    nro_pedido:"",
-    estado: "EN_PROCESO",
+    titulo: "",
     observaciones: "",
     seguimiento: {
-        destino: "",
         archivo: {
             ruta: "" 
     }
@@ -52,11 +49,8 @@ export default function CreateNotas() {
     try {
        
          const formData = new FormData();
-        formData.append("motivo", data.motivo);
-        formData.append("nro_pedido", data.nro_pedido);
-        formData.append("estado", data.estado);
+        formData.append("titulo", data.titulo);
         formData.append("observaciones", data.observaciones);
-        formData.append("seguimiento[destino]", data.seguimiento.destino);
         if (file) {
             formData.append("seguimiento[archivo][ruta]", file);
         }

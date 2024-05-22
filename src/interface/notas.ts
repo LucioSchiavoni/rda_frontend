@@ -1,24 +1,18 @@
 export interface createNotas {
-    motivo:string;
-    nro_pedido: string;
-    estado: string;
+    titulo:string;
     observaciones: string;
-    destino: string;
     ruta: File | null;
 }
 
 export type Nota = {
     nro_referencia: number;
-    motivo: string;
-    nro_pedido: number;
-    estado: string;
+    titulo: string;
     observaciones: string;
     seguimiento: Seguimiento[];
 };
 
 export type Seguimiento = {
     id: number;
-    destino: string;
     fecha: string;  
     archivoId: number;
     notaId: number;
@@ -34,8 +28,6 @@ export type Archivo = {
 
 export type EditData = {
     [key: string]: any;
-    motivo?:string;
-    nro_pedido?: string;
-    estado?: string;
+    titulo?:string;
     observaciones?: string;
 }
