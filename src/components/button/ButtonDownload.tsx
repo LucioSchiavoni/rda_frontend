@@ -2,9 +2,10 @@ import { downloadFileRequest } from "../../api/notas";
 
 interface ButtonDownloadProps {
     fileId: number;
+    nombre: string;
 }
 
-const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId }) => {
+const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId, nombre }) => {
 
     const handleDownload = async () => {
         try {
@@ -51,7 +52,7 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId }) => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
         </svg>
 
-        <span className="text-white">Descargar</span>
+        <span className="text-white">{nombre}</span> 
     </button>
     );
 }

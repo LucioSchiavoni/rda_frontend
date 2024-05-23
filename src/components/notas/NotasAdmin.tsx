@@ -3,10 +3,9 @@ import {
   MenuList,
   MenuButton,
   IconButton,
-  Spinner,
-  Progress
+  Spinner
 } from '@chakra-ui/react'
-import { getNotasByEstado, getNotasRequest } from "../../api/notas"
+import {  getNotasRequest } from "../../api/notas"
 import { useQuery } from "@tanstack/react-query";
 import SeguimientoModal from '../Modal/SeguimientosModal';
 import SubirArchivo from "../Modal/ArchivoModal";
@@ -18,47 +17,32 @@ import { useState } from 'react';
 import { GetNota } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../context/auth/store';
-// import ReactPaginate from 'react-paginate';
 
-// const pageSize = 8;
 
 export default function NotasAdmin() {
     
-    // const [estado, setEstado] = useState("default")
+
     const [search, setSearch] = useState("");
-    // const [currentPage, setCurrentPage] = useState(0);
 
     const user = useAuthStore(state => state.profile)
 
-    const { data, isLoading, error } = useQuery<GetNota[]>({
+    const { data, isLoading, error } = useQuery<GetNota[], Error>({
       queryKey: ['notas'],
       queryFn: getNotasRequest
     });
-
-    // const handleEstado = async(estado:string)=>{
-    //   setEstado(estado)
-    // }
-
 
        const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearch(event.target.value);
     };
 
-    // const handlePageChange = ({ selected }: any) => {
-    //   setCurrentPage(selected);
-    // };
 
   
-    //   const filteredData = search 
-    // ? data?.filter(item => 
-        
-    //     (item.titulo && item.titulo.toLowerCase().includes(search)) ||
-    //     (item.observaciones && item.observaciones.toLowerCase().includes(search))
-    // )
-    // : data;
-
-    // const offset = currentPage * pageSize;
-    // const currentPageData = filteredData?.slice(offset, offset + pageSize);
+    const filteredData = search 
+    ? (Array.isArray(data) ? data.filter(item => 
+        (item.titulo && item.titulo.toLowerCase().includes(search.toLowerCase())) ||
+        (item.observaciones && item.observaciones.toLowerCase().includes(search.toLowerCase()))
+      ) : [])
+    : data;
 
 
     if(isLoading) return <div className="flex justify-center items-center mt-32 text-3xl ">
@@ -75,7 +59,7 @@ export default function NotasAdmin() {
 
         {
           user.rol === "ADMIN" ? 
-           <Link to='/createNotas' className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+           <Link to='/createNotas' className="flex items-center justify-center w-1/2 mr-56 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-gray-800 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-gray-700 dark:hover:bg-gray-700 dark:bg-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -86,13 +70,7 @@ export default function NotasAdmin() {
           null
         }
        
-            <div className='flex  items-center '>
-              <div className='px-3 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
-
-              </div>
-          
-
-        </div>
+         
 
       <div className="relative flex items-center mt-4 md:mt-0 ml-12">
             <span className="absolute">
@@ -131,9 +109,12 @@ export default function NotasAdmin() {
   </th>
      
   <th>
-
+        
   </th>
-  <th className='dark:text-white text-xl font-thin'>
+  <th>
+        
+        </th>
+ <th className='dark:text-white text-xl font-thin'>
     {
       user.rol === "ADMIN" ?
       <span>Editar / Eliminar</span>
@@ -142,20 +123,15 @@ export default function NotasAdmin() {
     }
     
   </th>
-
-
                             
-                            </tr>
-                        </thead>
-                        {data?.map((item: GetNota, index: number) => (
+    </tr>
+</thead>
+     {filteredData?.map((item: GetNota, index: number) => (
 
-                        <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900" key={index} >
+  <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900" key={index} >
                             <tr>
   <td className="px-4 py-4 text-sm font-medium text-gray-700  dark:border-none border-b border-l border-r border-gray-200 dark:text-gray-200 whitespace-nowrap">
-      <div className=" items-center" >
 
-
- </div>
   </td>
 
  
@@ -166,17 +142,13 @@ export default function NotasAdmin() {
       </div>
   </td>
   
-  <td className="px-4 py-4 dark:border-none border-b border-l border-r border-gray-200 text-gray-700 dark:text-gray-200 whitespace-nowrap text-xl font-semibold ">{item.observaciones}</td>
-    
-   <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap dark:border-none border-b border-l border-r border-gray-200">
-    
+  <td className="px-4 py-4 dark:border-none border-b border-l border-r border-gray-200 text-gray-700 dark:text-gray-200 whitespace-nowrap text-xl font-semibold">{item.observaciones}</td>
 
+      <td className='text-white  '>
+        <span className='px-2 py-1 border  rounded-xl '>Privado</span>
         
-    
-  </td>
-  
-
-  <td className='flex justify-center items-center p-2 '>
+      </td>
+  <td className='flex justify-center items-center ml-4 py-1 '>
      <Menu>
    <MenuButton className='  flex justify-center items-center mt-3 ' as={IconButton} >
 
@@ -221,21 +193,7 @@ export default function NotasAdmin() {
 
 </div>
   </div>
-  {/* <ReactPaginate className='text-white flex gap-10 justify-center items-center mt-2'
- pageCount={Math.ceil((filteredData?.length ?? 0) / pageSize)}
- pageRangeDisplayed={5} // numero de paginas mostradas en el rango
- marginPagesDisplayed={2} // numero de paginas mostradas en los margenes
- onPageChange={handlePageChange}
- containerClassName={'pagination'}
- activeClassName={'active'}
- previousLabel={'Página anterior'}
-  nextLabel={'Página siguiente'}
-  previousClassName={'custom-previous-button bg-blue-900 px-3 py-2 rounded-md hover:bg-blue-800 transition-all'} 
-  nextClassName={'custom-next-button bg-blue-900 px-3 py-2 rounded-md hover:bg-blue-800 transition-all'} 
-  breakClassName={'custom-break'} 
-  pageClassName={'custom-page underline underline-offset-2 text-black dark:text-white font-medium text-xl'} 
-  disabledClassName={'disabled'}
-/> */}
+
     </div>
       </div>
 

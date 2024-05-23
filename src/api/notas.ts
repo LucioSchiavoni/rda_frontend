@@ -67,12 +67,13 @@ export const editNotasRequest = async(id: string, data: EditData) => {
 
 
 
-export const getNotasRequest = async() => {
+export const getNotasRequest = async(): Promise<Nota[]> => {
     try {
-        const {data} = await clienteAxios.get("/allNotas")
+        const {data} = await clienteAxios.get("/allNotas");
         return data as Nota[];
     } catch (error) {
         console.log(error)
+        return [];
     }
 }
 

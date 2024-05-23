@@ -8,21 +8,29 @@ export type Nota = {
     nro_referencia: number;
     titulo: string;
     observaciones: string;
-    seguimiento: Seguimiento[];
+    carpetas: Carpeta[]
 };
+
+export type Carpeta = {
+    id: number;
+    nombre: string;
+    archivos: Archivo[];
+    seguimientoId?: number;
+}
 
 export type Seguimiento = {
     id: number;
     fecha: string;  
-    archivoId: number;
+    carpetas: Carpeta[];
     notaId: number;
-    archivo: Archivo;
+   
 };
 
 export type Archivo = {
     id: number;
     ruta: string;
     nombre: string;
+    carpetaId: number;
 };
 
 
