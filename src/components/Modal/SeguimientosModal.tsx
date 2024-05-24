@@ -15,6 +15,7 @@ import ButtonDownload from '../button/ButtonDownload';
 
 interface SeguimientoProps {
     id: string;
+
 }
 
 
@@ -44,7 +45,6 @@ return (
           <DrawerBody>
                  
     <section className=" px-4 ">
-     
     
         <div className="flex flex-col mt-6">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -73,7 +73,7 @@ return (
                             {
                                 data.map((item, index) => (
                                   
-                             
+                           
                             <tbody key={index} className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                 <tr>
                                     <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
@@ -87,7 +87,15 @@ return (
                                                 </div>
                                                 
                                                 <div>
-                                                    <h2 className="font-normal text-gray-800 dark:text-white hover:underline hover:underline-offset-4">{item.archivo.nombre}</h2>
+                                                    {
+                                                         item.carpetas.map((carpeta, carpetaIndex) => (
+                                                        <div key={carpetaIndex}>
+                                                        <ButtonDownload  fileId={carpeta.id} nombre={carpeta.nombre} />
+                                                            </div>
+                                                                ))
+                                                    }
+                              
+                                                    <h2 className="font-normal text-gray-800 dark:text-white hover:underline hover:underline-offset-4"></h2>
                                                     {/* <p className="text-xs font-normal text-gray-500 dark:text-gray-400">200 KB</p> */}
                                                 </div>
                                             </div>
@@ -96,7 +104,7 @@ return (
                                  
                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{item.fecha.substring(0, 10)}</td>
                                    
-                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Lana Steiner</td>
+                                    <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">agregar autor</td>
                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                         <button className="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
                                          Borrar
