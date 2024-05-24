@@ -2,13 +2,17 @@ export interface createNotas {
     titulo:string;
     observaciones: string;
     ruta: File | null;
+    estado: string;
+    authorId: number;
 }
 
 export type Nota = {
     nro_referencia: number;
     titulo: string;
     observaciones: string;
+    estado: string;
     carpetas: Carpeta[]
+    authorId: number;
 };
 
 export type Carpeta = {

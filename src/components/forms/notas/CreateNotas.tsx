@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { ChangeEvent, useState } from 'react';
 import { toast } from "react-toastify"
 import {useMutation} from '@tanstack/react-query'
+import { useAuthStore } from "../../../context/auth/store"
 
 export default function CreateNotas() {
 
@@ -13,14 +14,23 @@ export default function CreateNotas() {
     const initialValues: NotaFormData = {
     titulo: "",
     observaciones: "",
+    estado:"",
+    authorId: "",
     seguimiento: {
-        archivo: {
+        carpetas:{
+            archivo: {
             ruta: "" 
     }
-    }
+        }
+       
+    },
+   
     }
 
     const {register, handleSubmit, formState: {errors}} = useForm<NotaFormData>({ defaultValues: initialValues })
+      
+    const user = useAuthStore((state) => state.profile);
+    const userId = user.id;
 
     const [file, setFile] = useState<File | null>(null);
 
@@ -49,8 +59,10 @@ export default function CreateNotas() {
     try {
        
          const formData = new FormData();
+         formData.append("authoId", userId);
         formData.append("titulo", data.titulo);
         formData.append("observaciones", data.observaciones);
+        formData.append("estado", data.estado);
         if (file) {
             formData.append("seguimiento[archivo][ruta]", file);
         }

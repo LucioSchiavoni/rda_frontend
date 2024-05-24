@@ -39,7 +39,14 @@ export default function NotasForm({errors, register}: NotasFormProps){
     <label htmlFor="Observacion" className="block text-xl  pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-700">Observacion</label>
 
     <textarea placeholder="Observacion..." id="observaciones" {...register("observaciones")} className="block focus:outline-none focus:border-blue-600 mt-2 w-full text-xl placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 "></textarea>
-    
+    <div className="p-4"> 
+      <select name="" id="" className="px-3 py-1 rounded-md border shadow-xl">
+      <option value="PUBLICO">Estado</option>
+      <option value="PUBLICO">Publico</option>
+      <option value="PRIVADO">Privado</option>
+    </select>
+
+    </div>
    
 
 
