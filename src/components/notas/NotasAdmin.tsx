@@ -14,7 +14,7 @@ import ButtonDrawer from '../button/ButtonDrawer';
 
 import EditModal from '../Modal/EditModal';
 import { useState } from 'react';
-import { GetNota } from '../../types';
+import { GetNota, Nota } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../context/auth/store';
 
@@ -26,9 +26,9 @@ export default function NotasAdmin() {
 
     const user = useAuthStore(state => state.profile)
 
-    const { data, isLoading, error } = useQuery<GetNota[], Error>({
-      queryKey: ['notas'],
-      queryFn: getNotasRequest
+      const { data, isLoading, error } = useQuery<Nota[], Error>({
+        queryKey: ['notas'],
+        queryFn: getNotasRequest
     });
 
        const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,7 +145,7 @@ export default function NotasAdmin() {
   <td className="px-4 py-4 dark:border-none border-b border-l border-r border-gray-200 text-gray-700 dark:text-gray-200 whitespace-nowrap text-xl font-semibold">{item.observaciones}</td>
 
       <td className='text-white  '>
-        <span className='px-2 py-1 border  rounded-xl '>Privado</span>
+        <span className='px-2 py-1 border  rounded-xl '>{item.estado}</span>
         
       </td>
   <td className='flex justify-center items-center ml-4 py-1 '>

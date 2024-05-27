@@ -67,15 +67,15 @@ export const editNotasRequest = async(id: string, data: EditData) => {
 
 
 
-export const getNotasRequest = async(): Promise<Nota[]> => {
+export const getNotasRequest = async (): Promise<Nota[]> => {
     try {
-        const {data} = await clienteAxios.get("/allNotas");
+        const { data } = await clienteAxios.get("/allNotas");
         return data as Nota[];
     } catch (error) {
-        console.log(error)
-        return [];
+        console.error(error);
+        throw new Error("Error fetching nota data");
     }
-}
+};
 
 export const getNotasByIdRequest = async(id: string) => {
     try {
@@ -86,12 +86,13 @@ export const getNotasByIdRequest = async(id: string) => {
     }
 }
 
-export const getSeguimientoRequest = async(id: string) => {
+export const getSeguimientoRequest = async(id: string): Promise<Seguimiento[]> => {
     try {
         const {data} = await clienteAxios.get(`/seguimiento/${id}`)
         return data as Seguimiento[];
     } catch (error) {
         console.log(error)
+        throw new Error("Error fetching seguimiento data");
     }
 }
 
