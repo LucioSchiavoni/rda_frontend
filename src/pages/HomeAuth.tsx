@@ -1,6 +1,7 @@
 
 import Layout from "../Layout"
-import NotasAdmin from "../components/notas/NotasAdmin"
+import PostContent from "../components/notas/PostContent"
+
 
 
 
@@ -13,7 +14,7 @@ const HomeAuth = () => {
   return (
     <>
     <Layout>
-       <NotasAdmin/>
+    <PostContent/>
     </Layout>
    
 

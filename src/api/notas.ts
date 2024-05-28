@@ -1,6 +1,6 @@
 import clienteAxios from "../config/axios";
 import { isAxiosError } from "axios";
-import { EditData, Nota, Seguimiento } from "../interface/notas";
+import { EditData, File, Folder, Post } from "../interface/notas";
 import { toast } from "react-toastify";
 
 
@@ -67,29 +67,30 @@ export const editNotasRequest = async(id: string, data: EditData) => {
 
 
 
-export const getNotasRequest = async (): Promise<Nota[]> => {
+export const getNotasRequest = async (): Promise<Post[]> => {
     try {
         const { data } = await clienteAxios.get("/allNotas");
-        return data as Nota[];
+        return data as Post[];
     } catch (error) {
         console.error(error);
-        throw new Error("Error fetching nota data");
+        throw new Error("Error fetching post data");
     }
 };
 
-export const getNotasByIdRequest = async(id: string) => {
+export const getNotasByIdRequest = async(id: string): Promise<Post[]> => {
     try {
-        const {data} = await clienteAxios.get(`/nota/${id}`)
-        return data as Nota[];
+        const {data} = await clienteAxios.get(`/post/${id}`)
+        return data as Post[];
     } catch (error) {
         console.log(error)
+        throw new Error("Error fetching post data")
     }
 }
 
-export const getSeguimientoRequest = async(id: string): Promise<Seguimiento[]> => {
+export const getSeguimientoRequest = async(id: string)  => {
     try {
         const {data} = await clienteAxios.get(`/seguimiento/${id}`)
-        return data as Seguimiento[];
+        return data;
     } catch (error) {
         console.log(error)
         throw new Error("Error fetching seguimiento data");

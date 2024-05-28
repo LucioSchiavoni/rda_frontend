@@ -14,9 +14,10 @@ import ButtonDrawer from '../button/ButtonDrawer';
 
 import EditModal from '../Modal/EditModal';
 import { useState } from 'react';
-import { GetNota, Nota } from '../../types';
+import { GetNota } from '../../types';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../context/auth/store';
+import { Post } from '../../interface/notas';
 
 
 export default function NotasAdmin() {
@@ -26,7 +27,7 @@ export default function NotasAdmin() {
 
     const user = useAuthStore(state => state.profile)
 
-      const { data, isLoading, error } = useQuery<Nota[], Error>({
+      const { data, isLoading, error } = useQuery<Post[], Error>({
         queryKey: ['notas'],
         queryFn: getNotasRequest
     });

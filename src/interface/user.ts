@@ -1,10 +1,11 @@
 export interface createUser {
     username: string;
+    name: string;
     password: string;
     rol: RolUser;
-    estado: Estado;
+    state: State;
 }
 
 
 export type RolUser = 'ADMIN' | 'USER';
-export type Estado = 'PUBLICO' | 'PRIVADO';
+export type State = 'PUBLICO' | 'PRIVADO';

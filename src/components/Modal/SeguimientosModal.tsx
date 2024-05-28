@@ -10,24 +10,25 @@ DrawerFooter,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { useQuery } from "@tanstack/react-query";
-import { getSeguimientoRequest } from '../../api/notas';
+import { getNotasByIdRequest } from '../../api/notas';
 import ButtonDownload from '../button/ButtonDownload';
-import { Seguimiento } from '../../interface/notas';
+import { Post } from '../../interface/notas';
+import { Nota } from '../../types';
 
 
 interface SeguimientoProps {
-    id: string;
-
+    id: number;
+    children: React.ReactNode
 }
 
 
 
-const SeguimientoModal: React.FC<SeguimientoProps> = ({id})  => {
+const SeguimientoModal: React.FC<SeguimientoProps> = ({id, children})  => {
 
 
-      const {data , isLoading} = useQuery<Seguimiento[]>({
-        queryKey: ['seguimiento', id],
-        queryFn: () => getSeguimientoRequest(id),
+      const {data , isLoading} = useQuery<Post[]>({
+        queryKey: ['post', id],
+        queryFn: () => getNotasByIdRequest(id),
         
     })
 
@@ -37,9 +38,7 @@ const SeguimientoModal: React.FC<SeguimientoProps> = ({id})  => {
   if(data)
 return (
     <>
- <button className='px-3 py-1.5 rounded-sm font-semibold border-b hover:bg-gray-100 transition-all' onClick={onOpen}>
-        Ver seguimiento
-      </button>
+
       <Drawer placement={'right'} onClose={onClose} isOpen={isOpen} size={'xl'}>
         <DrawerOverlay />
         <DrawerContent className='dark:bg-gray-900 dark:text-white'>
@@ -76,11 +75,7 @@ return (
                                 data?.map((item, index) => (
                                     
                             <tbody key={index} className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                <p>{item.archivos.map((item: any, fileIndex: any) => (
-                                    <div key={fileIndex}>
-                                     <p>archivo suelto: {item.nombre}</p>   
-                                    </div>
-                                ))}</p>
+                            
                                 <tr>
                                     <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                         <div className="inline-flex items-center gap-x-3">
