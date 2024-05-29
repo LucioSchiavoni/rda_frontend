@@ -21,7 +21,7 @@ const NavbarAdmin = () => {
         </Link>
 
             {
-            user.rol === "ADMIN" ? 
+            user.rolUser === "USER" ? 
             <Tooltip label="Crear nuevo usuario" aria-label="A tooltip">
   <Link to='/register'  className="p-1.5 text-gray-700 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
