@@ -77,10 +77,10 @@ export const getNotasRequest = async (): Promise<Post[]> => {
     }
 };
 
-export const getNotasByIdRequest = async(id: string): Promise<Post[]> => {
+export const getNotasByIdRequest = async(id: string): Promise<Post> => {
     try {
         const {data} = await clienteAxios.get(`/post/${id}`)
-        return data as Post[];
+        return data;
     } catch (error) {
         console.log(error)
         throw new Error("Error fetching post data")

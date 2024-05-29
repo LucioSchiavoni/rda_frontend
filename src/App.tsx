@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/ReactToastify.css'
 import ChangePassword from "./pages/ChangePassword"
 import NotaId from "./components/Modal/NotaId"
+import PostContentPage from "./pages/PostContentPage"
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
 
    <Route element={<ProtectedRoute isAllowed={isAuth} />} >
             <Route path="/auth" element={<HomeAuth />} />
-           <Route path="/:id" element={<NotaId />}/>
+           <Route path="/:id" element={<PostContentPage />}/>
             {userRol === 'USER' && (
               <>
                 <Route path="/password" element={<ChangePassword />} />
