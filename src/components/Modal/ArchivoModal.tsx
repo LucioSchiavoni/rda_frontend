@@ -12,7 +12,7 @@ import {
 
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { createSeguimientoRequest } from '../../api/notas';
+import { createFileRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
 
 
@@ -23,7 +23,7 @@ const SubirArchivo: React.FC<ArchivoProps> = ({id}) => {
 
 
  const {handleSubmit} = useForm()
-const idParam = id;
+
 
 const [file, setFile] = useState<File | null>(null);
         const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,14 +37,16 @@ const [file, setFile] = useState<File | null>(null);
    const handleForm = async () => {
         try {
             const formData = new FormData()
-            formData.append("id", idParam.toString())
+            formData.append("id", JSON.stringify(id))
             if(file){
                  formData.append("file[url]", file)
                  
             }
-           const data = await createSeguimientoRequest(formData)
+           const data = await createFileRequest(formData)
             toast.success(data.succes)
-            window.location.reload()
+            setTimeout(() => {
+                window.location.reload()
+            },1000)
         } catch (error) {
             console.log(error)
         }
@@ -54,7 +56,7 @@ const [file, setFile] = useState<File | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <button onClick={onOpen} className=' px-3 py-1.5 font-semibold rounded-sm hover:bg-gray-100 transition-all '>Subir archivo</button>
+      <button onClick={onOpen} className=' px-2 py-1  '>Subir archivo</button>
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
@@ -73,7 +75,7 @@ const [file, setFile] = useState<File | null>(null);
 
                 <input id="dropzone-file" type="file" className="hidden" onChange={(e) => handleFileChange(e)} />
             </label>
-              <button type='submit' className='w-full hover:bg-blue-800  px-3 py-2 text-xl bg-gray-900 rounded-md text-white font-semibold mt-10'>Subir</button>
+              <button type='submit' className='w-full hover:bg-neutral-800  px-3 py-2 text-xl bg-neutral-900 rounded-md text-white font-semibold mt-10'>Subir</button>
             </form>
           </ModalBody>
 

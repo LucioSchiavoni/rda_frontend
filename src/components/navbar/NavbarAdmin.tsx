@@ -11,7 +11,7 @@ const NavbarAdmin = () => {
       const logout = useAuthStore(state => state.logout)
         const user = useAuthStore(state => state.profile)
   return (
-    <aside className="flex flex-col items-center  w-16 min-h-screen py-8 overflow-y-auto bg-white border-r rtl:border-l rtl:border-r-0 dark:bg-gray-900 dark:border-gray-700">
+    <aside className="flex flex-col items-center  w-16 min-h-screen py-8 overflow-y-auto bg-white border-r rtl:border-l rtl:border-r-0 dark:bg-neutral-900 dark:border-neutral-800">
 
      <nav className="flex flex-col flex-1 mt-12 space-y-14">
             <DarkMode/>

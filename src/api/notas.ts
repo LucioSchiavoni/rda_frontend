@@ -22,14 +22,14 @@ export const createNotasRequest = async (formData: FormData) => {
     }
 }
 
-export const getNotasByEstado = async(estado: string) => {
-    try {
-        const response = await clienteAxios.get(`/nota/estado/${estado}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}
+// export const getNotasByEstado = async(estado: string) => {
+//     try {
+//         const response = await clienteAxios.get(`/nota/estado/${estado}`)
+//         return response.data
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 
 
@@ -89,17 +89,17 @@ export const getNotasByIdRequest = async(id: string): Promise<Post> => {
     }
 }
 
-export const getSeguimientoRequest = async(id: string)  => {
-    try {
-        const {data} = await clienteAxios.get(`/seguimiento/${id}`)
-        return data;
-    } catch (error) {
-        console.log(error)
-        throw new Error("Error fetching seguimiento data");
-    }
-}
+// export const getSeguimientoRequest = async(id: string)  => {
+//     try {
+//         const {data} = await clienteAxios.get(`/seguimiento/${id}`)
+//         return data;
+//     } catch (error) {
+//         console.log(error)
+//         throw new Error("Error fetching seguimiento data");
+//     }
+// }
 
-export const createSeguimientoRequest = async(formdata:FormData) => {
+export const createFileRequest = async(formdata:FormData) => {
     try {
         const res = await clienteAxios.post("/createFile", formdata, {
             headers:{
@@ -107,6 +107,35 @@ export const createSeguimientoRequest = async(formdata:FormData) => {
             }
         })
            return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const createFileByIdFolderRequest = async(formdata:FormData) => {
+    try {
+        const res = await clienteAxios.post("/create/folder/file", formdata, {
+            headers:{
+                "Content-Type": "multipart/form-data"
+            }
+        })
+           return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+///pasarlo como parametros en la url  
+export const getFolderById = async(postId: number, folderId:number) => {
+    try {
+        const res = await clienteAxios.get("/folder/file",{
+            params:{
+                postId: postId,
+                folderId: folderId
+            }
+        })
+        console.log("Response data:", res.data);
+        return res.data 
     } catch (error) {
         console.log(error)
     }
