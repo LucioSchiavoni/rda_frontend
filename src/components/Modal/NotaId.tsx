@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getNotasByIdRequest } from "../../api/notas";
 import { Post } from "../../interface/notas";
 import { Link, useParams } from "react-router-dom";
+import ButtonCreate from "../button/ButtonCreate";
 
 
 
@@ -24,11 +25,12 @@ const NotaId = () => {
         if (!data) return <div><p>No se encontraron datos.</p></div>;
 
 
-
   return (
 
     <div className="flex justify-center items-center flex-col gap-10  dark:text-white ">
-       
+      <div className='top-28 left-24 absolute'>
+        <ButtonCreate id={data.id}/> 
+      </div>
 <Link to='/auth' className="absolute left-24 top-10  border shadow-xl px-3 py-1 rounded-md">
     Volver
 </Link>

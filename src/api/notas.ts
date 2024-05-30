@@ -1,6 +1,6 @@
 import clienteAxios from "../config/axios";
 import { isAxiosError } from "axios";
-import { EditData, File, Folder, Post } from "../interface/notas";
+import { EditData, Post } from "../interface/notas";
 import { toast } from "react-toastify";
 
 
@@ -30,6 +30,8 @@ export const getNotasByEstado = async(estado: string) => {
         console.log(error)
     }
 }
+
+
 
 export const downloadFileRequest= async(id:number) => {
     try {

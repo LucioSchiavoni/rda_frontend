@@ -37,9 +37,9 @@ const [file, setFile] = useState<File | null>(null);
    const handleForm = async () => {
         try {
             const formData = new FormData()
-            formData.append("nro_referencia", idParam.toString())
+            formData.append("id", idParam.toString())
             if(file){
-                 formData.append("seguimiento[archivo][ruta]", file)
+                 formData.append("file[url]", file)
                  
             }
            const data = await createSeguimientoRequest(formData)
@@ -59,7 +59,7 @@ const [file, setFile] = useState<File | null>(null);
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
         <ModalContent className='h-64'>
-          <ModalHeader className='text-center'>Subir nueva nota al seguimiento</ModalHeader>
+          <ModalHeader className='text-center'>Subir nuevo archivo</ModalHeader>
           <ModalCloseButton />
           <ModalBody className=' flex justify-center items-center'>
             <form onSubmit={handleSubmit(handleForm)}>
@@ -73,7 +73,7 @@ const [file, setFile] = useState<File | null>(null);
 
                 <input id="dropzone-file" type="file" className="hidden" onChange={(e) => handleFileChange(e)} />
             </label>
-              <button type='submit' className='w-full hover:bg-blue-800  px-3 py-2 text-xl bg-blue-950 rounded-md text-white font-semibold mt-10'>Subir</button>
+              <button type='submit' className='w-full hover:bg-blue-800  px-3 py-2 text-xl bg-gray-900 rounded-md text-white font-semibold mt-10'>Subir</button>
             </form>
           </ModalBody>
 
