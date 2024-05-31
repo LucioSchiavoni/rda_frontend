@@ -31,6 +31,18 @@ export const createNotasRequest = async (formData: FormData) => {
 //     }
 // }
 
+export const createFileInFolder = async(formData: FormData) => {
+    try {
+        const res = await clienteAxios.post("/create/folder/file", formData, {
+            headers:{
+                "Content-Type": "multipart/form-data",
+            }
+        })
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 export const downloadFileRequest= async(id:number) => {
@@ -125,14 +137,14 @@ export const createFileByIdFolderRequest = async(formdata:FormData) => {
     }
 }
 
-///pasarlo como parametros en la url  
-export const getFolderById = async(postId: number, folderId:number): Promise<File[] | undefined> => {
+
+export const getFolderById = async(postId: number, folderId:number): Promise<File[]> => {
     try {
         const res = await clienteAxios.get(`/folder/file/${postId}/${folderId}`)
-     
-        return res.data as File[];
+        return res.data as File[]
     } catch (error) {
         console.log(error)
+        throw new Error("Error al obtener archivos por id")
     }
 }
 

@@ -14,6 +14,7 @@ import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import { useLocation } from "react-router-dom"; 
 import FolderById from "./components/Modal/FolderById";
+import FolderByIdPage from "./pages/FolderByIdPage";
 
 declare global {
   interface Window {
@@ -38,7 +39,7 @@ const AppContent = () => {
       <Route element={<ProtectedRoute isAllowed={isAuth} />}>
         <Route path="/auth" element={<HomeAuth />} />
         <Route path="/:id" element={<PostContentPage />} />
-        <Route path="/folder/:postId/:folderId" element={<FolderById />} />
+        <Route path="/folder/:postId/:folderId/:titlePost/:nameFolder" element={<FolderByIdPage />} />
       
             <Route path="/password" element={<ChangePassword />} />
       

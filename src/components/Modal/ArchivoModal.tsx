@@ -12,14 +12,15 @@ import {
 
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { createFileRequest } from '../../api/notas';
+import { createFileInFolder, createFileRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
-
+import { HiOutlineDocumentPlus } from 'react-icons/hi2';
 
 interface ArchivoProps {
     id: string;
+    folderId?: string;
 }
-const SubirArchivo: React.FC<ArchivoProps> = ({id}) => {
+const SubirArchivo: React.FC<ArchivoProps> = ({id, folderId}) => {
 
 
  const {handleSubmit} = useForm()
@@ -37,16 +38,33 @@ const [file, setFile] = useState<File | null>(null);
    const handleForm = async () => {
         try {
             const formData = new FormData()
-            formData.append("id", JSON.stringify(id))
+            
+            
             if(file){
                  formData.append("file[url]", file)
                  
             }
-           const data = await createFileRequest(formData)
-            toast.success(data.succes)
-            setTimeout(() => {
+             if(folderId){
+              formData.append("id", JSON.stringify(id)) 
+              formData.append("folderId", JSON.stringify(folderId))
+              
+              const folderData = await createFileInFolder(formData)
+            
+                toast.success(folderData.succes)
+                setTimeout(() => {
                 window.location.reload()
-            },1000)
+                },1000)
+
+            }else{
+                formData.append("id", JSON.stringify(id)) 
+                 const data = await createFileRequest(formData)
+                toast.success(data.succes)
+                setTimeout(() => {
+                window.location.reload()
+              },1000)
+            }
+        
+           
         } catch (error) {
             console.log(error)
         }
@@ -56,12 +74,15 @@ const [file, setFile] = useState<File | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <button onClick={onOpen} className=' px-2 py-1  '>Subir archivo</button>
+      <button onClick={onOpen}  className='px-3 py-1 w-full dark:text-white dark:hover:bg-neutral-800 dark:border-neutral-800    flex items-center justify-center text-center gap-5 dark:bg-neutral-900'>Subir archivo 
+      <span className="text-2xl font-thin "><HiOutlineDocumentPlus/></span>
+      </button>
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
         <ModalContent className='h-64'>
-          <ModalHeader className='text-center'>Subir nuevo archivo</ModalHeader>
+          <ModalHeader className='text-center'>Subir nuevo archivo 
+      </ModalHeader>
           <ModalCloseButton />
           <ModalBody className=' flex justify-center items-center'>
             <form onSubmit={handleSubmit(handleForm)}>

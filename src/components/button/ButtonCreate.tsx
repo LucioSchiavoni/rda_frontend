@@ -6,8 +6,9 @@ import {
   MenuItem,
 } from '@chakra-ui/react'
 import { HiPlus } from "react-icons/hi";
-import { HiOutlineFolderPlus } from "react-icons/hi2";
-import { HiOutlineDocumentPlus } from "react-icons/hi2";
+
+import CreateFolder from "../Modal/CreateFolder";
+
 
 const ButtonCreate = (id: any) => {
 
@@ -27,9 +28,8 @@ const ButtonCreate = (id: any) => {
 </p>      </span> 
   </MenuButton>
   <MenuList className="dark:text-white dark:border-neutral-700  dark:bg-neutral-900">
-    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2 "><SubirArchivo id={id}/> <span className="text-2xl font-thin "><HiOutlineDocumentPlus/></span> </MenuItem>
-    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2  "> <p className="px-2">Nueva carpeta</p> <span className="font-thin text-2xl">
-      <HiOutlineFolderPlus/></span></MenuItem>
+    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2 "><SubirArchivo id={id}/> </MenuItem>
+    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2  justify-center "> <CreateFolder/> </MenuItem>
    
   </MenuList>
 </Menu>
