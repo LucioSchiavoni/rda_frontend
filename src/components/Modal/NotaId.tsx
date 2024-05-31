@@ -59,7 +59,7 @@ const handleRowClick = (postId: number, folderId: number) => {
                         {
                             data.folder?.map((itemFolder, folderIndex) => (
                                 <button key={folderIndex} onClick={() => handleRowClick(data.id, itemFolder.id)} className="dark:border-neutral-800 border mt-6  flex justify-between   shadow-xl  px-3 py-1 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
-                                    <p className="text-start font-semibold">{itemFolder.nameFolder}</p>
+                                    <p className="text-start font-thin">{itemFolder.nameFolder}</p>
                                     {/* <p className="text-end font-thin text-sm mt-0.5">{itemFolder.createdAt}</p> */}
                                     {/* <UploadFileInFolder id={data.id} folderId={itemFolder.id}/> */}
                                 </button>

@@ -1,43 +1,50 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { File } from "../../interface/notas";
 import { useQuery } from "@tanstack/react-query";
 import { getFolderById } from "../../api/notas";
-import { useEffect } from "react";
-
+import { MdArrowBack } from "react-icons/md";
 
 const FolderById = () => {
+    const { postId, folderId } = useParams<{ postId: string, folderId: string }>();
 
-    const { postId, folderId } = useParams<{ postId: any, folderId: any}>();
-    
-    
-    const { data, isLoading, error } = useQuery<File>({
-        queryKey: ['folder', postId, folderId],
-        queryFn: () => getFolderById(postId!, folderId!),
-        enabled: !!postId && !!folderId,
+    const postIdNumber = postId ? parseInt(postId) : undefined;
+    const folderIdNumber = folderId ? parseInt(folderId) : undefined;
+
+    const { data, isLoading, error } = useQuery<File[], Error>({
+        queryKey: ['folder', postIdNumber, folderIdNumber],
+        queryFn: async () => {
+            if (postIdNumber !== undefined && folderIdNumber !== undefined) {
+                return await getFolderById(postIdNumber, folderIdNumber);
+            }
+            return Promise.reject("Invalid IDs");
+        },
+        enabled: postIdNumber !== undefined && folderIdNumber !== undefined,
     });
-  useEffect(() => {
-    console.log("la data: ",data?.nameFile)
-  },[])
- 
-    if(isLoading) 
-        return(
-         <div>Cargando..</div>
-    )
 
-    
-    if(error) 
-        return(
-         <div>{error.message}</div>
-    )
-    
+    if (isLoading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
     return (
-    <div className="flex items-center gap-10">
-        {
-          data?.nameFile
-        }
-       
-    </div>
-  )
+
+      <div className="">
+      <Link to='/auth' className="absolute left-24 top-10 dark:border dark:border-neutral-700 shadow-xl px-3 py-1 rounded-md text-3xl">
+    <MdArrowBack/>
+</Link>
+        <div className="grid grid-cols-4 p-24">
+            {Array.isArray(data) && data.map((item: File, index: number) => (
+                <div key={index} className="m-auto p-8 border w-52 h-38 rounded-md shadow-xl">
+                    <p>{item.nameFile}</p>
+                </div>
+            ))}
+        </div>
+      </div>
+        
+    );
 }
 
-export default FolderById
+export default FolderById;

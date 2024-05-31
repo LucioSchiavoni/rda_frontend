@@ -126,16 +126,11 @@ export const createFileByIdFolderRequest = async(formdata:FormData) => {
 }
 
 ///pasarlo como parametros en la url  
-export const getFolderById = async(postId: number, folderId:number) => {
+export const getFolderById = async(postId: number, folderId:number): Promise<File[] | undefined> => {
     try {
-        const res = await clienteAxios.get("/folder/file",{
-            params:{
-                postId: postId,
-                folderId: folderId
-            }
-        })
-        console.log("Response data:", res.data);
-        return res.data 
+        const res = await clienteAxios.get(`/folder/file/${postId}/${folderId}`)
+     
+        return res.data as File[];
     } catch (error) {
         console.log(error)
     }
