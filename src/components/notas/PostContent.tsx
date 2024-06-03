@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Post } from "../../interface/notas";
 import { getNotasRequest } from "../../api/notas";
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 
 const PostContent = () => {
@@ -25,6 +25,17 @@ if(isLoading)
     </div>
   )
 
+  if(!data || data.length === 0){
+    return(
+      <div className="w-10/12 m-auto flex flex-col gap-10">
+        <p className="text-center text-2xl font-medium dark:text-white">Sin repositorios creados</p>
+        <Link to='/createPost' className="w-64 text-center rounded-md dark:bg-white border dark:text-black bg-neutral-900 text-white hover:bg-neutral-800 font-medium dark:hover:bg-gray-100 px-3 py-1 m-auto">
+        Crear repositorio
+        </Link>
+      </div>
+    )
+  }
+
 if(data)
   return (
 
@@ -45,6 +56,8 @@ if(data)
            
            
               {
+
+       
               
                 data.map((item, index) => (
 
@@ -87,6 +100,7 @@ if(data)
            
                  
                 ))
+             
               }
              
            

@@ -6,6 +6,7 @@ import ButtonCreate from "../button/ButtonCreate";
 import { MdArrowBack } from "react-icons/md";
 import { FaFolder } from "react-icons/fa";
 import SubirArchivo from "./ArchivoModal";
+import ButtonDownload from "../button/ButtonDownload";
 // import UploadFileInFolder from "./UploadFileInFolder";
 
 
@@ -81,9 +82,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
    <div className="flex items-center gap-4">
 <h2 className="text-2xl  px-5 py-8 font-thin">Archivos</h2>
        
-  <article className="mt-2">
-    <SubirArchivo id={data.id} />
-  </article>
+
    </div>
 
      
@@ -93,8 +92,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
 
 
                         <div key={indexFile} className="bg-gray-100 dark:bg-neutral-900 dark:border-neutral-800 border shadow-lg p-4 rounded-md  space-y-10 hover:scale-105 transition-all delay-150 duration-300">
-                              <p className="font-semibold underline underline-offset-2">{itemFile.nameFile}</p>
-                                <p>{itemFile.createdAt}</p>
+                              <p className="font-semibold underline underline-offset-2 text-center">{itemFile.nameFile}</p>
+                             
+                                <div className="flex flex-col  justify-center ">
+                                          <ButtonDownload fileId={itemFile.id} nameFile={itemFile.nameFile} />
+                                          <p className="text-xs text-center mt-3">{itemFile.createdAt}</p>
+                                </div>
+                             
                         </div>
                     ))}
     </div>

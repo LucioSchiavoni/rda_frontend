@@ -2,16 +2,13 @@ import clienteAxios from "../config/axios";
 import { isAxiosError } from "axios";
 import { CreateFolder, EditData, Post } from "../interface/notas";
 import { toast } from "react-toastify";
+import { NotaFormData } from "../types";
 
 
 
-export const createNotasRequest = async (formData: FormData) => {
+export const createNotasRequest = async (data: NotaFormData): Promise<any> => {
     try {
-        const response = await clienteAxios.post("/create", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            }
-        });
+        const response = await clienteAxios.post("/create", data);
         return response.data;
     } catch (error) {
         if(isAxiosError(error) && error.response){
@@ -22,14 +19,6 @@ export const createNotasRequest = async (formData: FormData) => {
     }
 }
 
-// export const getNotasByEstado = async(estado: string) => {
-//     try {
-//         const response = await clienteAxios.get(`/nota/estado/${estado}`)
-//         return response.data
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 export const createFolderRequest = async(data:CreateFolder):Promise<any> => {
     try {
@@ -110,15 +99,6 @@ export const getNotasByIdRequest = async(id: string): Promise<Post> => {
     }
 }
 
-// export const getSeguimientoRequest = async(id: string)  => {
-//     try {
-//         const {data} = await clienteAxios.get(`/seguimiento/${id}`)
-//         return data;
-//     } catch (error) {
-//         console.log(error)
-//         throw new Error("Error fetching seguimiento data");
-//     }
-// }
 
 export const createFileRequest = async(formdata:FormData) => {
     try {

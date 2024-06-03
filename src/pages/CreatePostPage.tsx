@@ -1,15 +1,15 @@
-import CreateNotas from "../components/forms/post/CreateNotas"
+import CreatePost from "../components/forms/post/CreateNotas"
 import Layout from "../Layout"
 
 
 
-const CreateNotasPage = () => {
+const CreatePostPage = () => {
   return (
     <>
     <Layout>
        <div className="w-4/12 m-auto ">
 
-       <CreateNotas/>
+       <CreatePost/>
     </div>
     </Layout>
    
@@ -18,4 +18,4 @@ const CreateNotasPage = () => {
   )
 }
 
-export default CreateNotasPage
+export default CreatePostPage

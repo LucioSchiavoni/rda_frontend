@@ -39,14 +39,16 @@ const FolderById = () => {
         <Link to={`/${postId}`} >
            <p className=" hover:bg-gray-100 dark:hover:bg-neutral-800 p-2 hover:font-normal  rounded-md">{titlePost}</p>
         </Link>
-     
+        
         <p className="hover:underline underline-offset-2">{nameFolder}</p>
+
+        <span className=" w-56  shadow-xl rounded-md hover:bg-gray-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 dark:border-neutral-800 bg-gray-50 border text-center">
+                    <SubirArchivo id={postId} folderId={folderId} /> 
+                </span>
         </aside>
 
         <div className="flex flex-col  mt-16  ">
-                <span className="ml-40 w-56  shadow-xl rounded-md hover:bg-gray-100 dark:hover:bg-neutral-800 dark:bg-neutral-900 dark:border-neutral-800 bg-gray-50 border text-center">
-                    <SubirArchivo id={postId} folderId={folderId} /> 
-                </span>
+                
              
             
             <h2 className="ml-36 text-2xl  text-start mt-10 ">Archivos en esta carpeta</h2> 

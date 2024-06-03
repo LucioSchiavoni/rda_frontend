@@ -23,7 +23,7 @@ const ButtonCreate = (id: any) => {
     borderWidth='1px'
     _hover={{ bg: 'neutral.800' }}
   >
-    <span className="flex items-center gap-2  text-xl ">
+    <span className="flex items-center gap-2 px-3 py-1  text-2xl font-thin ">
     Crear <p ><HiPlus />
 </p>      </span> 
   </MenuButton>

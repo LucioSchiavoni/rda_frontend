@@ -18,7 +18,7 @@ import { HiOutlineDocumentPlus } from 'react-icons/hi2';
 
 
 interface ArchivoProps {
-    id: string;
+    id: number;
     folderId?: string;
 }
 const SubirArchivo: React.FC<ArchivoProps> = ({id, folderId}) => {
@@ -42,7 +42,7 @@ const [file, setFile] = useState<File | null>(null);
       if (file) {
         formData.append('file[url]', file);
       }
-      formData.append('id', id); 
+      formData.append('postId', id); 
 
       let data;
       if (folderId) {
@@ -65,7 +65,7 @@ const [file, setFile] = useState<File | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <button onClick={onOpen}  className='px-3 py-1 w-full dark:text-white dark:hover:bg-neutral-800 dark:border-neutral-800  border rounded-md  flex items-center justify-center text-center gap-5 dark:bg-neutral-900'>Subir archivo 
+      <button onClick={onOpen}  className='px-3 py-1 w-full dark:text-white dark:hover:bg-neutral-800 dark:border-neutral-800    rounded-md  flex items-center justify-center text-center gap-5 dark:bg-neutral-900'>Subir archivo 
       <span className="text-2xl font-thin "><HiOutlineDocumentPlus/></span>
       </button>
 
