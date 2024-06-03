@@ -13,14 +13,17 @@ import { useForm } from "react-hook-form";
  import { HiOutlineFolderPlus } from "react-icons/hi2";
 import { createFolderRequest } from "../../api/notas";
 import { toast } from "react-toastify";
+import React from "react";
 
 
 
 
+interface postIdPorps  {
+id: string;
+}
 
 
-
-const CreateFolder = ({id: any}) => {
+const CreateFolder: React.FC<postIdPorps> = ({id}) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -30,7 +33,7 @@ const { register, handleSubmit } = useForm();
 
     const handleForm = async(data: any ) =>{
         try {  
-               
+            console.log(id)   
             const res = await createFolderRequest(data)
             toast.success(res.data)
         } catch (error) {
