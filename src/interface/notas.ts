@@ -50,3 +50,9 @@ export type EditData = {
     content?:string;
     title?: string;
 }
+
+
+export type CreateFolder = {
+    nameFolder: string;
+    postId: number;
+}

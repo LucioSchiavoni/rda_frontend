@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ButtonCreate from "../button/ButtonCreate";
 import { MdArrowBack } from "react-icons/md";
 import { FaFolder } from "react-icons/fa";
+import SubirArchivo from "./ArchivoModal";
 // import UploadFileInFolder from "./UploadFileInFolder";
 
 
@@ -58,7 +59,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
         <h2 className="font-thin text-2xl pb-6 px-3">
         Carpetas
     </h2>
-  
+
    
        
      <div className="grid grid-cols-6 w-full gap-6">
@@ -77,9 +78,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
 </section>
  
  <section className=" w-10/12 mt-16 ">
-   
-          <h2 className="text-2xl  ml-5 pb-8  font-thin">Archivos</h2>
+   <div className="flex items-center gap-4">
+<h2 className="text-2xl  px-5 py-8 font-thin">Archivos</h2>
        
+  <article className="mt-2">
+    <SubirArchivo id={data.id} />
+  </article>
+   </div>
 
      
        <div className="grid grid-cols-6  gap-5">

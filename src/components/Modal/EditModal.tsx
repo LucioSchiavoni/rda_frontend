@@ -1,5 +1,5 @@
 import { Button, Modal, ModalContent, ModalOverlay, ModalCloseButton, ModalBody, useDisclosure } from "@chakra-ui/react"
-import EditForm from "../forms/notas/EditForm"
+import EditForm from "../forms/post/EditForm"
 import { useForm } from "react-hook-form"
 import { editNotasRequest } from "../../api/notas"
 import { EditData } from "../../interface/notas"

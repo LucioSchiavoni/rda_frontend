@@ -29,7 +29,7 @@ const ButtonCreate = (id: any) => {
   </MenuButton>
   <MenuList className="dark:text-white dark:border-neutral-700  dark:bg-neutral-900">
     <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2 "><SubirArchivo id={id}/> </MenuItem>
-    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2  justify-center "> <CreateFolder/> </MenuItem>
+    <MenuItem className="dark:bg-neutral-900 dark:hover:bg-neutral-800 flex items-center gap-2  justify-center "> <CreateFolder id={id}/> </MenuItem>
    
   </MenuList>
 </Menu>

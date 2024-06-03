@@ -1,6 +1,6 @@
 import clienteAxios from "../config/axios";
 import { isAxiosError } from "axios";
-import { EditData, Post } from "../interface/notas";
+import { CreateFolder, EditData, Post } from "../interface/notas";
 import { toast } from "react-toastify";
 
 
@@ -30,6 +30,15 @@ export const createNotasRequest = async (formData: FormData) => {
 //         console.log(error)
 //     }
 // }
+
+export const createFolderRequest = async(data:CreateFolder):Promise<any> => {
+    try {
+        const res = await clienteAxios.post("/create/folder",data )
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const createFileInFolder = async(formData: FormData) => {
     try {

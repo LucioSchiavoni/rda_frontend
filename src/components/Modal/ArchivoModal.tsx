@@ -16,6 +16,7 @@ import { createFileInFolder, createFileRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
 import { HiOutlineDocumentPlus } from 'react-icons/hi2';
 
+
 interface ArchivoProps {
     id: string;
     folderId?: string;
@@ -34,47 +35,37 @@ const [file, setFile] = useState<File | null>(null);
         }
     };
 
+  const handleForm = async () => {
+    try {
+      const formData = new FormData();
+      console.log("Datos here: ", id, folderId)
+      if (file) {
+        formData.append('file[url]', file);
+      }
+      formData.append('id', id); 
 
-   const handleForm = async () => {
-        try {
-            const formData = new FormData()
-            
-            
-            if(file){
-                 formData.append("file[url]", file)
-                 
-            }
-             if(folderId){
-              formData.append("id", JSON.stringify(id)) 
-              formData.append("folderId", JSON.stringify(folderId))
-              
-              const folderData = await createFileInFolder(formData)
-            
-                toast.success(folderData.succes)
-                setTimeout(() => {
-                window.location.reload()
-                },1000)
+      let data;
+      if (folderId) {
+        formData.append('folderId', folderId);
+        data = await createFileInFolder(formData)
+      } else {
+        data = await createFileRequest(formData)
+      }
 
-            }else{
-                formData.append("id", JSON.stringify(id)) 
-                 const data = await createFileRequest(formData)
-                toast.success(data.succes)
-                setTimeout(() => {
-                window.location.reload()
-              },1000)
-            }
-        
-           
-        } catch (error) {
-            console.log(error)
-        }
-        
+      toast.success(data.success);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+      toast.error('Error al subir el archivo');
     }
+  };
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <button onClick={onOpen}  className='px-3 py-1 w-full dark:text-white dark:hover:bg-neutral-800 dark:border-neutral-800    flex items-center justify-center text-center gap-5 dark:bg-neutral-900'>Subir archivo 
+      <button onClick={onOpen}  className='px-3 py-1 w-full dark:text-white dark:hover:bg-neutral-800 dark:border-neutral-800  border rounded-md  flex items-center justify-center text-center gap-5 dark:bg-neutral-900'>Subir archivo 
       <span className="text-2xl font-thin "><HiOutlineDocumentPlus/></span>
       </button>
 

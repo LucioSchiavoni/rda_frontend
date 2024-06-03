@@ -12,7 +12,6 @@ const FolderById = () => {
 
     const postIdInt = parseInt(postId || "");
     const folderIdInt = parseInt(folderId || "");
-
     const { data, isLoading, error } = useQuery<File[], Error>({
         queryKey: ['folder', postIdInt, folderIdInt],
         queryFn: () => getFolderById(postIdInt, folderIdInt),

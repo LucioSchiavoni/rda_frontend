@@ -1,4 +1,4 @@
-import CreateNotas from "../components/forms/notas/CreateNotas"
+import CreateNotas from "../components/forms/post/CreateNotas"
 import Layout from "../Layout"
 
 
