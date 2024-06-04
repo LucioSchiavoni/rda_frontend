@@ -5,9 +5,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ButtonCreate from "../button/ButtonCreate";
 import { MdArrowBack } from "react-icons/md";
 import { FaFolder } from "react-icons/fa";
-import SubirArchivo from "./ArchivoModal";
 import ButtonDownload from "../button/ButtonDownload";
-// import UploadFileInFolder from "./UploadFileInFolder";
+import DateFormat from "../utils/DateFormat";
+
 
 
   
@@ -61,16 +61,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
         Carpetas
     </h2>
 
-   
        
      <div className="grid grid-cols-6 w-full gap-6">
-                        {
-                            data.folder?.map((itemFolder, folderIndex) => (
+                        { 
+                                data.folder?.map((itemFolder, folderIndex) => (
                                 <button key={folderIndex} onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} className="items-center dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-800 border mt-6 py-2.5 flex justify-between   shadow-xl  px-4 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
                                     <p className="text-start font-thin">{itemFolder.nameFolder}</p>
                                     <span className="text-xl mt-1 dark:text-white"><FaFolder/></span>
-                                    {/* <p className="text-end font-thin text-sm mt-0.5">{itemFolder.createdAt}</p> */}
-                                    {/* <UploadFileInFolder id={data.id} folderId={itemFolder.id}/> */}
                                 </button>
                             ))
                         }
@@ -96,7 +93,10 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
                              
                                 <div className="flex flex-col  justify-center ">
                                           <ButtonDownload fileId={itemFile.id} nameFile={itemFile.nameFile} />
-                                          <p className="text-xs text-center mt-3">{itemFile.createdAt}</p>
+                                          <span className="text-center mt-2 text-sm pt-4">
+                                              <DateFormat item={itemFile.createdAt} />
+                                          </span>
+                                        
                                 </div>
                              
                         </div>

@@ -7,10 +7,25 @@ interface ButtonDownloadProps {
 
 const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId, nameFile }) => {
 
+    const removeExtension = (nameFile:any) => {
+       
+        const dotIndex = nameFile.lastIndexOf('.');
+        
+       
+        if (dotIndex === -1) {
+            return nameFile;
+        }
+        
+        return nameFile.substring(0, dotIndex);
+
+        }
+
     const handleDownload = async () => {
         try {
             const res = await downloadFileRequest(fileId);
             
+            const fileNameWithoutExtension = removeExtension(nameFile)
+
             if (res?.status === 200) {
                 
                 const fileData = res.data;
@@ -24,13 +39,13 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId, nameFile }) => 
                 link.href = url;
 
                 if(res.data.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"){
-                     link.setAttribute('download', `${nameFile}_${fileId}.docx`);
+                     link.setAttribute('download', `${fileNameWithoutExtension}.docx`);
                 }else if(res.data.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-                    link.setAttribute('download', `${nameFile}_${fileId}.xlsx`);
+                    link.setAttribute('download', `${fileNameWithoutExtension}.xlsx`);
                 }else if (res.data.type === "application/pdf"){
-                    link.setAttribute('download', `${nameFile}_${fileId}.pdf`);
+                    link.setAttribute('download', `${fileNameWithoutExtension}.pdf`);
                 }else {
-                    link.setAttribute('download', `${nameFile}_${fileId}.txt`);
+                    link.setAttribute('download', `${fileNameWithoutExtension}.txt`);
                 }
           
                 

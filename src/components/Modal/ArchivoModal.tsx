@@ -18,7 +18,9 @@ import { HiOutlineDocumentPlus } from 'react-icons/hi2';
 
 
 interface ArchivoProps {
-    id: number;
+  id: {
+    id: string;
+  };
     folderId?: string;
 }
 const SubirArchivo: React.FC<ArchivoProps> = ({id, folderId}) => {
@@ -42,16 +44,16 @@ const [file, setFile] = useState<File | null>(null);
       if (file) {
         formData.append('file[url]', file);
       }
-      formData.append('postId', id); 
-
+      
       let data;
       if (folderId) {
+        formData.append('postId', id.toString()); 
         formData.append('folderId', folderId);
         data = await createFileInFolder(formData)
       } else {
+        formData.append('id', id.id); 
         data = await createFileRequest(formData)
       }
-
       toast.success(data.success);
       setTimeout(() => {
         window.location.reload();

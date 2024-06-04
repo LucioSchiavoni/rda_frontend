@@ -3,6 +3,7 @@ import { Post } from "../../interface/notas";
 import { getNotasRequest } from "../../api/notas";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import DateFormat from "../utils/DateFormat";
 
 
 const PostContent = () => {
@@ -94,7 +95,8 @@ if(data)
                   </td>
 
               <td className="px-6 py-2 whitespace-nowrap text-end text-sm font-medium text-gray-800 dark:text-neutral-200">
-                {item.createdAt}
+                <DateFormat  item={item.createdAt}/>
+                
               </td> 
               </tr>
            
