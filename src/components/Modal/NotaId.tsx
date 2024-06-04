@@ -7,6 +7,7 @@ import { MdArrowBack } from "react-icons/md";
 import { FaFolder } from "react-icons/fa";
 import ButtonDownload from "../button/ButtonDownload";
 import DateFormat from "../utils/DateFormat";
+import ButtonDelete from "../button/ButtonDelete";
 
 
 
@@ -65,10 +66,14 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
      <div className="grid grid-cols-6 w-full gap-6">
                         { 
                                 data.folder?.map((itemFolder, folderIndex) => (
-                                <button key={folderIndex} onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} className="items-center dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-800 border mt-6 py-2.5 flex justify-between   shadow-xl  px-4 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
+                              <>  <button key={folderIndex} onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} className="items-center dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-800 border mt-6 py-2.5 flex justify-between   shadow-xl  px-4 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
                                     <p className="text-start font-thin">{itemFolder.nameFolder}</p>
                                     <span className="text-xl mt-1 dark:text-white"><FaFolder/></span>
+                               
                                 </button>
+                                     <ButtonDelete id={data.id} />
+                                     
+                                     </>
                             ))
                         }
                     </div>

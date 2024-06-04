@@ -147,3 +147,13 @@ try {
     console.log(error)
 }
 }
+
+
+export const deleteFolderRequest = async(id: any) => {
+    try {
+        const res = await clienteAxios.delete("/delete/folder", id)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}

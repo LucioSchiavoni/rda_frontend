@@ -47,7 +47,7 @@ const CreateFolder: React.FC<PostIdPorps> = ({id}) => {
              postId: id.id
           }
           const res = await createFolderRequest(jsonData)
-          toast.success(res.succes)
+          toast.info(res.message)
           setTimeout(() =>{
             window.location.reload()
           }, 3000)
