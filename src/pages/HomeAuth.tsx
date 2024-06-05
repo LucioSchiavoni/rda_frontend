@@ -7,6 +7,7 @@ import PostContent from "../components/notas/PostContent"
 
 
 
+
 const HomeAuth = () => {
 
 
@@ -14,7 +15,11 @@ const HomeAuth = () => {
   return (
     <>
     <Layout>
-    <PostContent/>
+
+
+       <PostContent/> 
+
+    
     </Layout>
    
 

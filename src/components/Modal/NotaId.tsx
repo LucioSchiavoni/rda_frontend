@@ -71,7 +71,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
                                     <span className="text-xl mt-1 dark:text-white"><FaFolder/></span>
                                
                                 </button>
-                                     <ButtonDelete id={data.id} />
+                                     <ButtonDelete id={data.id} folderId={itemFolder.id} />
                                      
                                      </>
                             ))

@@ -1,20 +1,23 @@
 
+
 import { deleteFolderRequest } from "../../api/notas"
 
 interface PostIdPorps {
-    id:{
-        id: number
-    }
+    id: number,
+    folderId: number
 }
 
-const ButtonDelete: React.FC<PostIdPorps> = ({id}) => {
+const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId}) => {
 
 
-    const handleDelete = async(data: any) => {
+    const handleDelete = async() => {
         try {
-            console.log("Delete :", data.id.id)
-           const res = await deleteFolderRequest(data.id.id) 
-           return res.data
+            console.log("El id: ", id)
+            console.log("Delete :", folderId)
+
+           const res = await deleteFolderRequest(id,folderId)
+            return res
+         
         } catch (error) {
             console.log(error)   
         }
@@ -22,7 +25,7 @@ const ButtonDelete: React.FC<PostIdPorps> = ({id}) => {
 
   return (
     <div>
-        <button onClick={() => handleDelete(id.id)}>
+        <button onClick={handleDelete}>
             Borrar
         </button>
     </div>
