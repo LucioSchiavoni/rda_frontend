@@ -58,37 +58,33 @@ const mutation = useMutation({
 
 
   return (
-    <div className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 ">
+    <div className="w-full   ">
 
-    <div className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
-        relative z-10">
-
-      <form onSubmit={handleSubmit} className="w-full mr-0 mb-0 ml-0 relative space-y-8 py-10">
-        <h1 className="text-center text-2xl font-medium">Inicia sesion</h1>
-        <div className="relative">
-
-          <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
-              absolute">Nombre de usuario</p>
-              
-          <input placeholder="" type="text" className="border placeholder-gray-400 focus:outline-none
-              focus:border-blue-600 w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-              border-gray-300 rounded-md"/>
-        </div>
-       
-        <div className="relative">
-          <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
-              absolute">Contraseña</p>
-          <input placeholder="******" type="password" className="border placeholder-gray-400 focus:outline-none
-              focus:border-blue-600 w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-              border-gray-300 rounded-md"/>
-        </div>
-        <div className="relative">
-          <button type="submit" className="w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-blue-800
-              rounded-lg transition duration-200 hover:bg-blue-700 ease">Ingresar</button>
-        
-        </div>
-      </form>
+<div className="max-w-sm space-y-3  rounded-md p-8">
+  <h1 className="text-center font-medium text-4xl text-white">Inicia sesión</h1>
+  <form onSubmit={handleSubmit} className="gap-10 flex flex-col  ">
+  <div className="relative mt-10">
+    <input type="text" className="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-xl  focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Email"/>
+    <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+      <svg className="flex-shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
     </div>
+  </div>
+
+  <div className="relative">
+    <input type="password" className="peer py-3 px-4 ps-11 block w-full text-xl bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Contraseña"/>
+    <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+      <svg className="flex-shrink-0 size-4 text-gray-500 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"></path>
+        <circle cx="16.5" cy="7.5" r=".5"></circle>
+      </svg>
+    </div>
+  </div>
+  <button className="px-3 py-1 rounded-md bg-gray-50 hover:bg-gray-200 text-xl font-medium">Ingresar</button>
+  </form>
+</div>
 
 
   </div>

@@ -8,7 +8,8 @@ import { FaFolder } from "react-icons/fa";
 import ButtonDownload from "../button/ButtonDownload";
 import DateFormat from "../utils/DateFormat";
 import ButtonDelete from "../button/ButtonDelete";
-
+import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { SlOptionsVertical } from "react-icons/sl";
 
 
   
@@ -18,11 +19,12 @@ const NotaId = () => {
     
    const { id } = useParams<{ id: string }>();
 
+
+
     const {data , isLoading, error} = useQuery<Post>({
         queryKey: ['post', id],
         queryFn: () => getNotasByIdRequest(id || ""),
         enabled: !!id,
-        
     })
 
     const navigate = useNavigate();
@@ -66,19 +68,47 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
      <div className="grid grid-cols-6 w-full gap-6">
                         { 
                                 data.folder?.map((itemFolder, folderIndex) => (
-                              <>  <button key={folderIndex} onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} className="items-center dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-800 border mt-6 py-2.5 flex justify-between   shadow-xl  px-4 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
-                                    <p className="text-start font-thin">{itemFolder.nameFolder}</p>
+
+                              <>  
+                              <div  className="items-center  dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-800 border mt-6 py-2.5 flex justify-between  shadow-xl  px-4 bg-gray-100 dark:bg-neutral-900 dark:text-white  rounded-md">
+
+                            
+                              <button onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} key={folderIndex} className="flex space-x-5">
+                                    <p className=" font-thin">{itemFolder.nameFolder}</p>
                                     <span className="text-xl mt-1 dark:text-white"><FaFolder/></span>
-                               
+                             
                                 </button>
-                                     <ButtonDelete id={data.id} folderId={itemFolder.id} />
+                                <>
+                                
+                            
+                                <Menu>
+                             <MenuButton  
+                                    as={IconButton}
+                                    aria-label='Options'
+                                    variant='outline'
+                                    backgroundColor={"dark:black white dark:hover:bg-neutral-600"}
+                                    border={"none"}
+                                    textColor={"dark:white black"}
+                                    icon={<SlOptionsVertical />}
                                      
+                                        />
+                            <MenuList textColor={"black"}>
+                            <MenuItem className="text-black" onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} >
+                            Ver
+                            </MenuItem>
+                         <MenuItem >
+                         <ButtonDelete id={data.id} folderId={itemFolder.id} /> 
+                        </MenuItem>
+                        </MenuList>
+                        </Menu>
+    </>
+                          </div>
                                      </>
                             ))
                         }
                     </div>
 
-</section>
+            </section>
  
  <section className=" w-10/12 mt-16 ">
    <div className="flex items-center gap-4">

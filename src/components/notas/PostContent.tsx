@@ -49,7 +49,7 @@ if(data)
             <tr>
               <th scope="col" className="px-16 py-2 text-start text-xs font-medium text-gray-500 uppercase dark:text-white">Autor</th>
               <th scope="col" className="px-6 py-2 text-start text-xs font-medium text-gray-500 uppercase dark:text-white">Asunto</th>
-              <th scope="col" className="px-6 py-2 text-end text-xs font-medium text-gray-500 uppercase dark:text-white">Colaboradores</th>
+              {/* <th scope="col" className="px-6 py-2 text-end text-xs font-medium text-gray-500 uppercase dark:text-white">Colaboradores</th> */}
               <th scope="col" className="px-6 py-2 text-end text-xs font-medium text-gray-500 uppercase dark:text-white">Fecha</th>
             </tr>
           </thead>
@@ -90,9 +90,7 @@ if(data)
                 </span>
             
                 </td>
-                  <td>
-
-                  </td>
+               
 
               <td className="px-6 py-2 whitespace-nowrap text-end text-sm font-medium text-gray-800 dark:text-neutral-200">
                 <DateFormat  item={item.createdAt}/>

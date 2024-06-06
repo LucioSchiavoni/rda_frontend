@@ -38,7 +38,7 @@ export default function PostForm({errors, register}: NotasFormProps){
 
         </div>
 
-        <div className="relative mb-10 mt-10">
+        {/* <div className="relative mb-10 mt-10">
           <p className="dark:text-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0  font-medium text-gray-600
               absolute">Estado</p>
       <select className="mt-5  text-xl border placeholder-gray-400 focus:outline-none
@@ -53,7 +53,7 @@ export default function PostForm({errors, register}: NotasFormProps){
       
   
 
-    </div>
+    </div> */}
 
   </div>
   </div>

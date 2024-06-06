@@ -67,7 +67,7 @@ const ChangePasswordForm = () => {
           )}
         <button
           type="submit"
-          className="px-3 py-2 text-xl font-medium hover:bg-blue-700 rounded-md text-white bg-blue-900"
+          className="px-3 py-2 text-xl font-medium hover:bg-gray-200 bg-gray-100 shadow-xl rounded-md dark:text-white dark:bg-neutral-900 border dark:border-neutral-700 dark:hover:bg-neutral-800"
         >
           Guardar cambios
         </button>
