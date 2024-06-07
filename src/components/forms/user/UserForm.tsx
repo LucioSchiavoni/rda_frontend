@@ -9,6 +9,7 @@ const UserForm = () => {
   
 
      const { register, handleSubmit, watch, formState: { errors } } = useForm<{
+        name: string;
         username: string;
         password: string;
         confirmPassword: string;
@@ -20,6 +21,7 @@ const UserForm = () => {
 
       try {
           const jsonData = {
+            name: data.name,
             username: data.username,
             password: data.password,
             rol: data.rol
@@ -39,6 +41,19 @@ const UserForm = () => {
     <form className="p-4 border shadow-xl rounded-md bg-white" onSubmit={handleSubmit(handleForm)}>
         <h2 className="text-center text-3xl mb-10 font-semibold">Registrar usuario</h2>
         <div className="relative flex items-center mt-8">
+                <span className="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </span>
+                <input {...register("name", {
+            required: "Este campo es requerido",
+          })} type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11  dark:text-gray-900 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nombre completo"/>
+           {errors.name ? <span className="text-red-800 text-xl px-2 py-1">{errors.name.message}</span> : null}
+            </div>
+
+
+        <div className="relative flex items-center mt-4">
                 <span className="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

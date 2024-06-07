@@ -151,8 +151,18 @@ try {
 
 export const deleteFolderRequest = async(id: number, folderId: number) => {
     try {
-        console.log("Data axios: ", id, folderId)
+     
         const res = await clienteAxios.delete(`/delete/folder/${id}/${folderId}`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const deleteFileRequest = async(id: number, fileId: number) => {
+    try {
+        const res = await clienteAxios.delete(`/delete/file/${id}/${fileId}`)
         return res.data
     } catch (error) {
         console.log(error)

@@ -1,7 +1,7 @@
 import LoginForm from "../components/LoginForm"
 import StarsCanvas from "../components/layout/StarBackground"
 import {motion} from 'framer-motion'
-import { slideInFromLeft, slideInFromRight, slideInFromTop } from "../components/utils/motion"
+import { slideInFromRight, slideInFromTop } from "../components/utils/motion"
 import logo from '../assets/logo-blanco.png'
 
 const Home = () => {
@@ -17,10 +17,7 @@ const Home = () => {
       <h1 className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-blue-300 to-blue-400 text-4xl">  Repositorio de archivos </h1>
      
     </motion.div>
-    <motion.div variants={slideInFromLeft(0.5)}>  
 
-       <h2 className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-blue-200 to-blue-400 text-2xl">Ministerio de educacion y cultura</h2>
-    </motion.div>
      <motion.img variants={slideInFromRight(0.5)} src={logo} alt="logo" className="h-40 w-80" />
     </motion.div>
 

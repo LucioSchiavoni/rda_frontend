@@ -5,11 +5,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ButtonCreate from "../button/ButtonCreate";
 import { MdArrowBack } from "react-icons/md";
 import { FaFolder } from "react-icons/fa";
-import ButtonDownload from "../button/ButtonDownload";
-import DateFormat from "../utils/DateFormat";
+
 import ButtonDelete from "../button/ButtonDelete";
 import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { SlOptionsVertical } from "react-icons/sl";
+import { useAuthStore } from "../../context/auth/store";
+import FileCard from "../item/FileCard";
 
 
   
@@ -19,7 +20,7 @@ const NotaId = () => {
     
    const { id } = useParams<{ id: string }>();
 
-
+    const user = useAuthStore((state) => state.profile)
 
     const {data , isLoading, error} = useQuery<Post>({
         queryKey: ['post', id],
@@ -96,9 +97,16 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
                             <MenuItem className="text-black" onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} >
                             Ver
                             </MenuItem>
+                            {
+                            user.rolUser === "ADMIN" ?
                          <MenuItem >
-                         <ButtonDelete id={data.id} folderId={itemFolder.id} /> 
+                         
+                        <ButtonDelete id={data.id} folderId={itemFolder.id} /> 
+                                                   
                         </MenuItem>
+                         :
+                            null
+                         } 
                         </MenuList>
                         </Menu>
     </>
@@ -121,20 +129,8 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
        <div className="grid grid-cols-6  gap-5">
 
      {data.file?.map((itemFile, indexFile) => (
-
-
-                        <div key={indexFile} className="bg-gray-100 dark:bg-neutral-900 dark:border-neutral-800 border shadow-lg p-4 rounded-md  space-y-10 hover:scale-105 transition-all delay-150 duration-300">
-                              <p className="font-semibold underline underline-offset-2 text-center">{itemFile.nameFile}</p>
-                             
-                                <div className="flex flex-col  justify-center ">
-                                          <ButtonDownload fileId={itemFile.id} nameFile={itemFile.nameFile} />
-                                          <span className="text-center mt-2 text-sm pt-4">
-                                              <DateFormat item={itemFile.createdAt} />
-                                          </span>
-                                        
-                                </div>
-                             
-                        </div>
+                    <FileCard id={itemFile.id} createdAt={itemFile.createdAt} nameFile={itemFile.nameFile} idPost={data.id} key={indexFile} />
+                    
                     ))}
     </div>
     </section>              

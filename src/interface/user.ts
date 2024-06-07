@@ -3,7 +3,6 @@ export interface createUser {
     name: string;
     password: string;
     rol: RolUser;
-    state: State;
 }
 
 

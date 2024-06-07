@@ -3,10 +3,8 @@ import { File } from "../../interface/notas";
 import { useQuery } from "@tanstack/react-query";
 import {  getFolderById } from "../../api/notas";
 import { MdArrowBack } from "react-icons/md";
-import ButtonDownload from "../button/ButtonDownload";
-
 import SubirArchivo from "./ArchivoModal";
-import DateFormat from "../utils/DateFormat";
+import FileCard from "../item/FileCard";
 
 const FolderById = () => {
     const { postId, folderId, titlePost, nameFolder } = useParams<{ postId: any, folderId: string, titlePost: string, nameFolder:string }>();
@@ -57,14 +55,7 @@ const FolderById = () => {
             
         <div className="grid grid-cols-6 ml-24 p-8 gap-24 place-content-start   dark:text-white ">
             {Array.isArray(data) && data.map((item: File, index: number) => (
-                <div key={index} className="m-auto mt-2 gap-5 flex justify-between flex-col border dark:border-neutral-800 text-md w-52 h-36 text-center px-3 py-1 rounded-md shadow-xl">
-                    <p>{item.nameFile}</p>
-                    <ButtonDownload fileId={item.id} nameFile={item.nameFile}/>
-                    <span className="text-sm">
-                      <DateFormat item={item.createdAt} />  
-                    </span>
-                    
-                </div>
+                <FileCard key={index} createdAt={item.createdAt} nameFile={item.nameFile} id={item.id} idPost={postId}  />
             ))}
            
         </div> 

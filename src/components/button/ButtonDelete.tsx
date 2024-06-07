@@ -1,15 +1,15 @@
-
-
 import { Button, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
-import { deleteFolderRequest } from "../../api/notas"
+import { deleteFileRequest, deleteFolderRequest } from "../../api/notas"
 import { toast } from "react-toastify"
+import { MdDeleteOutline } from "react-icons/md";
 
 interface PostIdPorps {
     id: number,
-    folderId: number
+    folderId?: number
+    fileId?: number
 }
 
-const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId}) => {
+const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId, fileId}) => {
 
     const {isOpen, onOpen, onClose} = useDisclosure()
 
@@ -17,9 +17,16 @@ const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId}) => {
         try {
             console.log("El id: ", id)
             console.log("Delete :", folderId)
-
-           const res = await deleteFolderRequest(id,folderId)
-            toast.info(res.succes)
+            if(folderId){
+              const res = await deleteFolderRequest(id,folderId)
+              toast.info(res.succes)  
+            }else if(fileId) {
+                const resFile = await deleteFileRequest(id, fileId)
+                toast.info(resFile.success)
+            }else{
+                toast.info("Archivo o carpeta no encontrado")
+            }
+           
             setTimeout(() => {
                 window.location.reload()
             }, 1000)
@@ -31,7 +38,12 @@ const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId}) => {
   return (
     <div>
         <button onClick={onOpen}>
-            Eliminar
+            {
+                fileId ?
+                <span className="text-xl flex hover:bg-neutral-700 p-2 rounded-md"><MdDeleteOutline /></span>
+                :
+                <p>Eliminar carpeta</p>
+            }
         </button>
         <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
         <ModalOverlay/>
