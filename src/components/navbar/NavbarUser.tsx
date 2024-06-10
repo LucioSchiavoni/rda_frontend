@@ -1,28 +1,22 @@
+import { Link } from "react-router-dom"
 import { useAuthStore } from "../../context/auth/store"
+import DarkMode from "../button/DarkMode"
+import { Tooltip } from "@chakra-ui/react"
+import { IoCreateOutline } from "react-icons/io5";
+import navbarLogo from '../../assets/mec-logo.png'
+import RegisterModal from "../Modal/RegisterModal";
 
 
-const NavbarUser = () => {
+const NavbarAdmin = () => {
 
-       const session = useAuthStore(state => state.profile)
+   
 
+      
   return (
-    <div className="p-4"> 
-    <div>   Usuario: </div>
-     
-        <div>
-  {session.id}
-        </div>
-          <div>
-           {session.username} 
-        </div>
-          <div>
-              {session.rol}
-        </div>
-      
-        
-      
-    </div>
+<aside>
+  navbar chico
+</aside>
   )
 }
 
-export default NavbarUser
+export default NavbarAdmin

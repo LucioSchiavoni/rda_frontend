@@ -4,7 +4,9 @@ import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 const RegisterModal = () => {
   return (
     <>
-    
+    <div className='relative'>
+
+   
     <Menu>
   <MenuButton
     px={4}
@@ -18,11 +20,11 @@ const RegisterModal = () => {
   >
     File 
   </MenuButton>
-  <MenuList className='z-50'>
-    <MenuItem>New File</MenuItem>
+  <MenuList  >
+    <MenuItem >New File</MenuItem>
     <MenuItem>New Window</MenuItem>
   </MenuList>
-</Menu>
+</Menu> </div>
 </>
   )
 }
