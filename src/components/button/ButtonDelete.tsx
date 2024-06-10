@@ -45,7 +45,7 @@ const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId, fileId}) => {
                 <p>Eliminar carpeta</p>
             }
         </button>
-        <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
+        <Modal  isCentered onClose={onClose} isOpen={isOpen} motionPreset='slideInBottom'>
         <ModalOverlay/>
         <ModalContent>
             <ModalHeader>Desea eliminar esta carpeta?</ModalHeader>

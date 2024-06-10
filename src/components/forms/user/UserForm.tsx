@@ -38,7 +38,7 @@ const UserForm = () => {
     
 
   return (
-    <form className="p-4 border shadow-xl rounded-md bg-white" onSubmit={handleSubmit(handleForm)}>
+    <form className="p-4 border dark:border-neutral-700 shadow-xl rounded-md bg-white dark:bg-neutral-900 dark:text-white" onSubmit={handleSubmit(handleForm)}>
         <h2 className="text-center text-3xl mb-10 font-semibold">Registrar usuario</h2>
         <div className="relative flex items-center mt-8">
                 <span className="absolute">
@@ -100,7 +100,7 @@ const UserForm = () => {
               absolute">Rol</p>
           <select {...register("rol", {
             required: "Este campo es obligatorio"
-          }) } className="border placeholder-gray-400 focus:outline-none
+          }) } className="border text-black placeholder-gray-400 focus:outline-none
               focus:border-blue-600 w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
               border-gray-300 rounded-md">
             <option value="USER">Usuario</option>
@@ -109,7 +109,7 @@ const UserForm = () => {
            {errors.rol ? <span className="text-red-800 text-xl px-2 py-1">{errors.rol.message}</span> : null}
         </div>
 
-<button type="submit" className="mt-8 border px-3 py-2 rounded-md  w-full bg-blue-700 hover:bg-blue-600 text-white font-semibold text-xl justify-center ">Registrar</button>
+<button type="submit" className="mt-8 border px-3 py-2 text-black rounded-md  w-full dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700 dark:text-white bg-gray-100 shadow-xl hover:bg-gray-200 font-semibold text-xl justify-center ">Registrar</button>
     </form> 
   )
 }
