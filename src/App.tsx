@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import FolderById from "./components/Modal/FolderById";
 import FolderByIdPage from "./pages/FolderByIdPage";
 import CreatePostPage from "./pages/CreatePostPage";
+import UserListPage from "./pages/UserListPage";
 
 declare global {
   interface Window {
@@ -43,7 +44,7 @@ const AppContent = () => {
         <Route path="/folder/:postId/:folderId/:titlePost/:nameFolder" element={<FolderByIdPage />} />
       
             <Route path="/password" element={<ChangePassword />} />
-      
+            <Route path="/users" element={<UserListPage/>} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/createPost" element={<CreatePostPage />} />
             <Route path="/password" element={<ChangePassword />} />

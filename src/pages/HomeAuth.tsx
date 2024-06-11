@@ -17,7 +17,9 @@ const HomeAuth = () => {
     <Layout>
 
 
-       <PostContent/> 
+            <PostContent/> 
+
+ 
 
     
     </Layout>

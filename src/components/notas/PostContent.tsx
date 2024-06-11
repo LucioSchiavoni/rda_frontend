@@ -39,10 +39,10 @@ if(isLoading)
 
 if(data)
   return (
-      <div className="py-8 w-full bg-neutral-900">
+      <div className="py-8 w-full dark:bg-neutral-900">
 
    
-    <div className="flex flex-col bg-[#181b20] rounded-md w-11/12 m-auto">
+    <div className="flex flex-col  dark:bg-[#181b20] rounded-md w-11/12 mr-10 m-auto">
   <div className="-m-1.5 overflow-x-auto">
     <div className="p-1.5 min-w-full inline-block align-middle">
       <div className="border rounded-lg overflow-hidden dark:border-neutral-700">

@@ -34,7 +34,7 @@ const handleTheme = async () => {
 
   return (
     <>
-    <button onClick={handleTheme} className="p-2 rounded-full shadow-xl dark:bg-white bg-gray-900 text-white dark:text-gray-800">
+    <button onClick={handleTheme} className="p-2 flex justify-center items-center w-12 ml-4 rounded-full shadow-xl dark:bg-white bg-gray-900 text-white dark:text-gray-800">
     <span className="hidden dark:block text-2xl"><BsSun/></span>
     <span className="dark:hidden text-2xl"><MdOutlineDarkMode/></span>
     </button>

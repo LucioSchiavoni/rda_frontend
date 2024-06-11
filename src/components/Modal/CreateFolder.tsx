@@ -50,7 +50,7 @@ const CreateFolder: React.FC<PostIdPorps> = ({id}) => {
           toast.info(res.message)
           setTimeout(() =>{
             window.location.reload()
-          }, 3000)
+          }, 2000)
       } catch (error) {
           console.log(error)
       }
@@ -75,14 +75,14 @@ return (
 
           <form onSubmit={handleSubmit(handleForm)}>            
       <input id="nameFolder"  {...register('nameFolder')} type="text" placeholder="Nueva carpeta..."  className="px-4 py-2 border border-gray-300 mb-5 rounded-md  flex justify-center  m-auto w-80" />
-    <div className="flex justify-center items-center gap-10">
-     <button type="submit" className="hover:bg-neutral-800 bg-neutral-900  transition-all delay-150 px-3 py-1 border rounded-md shadow-xl ml-5 dark:bg-neutral-900 text-white">Guardar</button>
-        <button className="px-4 py-1   dark:text-white rounded-md bg-gray-50 text-black dark:bg-neutral-900 "  onClick={onClose}>
+    <div className="flex justify-center items-center gap-5 ">
+     <Button type="submit" _hover={"gray.800"} backgroundColor={"gray.900"} textColor={"white"} className="">Guardar</Button>
+           <Button _hover={"gray.800"} textColor={"white"} className="px-4 py-1   dark:text-white rounded-md bg-gray-50 text-black dark:bg-neutral-900 "  onClick={onClose}>
           Cerrar
-        </button>    
+        </Button>
         </div>
           </form>
-
+ 
   </ModalBody>
    
     </ModalContent>

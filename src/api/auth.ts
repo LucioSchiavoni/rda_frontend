@@ -43,3 +43,22 @@ export const changePassword = async (id: number, password: string): Promise<any>
     console.log(error);
   }
 };
+
+
+export const getUsers = async() => {
+    try {
+        const res = await clienteAxios.get("/users")
+        return res.data        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteUser = async(id: number) => {
+    try {
+        const res = await clienteAxios.delete(`/deleteUser/${id}`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
