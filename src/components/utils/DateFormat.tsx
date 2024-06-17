@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import {formatDistanceToNow} from 'date-fns'
 import {es} from 'date-fns/locale'
+import { Tooltip } from "@chakra-ui/react";
+import {format} from 'date-fns'
 
 const DateFormat = ({ item }: any) => {
 
@@ -13,6 +15,8 @@ const DateFormat = ({ item }: any) => {
         setRelativeTime(formattedDate)
     }
 
+    const fechaFormateada = format(new Date(item), 'yyyy-MM-dd');
+
 
     useEffect(() => {
         updateRelativeTime();
@@ -22,7 +26,10 @@ const DateFormat = ({ item }: any) => {
 
   return (
         <div className=" ">
-        {relativeTime}
+            <Tooltip fontSize={"medium"} label={fechaFormateada}>
+            {relativeTime}
+            </Tooltip>
+        
         </div>
   )
 }

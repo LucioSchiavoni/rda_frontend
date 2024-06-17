@@ -1,4 +1,4 @@
-import { Button, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { deleteFileRequest, deleteFolderRequest } from "../../api/notas"
 import { toast } from "react-toastify"
 import { MdDeleteOutline } from "react-icons/md";
@@ -55,9 +55,9 @@ const ButtonDelete: React.FC<PostIdPorps> = ({id, folderId, fileId}) => {
             Borrar
         </button>
  
-            <Button colorScheme='gray' mr={3} onClick={onClose}>
+            <button className="px-3 py-1 rounded-md hover:bg-neutral-800 bg-neutral-900 text-white w-24 " onClick={onClose}>
               Cerrar
-            </Button>
+            </button>
 
  
             </div>

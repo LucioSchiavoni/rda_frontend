@@ -50,9 +50,9 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
     <Link to='/auth' className="shadow-xl h-10 hover:bg-gray-100 dark:hover:bg-neutral-800 px-3 py-1 rounded-md text-3xl">
     <MdArrowBack/>
 </Link>
-<article className="flex  flex-col">
-        <h1 className=" font-medium text-3xl">{data.title}</h1>
-    <p className="text-gray-700 dark:text-white px-3 text-start mt-2 ">{data.content}</p>
+<article className="flex  flex-col w-4/12">
+        <h1 className=" font-semibold text-2xl  ">{data.title}</h1>
+    <p className="text-gray-700 dark:text-white px-3 text-start mt-2">{data.content}</p>
 </article>
 
     <div className=''>
@@ -71,23 +71,24 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
                                 data.folder?.map((itemFolder, folderIndex) => (
 
                               <>  
-                              <div  className="items-center  dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-[#22272e] border mt-6 py-2.5 flex justify-between  shadow-xl  px-4 bg-gray-100 dark:bg-[#181b20] dark:text-white  rounded-md">
+                              <div onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} className="items-center  dark:border-neutral-800 hover:bg-gray-200 dark:hover:bg-[#22272e] border mt-6 py-2.5 flex justify-between  shadow-xl  px-4 bg-gray-100 dark:bg-[#181b20] dark:text-white  rounded-md">
 
-                            
-                              <button onClick={() => handleRowClick(data.id, itemFolder.id, data.title || "", itemFolder.nameFolder)} key={folderIndex} className="flex space-x-5">
+                                    
+                              <button  key={folderIndex} className="flex space-x-5">
                                     <p className=" font-thin">{itemFolder.nameFolder}</p>
                                     <span className="text-xl mt-1 dark:text-white"><FaFolder/></span>
                              
                                 </button>
                                 <>
                                 
-                            
+                                    <div onClick={(e) => e.stopPropagation()}>
+
+                                  
                                 <Menu>
                              <MenuButton  
                                     as={IconButton}
                                     aria-label='Options'
                                     variant='outline'
-                                    backgroundColor={"dark:black white dark:hover:bg-neutral-600"}
                                     border={"none"}
                                     textColor={"dark:white black"}
                                     icon={<SlOptionsVertical />}
@@ -109,6 +110,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
                          } 
                         </MenuList>
                         </Menu>
+                          </div>
     </>
                           </div>
                                      </>

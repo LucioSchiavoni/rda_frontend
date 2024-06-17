@@ -5,19 +5,26 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import DateFormat from "../utils/DateFormat";
 import { Checkbox } from '@chakra-ui/react'
+import { useState } from "react";
+import { useAuthStore } from "../../context/auth/store";
+import DeletePost from "../Modal/DeletePost";
 
 const PostContent = () => {
 
+  const [check, setCheck] = useState(false)
   const { data, isLoading } = useQuery<Post[], Error>({
     queryKey: ['notas'],
     queryFn: getNotasRequest
 });
+
+const user = useAuthStore((state) => state.profile)
 
 const navigate = useNavigate();
 
 const handleRowClick = (id: number) => {
   navigate(`/${id}`);
 };
+
 
 if(isLoading)
   return (
@@ -66,7 +73,32 @@ if(data)
 
                      <tr key={index} onClick={() => handleRowClick(item.id)} className="tr-button hover:font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 hover:shadow-xl ">  
               <td className="px-2 flex items-center py-2 whitespace-nowrap   text-gray-800 dark:text-neutral-200">
-                <Checkbox className="ml-2"></Checkbox>
+                {
+                  user.rolUser === "ADMIN" 
+                  ?
+                  <>
+                    
+                  <div onClick={(e) => e.stopPropagation()} className="flex items-center">
+                  <button className="mt-2" onChange={() => check === true ? setCheck(false): setCheck(true)}>
+                     <Checkbox />
+                  </button>
+                  {
+                    check === true ?
+                   
+                      
+                      <DeletePost id={item.id}/>
+                    
+                    :
+                    null
+                  }
+                </div>
+                </>
+                :
+                null
+                }
+                
+    
+               
                 <span className="flex gap-2">
                                  {item.state === "PUBLIC" ? <p className="text-sm mt-0.5 ml-5"></p> :     <span className="">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 mt-0.5  text-gray-600 dark:text-gray-500 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -79,15 +111,15 @@ if(data)
                 </span>
  
                </td>
-              <td className="  px-6 py-2 text-gray-800 dark:text-neutral-200">
-                <span className="flex gap-3 w-full ">
+              <td className=" px-6 py-2 text-gray-800 dark:text-neutral-200">
+                <span className="flex gap-3 w-min-max ">
                      
                       <p className="font-medium hover:font-bold">
-                         {item.title === null ? <p className="text-gray-400">Sin titulo</p>  : item.title}
+                         {item.title === null ? <p className="text-gray-400">Sin titulo</p>  : item.title ? item.title.length > 50 ? <div className="flex"> {item.title.substring(0, 50)}<p>...</p> </div>  : item.title : null}
                       </p>
                <p>-</p>
                 <p>
-                     {item.content === null ? <p className="text-gray-400 ">Sin asunto</p>  : item.content}
+                     {item.content === null ? <p className="text-gray-400 ">Sin asunto</p>  : item.content ? item.content.length > 50 ? <div className="flex">{item.content.substring(0,50)} <p>...</p></div> : item.content : null}
                 </p>
              
                 </span>
@@ -95,10 +127,13 @@ if(data)
                 </td>
                
 
-              <td className="px-6 py-2 whitespace-nowrap text-end text-sm font-medium text-gray-800 dark:text-neutral-200">
-                <DateFormat  item={item.createdAt}/>
-                
+              <td   className="px-6 py-2  whitespace-nowrap text-end text-sm font-medium text-gray-800 dark:text-neutral-200">
+              <DateFormat  item={item.createdAt}/>
+        
               </td> 
+              <td>
+                  
+              </td>
               </tr>
            
                  
@@ -114,6 +149,7 @@ if(data)
   </div>
 </div>
 </div>   
+
   )
 }
 

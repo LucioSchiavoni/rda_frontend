@@ -168,3 +168,12 @@ export const deleteFileRequest = async(id: number, fileId: number) => {
         console.log(error)
     }
 }
+
+export const deletePostRequest = async(id: number) => {
+    try {
+        const res = await clienteAxios.delete(`/delete/post/${id}`)
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
