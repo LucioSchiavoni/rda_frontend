@@ -1,32 +1,33 @@
 import { Link, useParams } from "react-router-dom";
 import { File } from "../../interface/notas";
-import { useQuery } from "@tanstack/react-query";
 import {  getFolderById } from "../../api/notas";
 import { MdArrowBack } from "react-icons/md";
 import SubirArchivo from "./ArchivoModal";
 import FileCard from "../item/FileCard";
+import { useEffect, useState } from "react";
 
 const FolderById = () => {
     const { postId, folderId, titlePost, nameFolder } = useParams<{ postId: any, folderId: string, titlePost: string, nameFolder:string }>();
 
     const postIdInt = parseInt(postId || "");
     const folderIdInt = parseInt(folderId || "");
-    const { data, isLoading, error } = useQuery<File[], Error>({
-        queryKey: ['folder', postIdInt, folderIdInt],
-        queryFn: () => getFolderById(postIdInt, folderIdInt),
-        enabled: !!postId && !!folderId,
-    });
 
+    const [data, setData] = useState([])
 
+    const getFolderData = async() => {
+        try {
+            const res = await getFolderById(postIdInt, folderIdInt)
+            setData(res?.data)
 
-
-    if (isLoading) {
-        return <div>Cargando...</div>;
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+        useEffect(() => {
+            getFolderData();
+        }, [])
+
 
     return (
 

@@ -127,10 +127,10 @@ export const createFileByIdFolderRequest = async(formdata:FormData) => {
 }
 
 
-export const getFolderById = async(postId: number, folderId:number): Promise<File[]> => {
+export const getFolderById = async(postId: number, folderId:number) => {
     try {
         const res = await clienteAxios.get(`/folder/file/${postId}/${folderId}`)
-        return res.data as File[]
+        return res.data
     } catch (error) {
         console.log(error)
         throw new Error("Error al obtener archivos por id")

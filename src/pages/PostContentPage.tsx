@@ -1,7 +1,7 @@
 
 import Layout from '../Layout'
 import NotaId from '../components/Modal/NotaId'
-import ButtonCreate from '../components/button/ButtonCreate'
+
 
 
 const PostContentPage = () => {
