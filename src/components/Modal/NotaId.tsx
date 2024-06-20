@@ -143,7 +143,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
        <div className="grid grid-cols-6  gap-5">
 
      {
-  Array.isArray(data.folder) && data.folder?.length === 0 ?
+  Array.isArray(data.file) && data.file?.length === 0 ?
   <div>
     <p className="text-start ml-2 text-gray-600 dark:text-gray-400">Sin archivos creados </p>
   </div>
