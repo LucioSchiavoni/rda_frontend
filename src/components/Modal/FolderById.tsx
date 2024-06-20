@@ -6,6 +6,7 @@ import SubirArchivo from "./ArchivoModal";
 import FileCard from "../item/FileCard";
 import { useEffect, useState } from "react";
 import { Spinner } from "@chakra-ui/react";
+
 const FolderById = () => {
     const { postId, folderId, titlePost, nameFolder } = useParams<{ postId: any, folderId: string, titlePost: string, nameFolder:string }>();
 
@@ -69,10 +70,9 @@ const FolderById = () => {
             {
             Array.isArray(data) && data.length === 0 ?
             <div>
-                 <div className="flex justify-center flex-col p-4">
-           {/* <span className=" text-8xl m-auto p-2 text-blue-800 "> <GoFileSymlinkFile/></span>  */}
+                 <div className="flex justify-center flex-col p-4"> 
                 <p className="text-center font-medium text-xl">Carpeta vacia</p>
-           <img src="https://ssl.gstatic.com/docs/doclist/images/empty_state_empty_folder.svg" alt=""  />
+       
        
             
             <div className="text-start flex flex-col  mt-6 hover:underline   py-2 underline-offset-2 border rounded-md shadow-xl ">
