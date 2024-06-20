@@ -14,8 +14,6 @@ export const createNotasRequest = async (data: NotaFormData): Promise<any> => {
         if(isAxiosError(error) && error.response){
             throw new Error(error.response.data.error);
         }
-        
-    
     }
 }
 

@@ -4,7 +4,7 @@ import { getNotasRequest } from "../../api/notas";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import DateFormat from "../utils/DateFormat";
-import { Checkbox } from '@chakra-ui/react'
+import { Checkbox, Spinner } from '@chakra-ui/react'
 import { useState } from "react";
 import { useAuthStore } from "../../context/auth/store";
 import DeletePost from "../Modal/DeletePost";
@@ -28,8 +28,8 @@ const handleRowClick = (id: number) => {
 
 if(isLoading)
   return (
-    <div>
-      <p className="text-center text-3xl ">Cargando...</p>
+    <div className="flex justify-center items-center dark:text-white">
+     <Spinner/>
     </div>
   )
 

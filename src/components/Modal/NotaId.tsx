@@ -11,8 +11,7 @@ import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/rea
 import { SlOptionsVertical } from "react-icons/sl";
 import { useAuthStore } from "../../context/auth/store";
 import FileCard from "../item/FileCard";
-
-
+import { Spinner } from '@chakra-ui/react';
   
 
 
@@ -34,7 +33,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
     navigate(`/folder/${postId}/${folderId}/${titlePost}/${nameFolder}`);
 };
 
-        if (isLoading) return <div><p>cargando...</p></div>;
+        if (isLoading) return <div className="flex-col flex justify-center items-center  mt-24 dark:text-white ">
+             
+           <aside className="dark:text-white ">
+             <Spinner/>
+           </aside>
+           <p className="font-medium px-4">Cargando...</p>
+           </div> ;
         if (error) return <div><p>Error: {error.message}</p></div>;
         if (!data) return <div><p>No se encontraron datos.</p></div>;
 
@@ -68,6 +73,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
        
      <div className="grid grid-cols-6 w-full gap-6">
                         { 
+
+                         Array.isArray(data.folder) && data.folder?.length === 0 ?
+                            <div className="px-3">
+                                    <p className="font-medium dark:text-gray-400 text-gray-600">Sin carpetas</p>
+       
+                            </div>
+                            :
                                 data.folder?.map((itemFolder, folderIndex) => (
 
                               <>  
@@ -130,7 +142,14 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
      
        <div className="grid grid-cols-6  gap-5">
 
-     {data.file?.map((itemFile, indexFile) => (
+     {
+  Array.isArray(data.folder) && data.folder?.length === 0 ?
+  <div>
+    <p className="text-start ml-2 text-gray-600 dark:text-gray-400">Sin archivos creados </p>
+  </div>
+        :
+     
+     data.file?.map((itemFile, indexFile) => (
                     <FileCard id={itemFile.id} createdAt={itemFile.createdAt} nameFile={itemFile.nameFile} idPost={data.id} key={indexFile} />
                     
                     ))}

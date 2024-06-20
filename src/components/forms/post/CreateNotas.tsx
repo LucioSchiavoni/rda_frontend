@@ -25,8 +25,9 @@ export default function CreatePost() {
     const mutation = useMutation({
         mutationFn: createNotasRequest,
         onError: (error) => {
-            console.log("desde onError")
+            console.log(error)
             toast.error(error.message)
+    
         },
         onSuccess: (data) => {
             console.log(data.success)
@@ -47,6 +48,7 @@ export default function CreatePost() {
      
     } catch (error) {
         console.log(error) 
+      
     }
    }
 
