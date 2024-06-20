@@ -5,6 +5,7 @@ import { MdArrowBack } from "react-icons/md";
 import SubirArchivo from "./ArchivoModal";
 import FileCard from "../item/FileCard";
 import { useEffect, useState } from "react";
+import { Spinner } from "@chakra-ui/react";
 
 const FolderById = () => {
     const { postId, folderId, titlePost, nameFolder } = useParams<{ postId: any, folderId: string, titlePost: string, nameFolder:string }>();
@@ -13,14 +14,17 @@ const FolderById = () => {
     const folderIdInt = parseInt(folderId || "");
 
     const [data, setData] = useState([])
+    const [load, setLoad] = useState(false)
 
     const getFolderData = async() => {
         try {
+            setLoad(true)
             const res = await getFolderById(postIdInt, folderIdInt)
-            setData(res?.data)
-
+            setData(res)
         } catch (error) {
             console.log(error)
+        }finally{
+            setLoad(false)
         }
     }
 
@@ -28,7 +32,15 @@ const FolderById = () => {
             getFolderData();
         }, [])
 
+        if (load) {
+            return (
+                <div className="dark:text-white flex justify-center items-center mt-24">
 
+                     <Spinner/>
+                </div>
+              
+            )
+        }
     return (
 
       <div className="dark:text-white">
@@ -55,9 +67,29 @@ const FolderById = () => {
         </div>
             
         <div className="grid grid-cols-6 ml-24 p-8 gap-24 place-content-start   dark:text-white ">
-            {Array.isArray(data) && data.map((item: File, index: number) => (
+            {
+            Array.isArray(data) && data.length === 0 ?
+            <div>
+                 <div className="flex justify-center flex-col p-4"> 
+                <p className="text-center font-medium text-xl">Carpeta vacia</p>
+       
+       
+            
+            <div className="text-start flex flex-col  mt-6 hover:underline   py-2 underline-offset-2 border rounded-md shadow-xl ">
+                        
+                <SubirArchivo id={postId} folderId={folderId}/>  
+            </div>
+        
+            </div>
+            </div>
+            :
+            Array.isArray(data) && data.map((item: File, index: number) => (
                 <FileCard key={index} createdAt={item.createdAt} nameFile={item.nameFile} id={item.id} idPost={postId}  />
-            ))}
+            ))
+        
+        
+        
+   }
            
         </div> 
 
