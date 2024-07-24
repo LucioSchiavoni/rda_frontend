@@ -56,7 +56,7 @@ const AppContent = () => {
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/rda">
         <AppContent />
         <ToastContainer 
           position="top-right"
