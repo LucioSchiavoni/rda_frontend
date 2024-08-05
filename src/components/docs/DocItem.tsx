@@ -188,11 +188,11 @@ const extensions = [
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false, 
     },
     orderedList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false, 
     },
   }),
 ]
@@ -204,8 +204,9 @@ const content = `
 export default () => {
   return (
     <Layout>
-        <div className='w-10/12 m-auto text-white border dark:border-neutral-700 p-4 mt-2'>
+        <div className='w-10/12 m-auto text-white border dark:border-neutral-700 mt-4'>
                  <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>    
+                 <button className='px-4 border'>Guardar</button>
         </div>
 
     </Layout>
