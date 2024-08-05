@@ -30,7 +30,9 @@ const NavbarAdmin = () => {
             </svg>
         </Link>
     </Tooltip>
-       
+       <Tooltip label="Docs">
+        <Link to='/doc' className="text-white text-center">Docs</Link>
+       </Tooltip>
         <Tooltip label="Crear post" fontSize={"large"} aria-label="A tooltip">
             <Link to="/createPost" className="p-1.5 flex justify-center text-gray-700 text-center focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
         <span className="text-3xl flex flex-col justify-center items-center font-semibold">

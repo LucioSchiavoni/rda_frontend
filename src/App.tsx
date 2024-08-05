@@ -16,6 +16,8 @@ import { useLocation } from "react-router-dom";
 import FolderByIdPage from "./pages/FolderByIdPage";
 import CreatePostPage from "./pages/CreatePostPage";
 import UserListPage from "./pages/UserListPage";
+import DocPage from "./pages/DocPage";
+import DocItem from "./components/docs/DocItem";
 
 declare global {
   interface Window {
@@ -38,10 +40,12 @@ const AppContent = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route element={<ProtectedRoute isAllowed={isAuth} />}>
+      <Route path="/doc" element={<DocPage />} />
+      <Route path="/docItem" element={<DocItem/>} />
         <Route path="/auth" element={<HomeAuth />} />
         <Route path="/:id" element={<PostContentPage />} />
         <Route path="/folder/:postId/:folderId/:titlePost/:nameFolder" element={<FolderByIdPage />} />
-      
+
             <Route path="/password" element={<ChangePassword />} />
             <Route path="/users" element={<UserListPage/>} />
             <Route path="/register" element={<RegisterPage />} />
