@@ -6,7 +6,7 @@ import Layout from "../Layout"
 const ChangePassword = () => {
   return (
     <Layout>
-<div className="flex items-center justify-center">
+<div className="flex items-center justify-center py-24">
       <ChangePasswordForm/>
      </div>
   </Layout>

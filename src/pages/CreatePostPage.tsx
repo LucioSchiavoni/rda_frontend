@@ -7,7 +7,7 @@ const CreatePostPage = () => {
   return (
     <>
     <Layout>
-       <div className="w-4/12 m-auto ">
+       <div className="w-4/12 m-auto py-24">
 
        <CreatePost/>
     </div>

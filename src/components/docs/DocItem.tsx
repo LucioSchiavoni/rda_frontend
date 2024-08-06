@@ -1,11 +1,19 @@
 import "@blocknote/core/fonts/inter.css";
-import { useCreateBlockNote } from "@blocknote/react";
-import { BlockNoteView } from "@blocknote/mantine";
+import { BlockNoteView
+ } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
+import { useCreateBlockNote } from "@blocknote/react";
 
-export default function DocItem() {
-  // Crear nueva instancia para editar
+
+const DocItem = () => {
+  // Nueva instancia para el editor
   const editor = useCreateBlockNote();
-        
-  return <BlockNoteView editor={editor} />;
+
+  return  (
+       <BlockNoteView editor={editor}/>
+ 
+  )
+
 }
+
+export default DocItem;

@@ -7,7 +7,7 @@ const RegisterPage = () => {
   return (
       <Layout>
       
-         <div className="w-3/12 m-auto ">
+         <div className="w-3/12 m-auto py-24">
           
 <UserForm/>
          </div>

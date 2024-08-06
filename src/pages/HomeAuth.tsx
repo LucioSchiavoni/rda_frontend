@@ -16,8 +16,10 @@ const HomeAuth = () => {
     <>
     <Layout>
 
-
-            <PostContent/> 
+          <div className="py-24">
+             <PostContent/> 
+          </div>
+           
 
  
 

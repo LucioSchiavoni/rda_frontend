@@ -56,3 +56,9 @@ export type CreateFolder = {
     nameFolder: string;
     postId: number;
 }
+
+export type CreateDocument = {
+    description: "",
+    title: "",
+    authorId: ""
+}

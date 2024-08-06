@@ -5,7 +5,10 @@ import UserTable from '../components/item/UserTable'
 const UserListPage = () => {
   return (
     <Layout>
-      <UserTable/>   
+      <div className='py-24'>
+              <UserTable/>   
+      </div>
+
     </Layout>
    
   )

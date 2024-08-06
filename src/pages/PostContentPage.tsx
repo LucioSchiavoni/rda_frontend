@@ -8,8 +8,10 @@ const PostContentPage = () => {
   return (
     <>
     <Layout>
- 
-        <NotaId/>
+    <div className='py-24'>
+       <NotaId/>
+    </div>
+       
     </Layout>
     </>
   )
