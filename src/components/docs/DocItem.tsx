@@ -10,7 +10,7 @@ const DocItem = () => {
   const editor = useCreateBlockNote();
 
   return  (
-       <BlockNoteView editor={editor}/>
+       <BlockNoteView editor={editor} theme={"light"}/>
  
   )
 

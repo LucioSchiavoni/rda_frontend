@@ -58,7 +58,7 @@ export type CreateFolder = {
 }
 
 export type CreateDocument = {
-    description: "",
-    title: "",
-    authorId: ""
+    description?: string,
+    title?: string,
+    authorId: string;
 }
