@@ -9,12 +9,13 @@ import { useForm } from "react-hook-form"
 import { useAuthStore } from "../context/auth/store"
 import ErrorMessage from "../components/errors/ErrorMessage"
 import DocList from "../components/docs/DocList"
-
+import { useNavigate } from "react-router-dom"
 
 const DocPage = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const navigate = useNavigate();
 
    const initialValues: CreateDocument = {
         title: "",
@@ -55,6 +56,8 @@ const DocPage = () => {
     } catch (error) {
         console.log(error) 
       
+    }finally{
+      navigate("/docItem")
     }
    }
   return (
@@ -86,9 +89,10 @@ const DocPage = () => {
                 </div>
             <div className="flex">
                    <button type="submit" className="rounded-md px-3 py-1 roubded-md border w-24 ml-4 mb-4">Crear</button>
-              <button onClick={onClose} className="rounded-md px-3 py-1 roubded-md border w-24 ml-4 mb-4">Cerrar</button>
+            
             </div>
           </form>
+            <button onClick={onClose} className="absolute bottom-0  right-10 rounded-md px-3 py-1 roubded-md border w-24 ml-4 mb-4">Cerrar</button>
             </ModalContent>
             
           

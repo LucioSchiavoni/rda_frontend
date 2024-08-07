@@ -41,7 +41,7 @@ const AppContent = () => {
       <Route path="/" element={<Home />} />
       <Route element={<ProtectedRoute isAllowed={isAuth} />}>
       <Route path="/doc" element={<DocPage />} />
-      <Route path="/docItem" element={<DocContent/>} />
+      <Route path="/docItem/:authorId/:id" element={<DocContent/>} />
         <Route path="/auth" element={<HomeAuth />} />
         <Route path="/:id" element={<PostContentPage />} />
         <Route path="/folder/:postId/:folderId/:titlePost/:nameFolder" element={<FolderByIdPage />} />

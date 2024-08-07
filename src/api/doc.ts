@@ -15,9 +15,19 @@ export const createDocRequest = async (data: any): Promise<any> => {
 }
 
 
-export const getAllDocRequest = async(id: any) => {
+export const getAllDocRequest = async(id: string) => {
     try {
-        const res = await clienteAxios.get("/docs", id)
+        const res = await clienteAxios.get(`/docs/${id}`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const getDocByIdRequest = async(id: string, authorId: string) => {
+    try {
+        const res = await clienteAxios.get(`/docId/${authorId}/${id}`)
         return res.data
     } catch (error) {
         console.log(error)
