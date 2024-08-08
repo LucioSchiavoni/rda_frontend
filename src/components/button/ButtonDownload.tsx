@@ -44,8 +44,12 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId, nameFile }) => 
                     link.setAttribute('download', `${fileNameWithoutExtension}.xlsx`);
                 }else if (res.data.type === "application/pdf"){
                     link.setAttribute('download', `${fileNameWithoutExtension}.pdf`);
-                }else {
+                }else if (res.data.type === "application/txt"){
                     link.setAttribute('download', `${fileNameWithoutExtension}.txt`);
+                }else if(res.data.type === "application/rar"){
+                    link.setAttribute('download', `${fileNameWithoutExtension}.rar`);
+                }else {
+                    link.setAttribute('download', `${fileNameWithoutExtension}.zip`);
                 }
           
                 

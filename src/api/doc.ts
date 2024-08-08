@@ -1,6 +1,7 @@
 import clienteAxios from "../config/axios";
 import axios from 'axios';
 
+
 export const createDocRequest = async (data: any): Promise<any> => {
     try { 
         const response =  await clienteAxios.post("/create/doc", data)
@@ -25,7 +26,7 @@ export const getAllDocRequest = async(id: string) => {
 }
 
 
-export const getDocByIdRequest = async(id: string, authorId: string) => {
+export const getDocByIdRequest = async(id?: string, authorId?: string) => {
     try {
         const res = await clienteAxios.get(`/docId/${authorId}/${id}`)
         return res.data
@@ -34,7 +35,8 @@ export const getDocByIdRequest = async(id: string, authorId: string) => {
     }
 }
 
-export const updateDocRequest = async(data: { authorId: string, id?: string, content: string }):Promise<any>=> {
+
+export const updateDocRequest = async(data: any): Promise<any>=> {
     try {
         const res =  await clienteAxios.put('/update/doc', data)
         return res.data

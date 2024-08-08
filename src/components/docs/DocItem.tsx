@@ -7,22 +7,23 @@ import { useEffect, useState } from "react";
 
 interface DocItemProps {
   onChange: (value: string) => void;
-  initialContent?: string;
+  initialContent?: string | null;
 }
 
 const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
-  // Ensure initialContent is a valid JSON string
+  // Initialcontent es un JSON valido y no es null
   let initialBlocks: Block[] = [];
   try {
-    initialBlocks = JSON.parse(initialContent) as Block[];
+    initialBlocks = initialContent ? (JSON.parse(initialContent) as Block[]) : [];
   } catch (e) {
     console.error("Failed to parse initialContent:", e);
+    initialBlocks = []; // devolver un array vacio
   }
 
-  const [blocks, setBlocks] = useState<Block[]>(initialBlocks.length ? initialBlocks : [{ type: "paragraph", content: "" }]);
+  const [blocks, setBlocks] = useState<Block[]>(initialBlocks);
 
   const editor = useCreateBlockNote({
-    initialContent: blocks.length ? blocks : [{ type: "paragraph", content: "" }]
+    initialContent: blocks.length > 0 ? blocks : [{ type: "paragraph", content: "" }],
   });
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
       theme="light"
     />
   );
-}
+};
 
 export default DocItem;
+

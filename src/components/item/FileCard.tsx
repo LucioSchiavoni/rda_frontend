@@ -33,6 +33,13 @@ const FileCard: React.FC<CardProps> = ({id, idPost, nameFile, createdAt, key}) =
   fileExtension === "docx" ? 
   ( srcFile = "https://icones.pro/wp-content/uploads/2022/06/icone-microsoft-word.png" )
   :
+  fileExtension === "zip" ? 
+  ( srcFile = "https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-045_file_zip_archive-512.png" )
+  :
+  fileExtension === "rar" ? 
+  ( srcFile = "https://cdn.freelogovectors.net/wp-content/uploads/2019/02/winrar_logo.png" )
+  
+  :
   null
 
   return (

@@ -1,15 +1,11 @@
-
-import { useMutation, useQuery } from "@tanstack/react-query"
-import { CreateDocument } from "../interface/notas"
+import { useQuery } from "@tanstack/react-query"
 import Layout from "../Layout"
-import { useDisclosure } from "@chakra-ui/react"
-import { toast } from "react-toastify"
-import { createDocRequest, getAllDocRequest, getDocByIdRequest } from "../api/doc"
-import { useForm } from "react-hook-form"
+import {  getAllDocRequest } from "../api/doc"
 import { useAuthStore } from "../context/auth/store"
+import { Link } from "react-router-dom"
+import { SimpleGrid } from "@chakra-ui/react"
+import CreateDocModal from "../components/Modal/CreateDocModal"
 
-import { Link, useNavigate } from "react-router-dom"
-import DocItem from "../components/docs/DocItem"
 
 const DocPage = () => {
 
@@ -27,20 +23,34 @@ const DocPage = () => {
 
  if(data)
   return (
+<>
     <Layout>
-    <div className="flex justify-center items-center p-10 ml-24">
-   {
-    data.map((item: any, index: number) => (
-      <div key={index} className="border p-4 rounded-md text-white">
-        <h2>{item.title}</h2>
-        <Link to={`/docId/${userId}/${item.id}`} className="border px-4 py-2">Ver</Link>
-      </div>
-    ))
-   }
-    </div>
+     <CreateDocModal/>
+
+
+<SimpleGrid spacing={4} ml={24} p={24} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+  {data.map((item: any, index: number) => (
+ <Link to={`/docId/${userId}/${item.id}`}  key={index}  className="h-72 w-52 rounded-md border flex flex-col justify-between">
+ <img src="https://icones.pro/wp-content/uploads/2022/06/icone-microsoft-word.png" alt="google-doc-icons" className=" w-36 m-auto" />
+ <article className="">
+ <div className="mt-auto w-full border p-2 bg-slate-100">
+    <p className="text-center mb-4 text-2xl">{item.title}</p>
+    <p className="text-center  ">Fecha</p>
+ </div> 
+ </article>
+ </Link>
+))}
+</SimpleGrid>
+
     </Layout>
-    
+    </>
   )
 }
 
 export default DocPage
+
+
+
+
+
+
