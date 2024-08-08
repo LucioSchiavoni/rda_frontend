@@ -1,34 +1,42 @@
-import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { Block } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
-import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
- 
-
+import "@blocknote/mantine/style.css";
+import { useEffect, useState } from "react";
 
 interface DocItemProps {
-  onChange: () => void;
+  onChange: (value: string) => void;
   initialContent?: string;
-  editable?: boolean;
 }
 
-const DocItem: React.FC<DocItemProps> = ({
-  onChange,
-  initialContent,
-  editable
-}) => {
+const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
+  // Ensure initialContent is a valid JSON string
+  let initialBlocks: Block[] = [];
+  try {
+    initialBlocks = JSON.parse(initialContent) as Block[];
+  } catch (e) {
+    console.error("Failed to parse initialContent:", e);
+  }
 
-const editor: BlockNoteEditor = useCreateBlockNote({
-  initialContent: initialContent ? (JSON.parse(initialContent) as PartialBlock[]) : undefined,
-})
-  
+  const [blocks, setBlocks] = useState<Block[]>(initialBlocks.length ? initialBlocks : [{ type: "paragraph", content: "" }]);
+
+  const editor = useCreateBlockNote({
+    initialContent: blocks.length ? blocks : [{ type: "paragraph", content: "" }]
+  });
+
+  useEffect(() => {
+    onChange(JSON.stringify(blocks));
+  }, [blocks, onChange]);
 
   return (
-    <BlockNoteView editor={editor}
-     editable={editable}
-      onChange={onChange}
-       theme="light" 
-       />
+    <BlockNoteView
+      editor={editor}
+      onChange={() => {
+        setBlocks(editor.document);
+      }}
+      theme="light"
+    />
   );
 }
 

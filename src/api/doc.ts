@@ -33,3 +33,12 @@ export const getDocByIdRequest = async(id: string, authorId: string) => {
         console.log(error)
     }
 }
+
+export const updateDocRequest = async(data: { authorId: string, id?: string, content: string }):Promise<any>=> {
+    try {
+        const res =  await clienteAxios.put('/update/doc', data)
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
