@@ -4,7 +4,7 @@ import {  getAllDocRequest } from "../api/doc"
 import { useAuthStore } from "../context/auth/store"
 import { Link } from "react-router-dom"
 import { SimpleGrid } from "@chakra-ui/react"
-import CreateDocModal from "../components/Modal/CreateDocModal"
+
 
 
 const DocPage = () => {
@@ -25,9 +25,7 @@ const DocPage = () => {
   return (
 <>
     <Layout>
-     <CreateDocModal/>
-
-
+   <Link to='/createDoc' className="absolute top-10 left-40 border px-3 py-1 rounded-md">Nuevo doc</Link>
 <SimpleGrid spacing={4} ml={24} p={24} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
   {data.map((item: any, index: number) => (
  <Link to={`/docId/${userId}/${item.id}`}  key={index}  className="h-72 w-52 rounded-md border flex flex-col justify-between">

@@ -18,6 +18,8 @@ import CreatePostPage from "./pages/CreatePostPage";
 import UserListPage from "./pages/UserListPage";
 import DocPage from "./pages/DocPage";
 import DocContent from "./components/docs/DocContent";
+import CreateDoc from "./components/Modal/CreateDoc";
+import ComingSoon from "./pages/ComingSoon";
 
 declare global {
   interface Window {
@@ -41,6 +43,8 @@ const AppContent = () => {
       <Route path="/" element={<Home />} />
       <Route element={<ProtectedRoute isAllowed={isAuth} />}>
       <Route path="/doc" element={<DocPage />} />
+      <Route path="/createDoc" element={<CreateDoc />} />
+      <Route path="/coming" element={<ComingSoon />} />
       <Route path="/docId/:authorId/:id" element={<DocContent/>} />
         <Route path="/auth" element={<HomeAuth />} />
         <Route path="/:id" element={<PostContentPage />} />
