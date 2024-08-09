@@ -14,7 +14,7 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
   // Initialcontent es un JSON valido y no es null
   let initialBlocks: Block[] = [];
   try {
-    initialBlocks = initialContent ? (JSON.parse(initialContent) as Block[]) : [];
+    initialBlocks = initialContent  ? (JSON.parse(initialContent) as Block[]) : []
   } catch (e) {
     console.error("Failed to parse initialContent:", e);
     initialBlocks = []; // devolver un array vacio
@@ -23,21 +23,25 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
   const [blocks, setBlocks] = useState<Block[]>(initialBlocks);
 
   const editor = useCreateBlockNote({
-    initialContent: blocks.length > 0 ? blocks : [{ type: "paragraph", content: "" }],
+    initialContent: blocks
   });
 
   useEffect(() => {
     onChange(JSON.stringify(blocks));
   }, [blocks, onChange]);
 
-  return (
+
+  return (<>
     <BlockNoteView
+    className="border w-9/12  mb-40 m-auto rounded-md"
       editor={editor}
       onChange={() => {
         setBlocks(editor.document);
       }}
       theme="light"
     />
+ 
+     </>
   );
 };
 

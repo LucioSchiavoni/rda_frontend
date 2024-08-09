@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { getDocByIdRequest, updateDocRequest } from '../../api/doc';
 import { useState } from 'react';
-import CreateDocModal from '../Modal/CreateDocModal';
+
 
 const DocContent = () => {
   const { authorId, id } = useParams();

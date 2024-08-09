@@ -1,5 +1,6 @@
 export interface Doc {
     title: string;
-    description: string;
+    description: any;
+    authorId: number
     
 }

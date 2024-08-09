@@ -3,22 +3,24 @@ import { createDocRequest } from '../../api/doc'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { useAuthStore } from '../../context/auth/store'
+import { Doc } from '../../interface/doc'
 
 
 const CreateDocModal = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const [desc, _] = useState('');
     const user = useAuthStore((state) => state.profile)
     const userId = user.id
     const [title, setTitle] = useState("");
 
     const saveNewDoc = async () => {
         
-        const dataJson = {
+        const dataJson: Doc = {
             authorId: userId,
             title: title,
-            description: ""
+            description: desc
         }
         try {
             const res = await createDocRequest(dataJson) 
