@@ -31,7 +31,7 @@ const NavbarAdmin = () => {
         </Link>
     </Tooltip>
        <Tooltip label="Documentos">
-        <Link to='/coming' className="dark:text-white flex justify-center text-gray-700"><span className="text-3xl "><SiGoogledocs /></span> </Link>
+        <Link to='/doc' className="dark:text-white flex justify-center text-gray-700"><span className="text-3xl "><SiGoogledocs /></span> </Link>
        </Tooltip>
         <Tooltip label="Crear post" fontSize={"large"} aria-label="A tooltip">
             <Link to="/createPost" className="p-1.5 flex justify-center text-gray-700 text-center focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">

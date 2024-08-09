@@ -1,4 +1,4 @@
-import { Block, BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { Block,PartialBlock } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
 import { useCreateBlockNote } from "@blocknote/react";
@@ -22,10 +22,8 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
 
   const [blocks, setBlocks] = useState<Block[]>(initialBlocks);
 
-  const editor: BlockNoteEditor = useCreateBlockNote({
-    initialContent: initialContent ? (JSON.parse(initialContent) as PartialBlock[])
-    :
-    undefined
+  const editor = useCreateBlockNote({
+     initialContent: initialBlocks as PartialBlock[]
   });
 
   useEffect(() => {
