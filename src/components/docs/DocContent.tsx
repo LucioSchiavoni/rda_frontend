@@ -3,19 +3,21 @@ import DocItem from './DocItem';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {  getDocByIdRequest, updateDocRequest } from '../../api/doc';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Layout from '../../Layout';
 import Navbar from '../navbar/Navbar';
 import { FaRegSave } from "react-icons/fa";
-import { generateDocx } from '../utils/generateDocx';
+import { IoArrowBackOutline } from "react-icons/io5";
+
+
+
 
 const DocContent = () => {
   const { authorId, id } = useParams();
   const [docContent, setDocContent] = useState('');
-  
+ 
 
-
-   const { data, isLoading } = useQuery<any, Error>({
+  const { data, isLoading } = useQuery<any, Error>({
      queryKey: ['docId', authorId, id],
      queryFn: () =>  getDocByIdRequest(authorId, id)
    });
@@ -41,8 +43,6 @@ const DocContent = () => {
     }
   };
 
-   
-
   if (isLoading) return <div>Cargando...</div>;
 
   if (!data || !data.description) {
@@ -55,16 +55,15 @@ const DocContent = () => {
 
   if(data)
 
-   console.log('Initial Content:', docContent); 
-
     return (
       <>
    <Navbar/>
 
         <div className='flex flex-col w-full ml-24'>
       <div className=' mt-12 flex items-center gap-3'>
-        <Link to='/doc' className='bg-white  h-7 w-20 text-center hover:bg-gray-100 items-center  rounded-md font-semibold border'>Volver</Link>
-           <button onClick={() =>generateDocx} className='hover:bg-gray-100 h-7 items-center  w-36 rounded-md font-semibold shadow-xl border bg-white'>Descargar Docx</button>
+        <Link to='/doc' className='bg-white  h-7 w-12 flex items-center justify-center hover:bg-gray-100
+   rounded-md font-semibold border '><span className='text-center text-xl'><IoArrowBackOutline/></span></Link>
+       
             <button 
               className='hover:bg-gray-100 flex  justify-center items-center gap-2 bg-white border h-7 w-28 text-center rounded-md font-medium shadow-xl' 
               onClick={handleSave}>
@@ -72,9 +71,7 @@ const DocContent = () => {
               </span>  <p className=''>Guardar</p>
             </button>
       </div>
-         
-
-          <div className='w-11/12 m-auto bg-white mt-12'>
+                <div className='w-11/12 m-auto bg-white mt-12'>
             <DocItem onChange={setDocContent} initialContent={initialContent}    />
           </div>
         </div>

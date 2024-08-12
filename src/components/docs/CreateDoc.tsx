@@ -17,6 +17,8 @@ const CreateDoc = () => {
     const user = useAuthStore((state) => state.profile);
     const userId = user.id;
     const [title, setTitle] = useState("Sin titulo");
+
+
     const saveNewDoc = async () => {
         const dataJson = {
             authorId: userId,
@@ -38,6 +40,8 @@ const CreateDoc = () => {
     const editor = useCreateBlockNote({
         initialContent: blocks.length > 0 ? blocks : [{type: "heading", content:"Hola mundo"}]
     });
+
+
 
     return (
         <>

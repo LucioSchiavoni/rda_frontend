@@ -2,11 +2,12 @@ import { Document, Packer, Paragraph, TextRun} from 'docx';
 import {saveAs} from 'file-saver'
 
 export const generateDocx = async (initialContent: any) => {
+  console.log("el initialContent: ", initialContent)
   try {
     const paragraphs = initialContent.map((item: any) => {
     
       const textRuns = item.content.map((textItem: any) => {
-        const text = textItem.text.slice(1, -1);
+        const text = textItem.text.slice(0, );
         return new TextRun({
             text: text,
             size: 30,

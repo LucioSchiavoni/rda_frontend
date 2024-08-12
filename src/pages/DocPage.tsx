@@ -3,10 +3,10 @@ import Layout from "../Layout"
 import {  getAllDocRequest } from "../api/doc"
 import { useAuthStore } from "../context/auth/store"
 import { Link } from "react-router-dom"
-import { SimpleGrid } from "@chakra-ui/react"
+import { SimpleGrid, Tooltip } from "@chakra-ui/react"
 import DateFormat from "../components/utils/DateFormat"
-
-
+import { MdDelete } from "react-icons/md"
+import { SiMicrosoftword } from "react-icons/si";
 
 const DocPage = () => {
 
@@ -26,7 +26,10 @@ const DocPage = () => {
   return (
 <>
     <Layout>
-   <Link to='/createDoc' className="absolute top-10 left-40 border px-3 py-1 rounded-md">Nuevo doc</Link>
+      <Tooltip label="Crear nuevo documento">
+           <Link to='/createDoc' className="absolute top-10 left-40 border px-3 py-1 rounded-md text-xl flex items-center gap-2">Crear nuevo <span><SiMicrosoftword /></span></Link>
+      </Tooltip>
+
 <SimpleGrid spacing={4} ml={24} p={24} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
   {data.map((item: any, index: number) => (
  <Link to={`/docId/${userId}/${item.id}`}  key={index}  className="h-72 w-52 rounded-md border flex flex-col justify-between">
@@ -34,7 +37,11 @@ const DocPage = () => {
  <article className="">
  <div className="mt-auto w-full border p-2 bg-slate-100">
     <p className="text-center mb-4 text-2xl">{item.title}</p>
-    <p className=" text-sm  text-center font-medium"><DateFormat item={item.createdAt}/></p>
+    <div className="flex justify-between "> 
+      <p className=" text-sm  text-center font-medium"><DateFormat item={item.createdAt}/></p>
+    <MdDelete size={24}/>
+    </div>
+   
  </div> 
  </article>
  </Link>
