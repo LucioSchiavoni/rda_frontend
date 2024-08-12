@@ -18,7 +18,7 @@ import CreatePostPage from "./pages/CreatePostPage";
 import UserListPage from "./pages/UserListPage";
 import DocPage from "./pages/DocPage";
 import DocContent from "./components/docs/DocContent";
-import CreateDoc from "./components/Modal/CreateDoc";
+import CreateDoc from "./components/docs/CreateDoc";
 import ComingSoon from "./pages/ComingSoon";
 
 declare global {

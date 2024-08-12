@@ -1,12 +1,13 @@
-import { Link, useParams } from 'react-router-dom';
+import {  Link, useParams } from 'react-router-dom';
 import DocItem from './DocItem';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {  getDocByIdRequest, updateDocRequest } from '../../api/doc';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../../Layout';
 import Navbar from '../navbar/Navbar';
-
+import { FaRegSave } from "react-icons/fa";
+import { generateDocx } from '../utils/generateDocx';
 
 const DocContent = () => {
   const { authorId, id } = useParams();
@@ -40,6 +41,8 @@ const DocContent = () => {
     }
   };
 
+   
+
   if (isLoading) return <div>Cargando...</div>;
 
   if (!data || !data.description) {
@@ -58,23 +61,24 @@ const DocContent = () => {
       <>
    <Navbar/>
 
-     
-      <div className='flex '>
-
-
-        <div className='flex flex-col w-11/12 ml-40 '>
-          <aside className='bg-[url(https://www.notion.so/images/page-cover/met_frederic_edwin_church_1871.jpg)] bg-center bg-no-repeat bg-cover h-52'>
+        <div className='flex flex-col w-full ml-24'>
+      <div className=' mt-12 flex items-center gap-3'>
+        <Link to='/doc' className='bg-white  h-7 w-20 text-center hover:bg-gray-100 items-center  rounded-md font-semibold border'>Volver</Link>
+           <button onClick={() =>generateDocx} className='hover:bg-gray-100 h-7 items-center  w-36 rounded-md font-semibold shadow-xl border bg-white'>Descargar Docx</button>
             <button 
-              className='absolute top-5 ml-8 border px-3 py-1 rounded-md  font-medium shadow-xl' 
+              className='hover:bg-gray-100 flex  justify-center items-center gap-2 bg-white border h-7 w-28 text-center rounded-md font-medium shadow-xl' 
               onClick={handleSave}>
-              Guardar
+            <span className='text-xl'> <FaRegSave/>
+              </span>  <p className=''>Guardar</p>
             </button>
-          </aside>
+      </div>
+         
+
           <div className='w-11/12 m-auto bg-white mt-12'>
             <DocItem onChange={setDocContent} initialContent={initialContent}    />
           </div>
         </div>
-      </div>
+
     </>
     ); 
 }

@@ -1,9 +1,10 @@
 import { Block,PartialBlock } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
-import { useCreateBlockNote } from "@blocknote/react";
+import { useCreateBlockNote} from "@blocknote/react";
 import "@blocknote/mantine/style.css";
 import { useEffect, useState } from "react";
+
 
 interface DocItemProps {
   onChange: (value: string) => void;
@@ -13,6 +14,9 @@ interface DocItemProps {
 const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
   // Initialcontent es un JSON valido y no es null
   let initialBlocks: Block[] = [];
+  
+
+
   try {
     initialBlocks = initialContent  ? (JSON.parse(initialContent) as Block[]) : []
   } catch (e) {
@@ -29,18 +33,17 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
   useEffect(() => {
     onChange(JSON.stringify(blocks));
   }, [blocks, onChange]);
-
   
   return (<>
     <BlockNoteView
-    className="border w-9/12  mb-40 m-auto rounded-md"
+    className="border w-9/12 p-4 mb-40 m-auto rounded-md"
       editor={editor}
       onChange={() => {
         setBlocks(editor.document);
       }}
       theme="light"
     />
- 
+      
      </>
   );
 };

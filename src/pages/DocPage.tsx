@@ -4,6 +4,7 @@ import {  getAllDocRequest } from "../api/doc"
 import { useAuthStore } from "../context/auth/store"
 import { Link } from "react-router-dom"
 import { SimpleGrid } from "@chakra-ui/react"
+import DateFormat from "../components/utils/DateFormat"
 
 
 
@@ -33,7 +34,7 @@ const DocPage = () => {
  <article className="">
  <div className="mt-auto w-full border p-2 bg-slate-100">
     <p className="text-center mb-4 text-2xl">{item.title}</p>
-    <p className="text-center  ">Fecha</p>
+    <p className=" text-sm  text-center font-medium"><DateFormat item={item.createdAt}/></p>
  </div> 
  </article>
  </Link>
