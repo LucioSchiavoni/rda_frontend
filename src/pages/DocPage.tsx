@@ -22,6 +22,27 @@ const DocPage = () => {
   
   if(isLoading) return <div>Cargando...</div>
 
+if(data.length === 0) return (
+  <Layout>
+    
+<div className=" bg-gray-100 dark:bg-neutral-800  w-full px-28 py-8 ">
+      <div className="flex justify-center items-center mb-6"> 
+ <input type="text" className="px-6 py-3 rounded-full border border-neutral-500 focus:border-cyan-800 focus:ring-2 focus:ring-cyan-800 focus:outline-none text-xl w-3/12 " placeholder="Buscar.." />
+  </div>
+      <Tooltip label="Crear nuevo documento">
+           <Link to='/createDoc' className="ml-24 h-52 w-40   py-1 rounded-md text-xl flex items-center gap-2">
+           <img src="https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank-googlecolors.png" alt="create-doc" className="h-52 border rounded-md shadow-xl hover:scale-110 transition-all duration-300 delay-150 " />
+           </Link>
+      </Tooltip>
+
+</div>
+
+<div>
+  <p className="text-center text-2xl font-semibold dark:text-white">Sin documentos creados.</p>
+</div>
+  </Layout>
+)
+
  if(data)
   return (
 <>  
