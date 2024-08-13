@@ -6,9 +6,9 @@ import {  getDocByIdRequest, updateDocRequest } from '../../api/doc';
 import { useState } from 'react';
 import Layout from '../../Layout';
 import Navbar from '../navbar/Navbar';
-import { FaRegSave } from "react-icons/fa";
+import { FaCloudDownloadAlt } from "react-icons/fa";
 import { IoArrowBackOutline } from "react-icons/io5";
-
+import { Divider } from '@chakra-ui/react'
 
 
 
@@ -59,19 +59,31 @@ const DocContent = () => {
       <>
    <Navbar/>
 
-        <div className='flex flex-col w-full ml-24'>
-      <div className=' mt-12 flex items-center gap-3'>
-        <Link to='/doc' className='bg-white  h-7 w-12 flex items-center justify-center hover:bg-gray-100
-   rounded-md font-semibold border '><span className='text-center text-xl'><IoArrowBackOutline/></span></Link>
-       
+        <div className='flex flex-col w-full '>
+          <section className='flex flex-col pb-4 '>
+      <div className=' mt-12 flex flex-col justify-center items-center  gap-3'>
+         <p className='text-black  text-3xl'>{data.title}</p>
+
+         <div className='flex  justify-start px-3 py-2 rounded-full w-10/12 bg-slate-100 '>
+              <Link to='/doc' className='bg-white flex py-4 justify-center items-center h-7 w-12 
+   rounded-md font-semibold border'><span className='text-center text-xl'><IoArrowBackOutline/></span>
+   </Link>
+          
             <button 
-              className='hover:bg-gray-100 flex  justify-center items-center gap-2 bg-white border h-7 w-28 text-center rounded-md font-medium shadow-xl' 
+              className='hover:border text-xl flex ml-12 mt-1 justify-center items-center gap-2  h-7 w-28 text-center rounded-md  hover:bg-white' 
               onClick={handleSave}>
-            <span className='text-xl'> <FaRegSave/>
+            <span className='text-xl'> <FaCloudDownloadAlt/>
               </span>  <p className=''>Guardar</p>
             </button>
+         </div>
+    
+      </div> 
+      <div className='mt-10 '>
+              <Divider/>
       </div>
-                <div className='w-11/12 m-auto bg-white mt-12'>
+
+      </section>
+                <div className='w-11/12 m-auto bg-white mt-5'>
             <DocItem onChange={setDocContent} initialContent={initialContent}    />
           </div>
         </div>

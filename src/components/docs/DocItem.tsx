@@ -5,7 +5,8 @@ import { useCreateBlockNote} from "@blocknote/react";
 import "@blocknote/mantine/style.css";
 import { useEffect, useState } from "react";
 import { generateDocx } from "../utils/generateDocx";
-import { SiMicrosoftword } from "react-icons/si";
+import { FiDownload } from "react-icons/fi";
+import { Tooltip } from "@chakra-ui/react";
 
 
 interface DocItemProps {
@@ -34,11 +35,15 @@ const DocItem = ({ onChange, initialContent = "[]" }: DocItemProps) => {
   useEffect(() => {
     onChange(JSON.stringify(blocks));
   }, [blocks, onChange]);
+
+
   
   return (
   <>
-  <button className="px-3 font-semibold rounded-md bg-white text-black border absolute top-12 left-72 hover:bg-gray-100 h-7 flex gap-2 items-center" onClick={() => generateDocx(blocks)}>GenerarDocx <span><SiMicrosoftword /></span></button>
-    <BlockNoteView
+  <Tooltip label="Descargar documento word">
+  <button className="px-3 text-xl rounded-md  text-black hover:border  absolute top-[6.8rem] right-52 hover:bg-white h-7 flex gap-2 items-center" onClick={() => generateDocx(blocks)}>Descargar <span><FiDownload /> </span></button>
+  </Tooltip> 
+   <BlockNoteView
     className="border w-9/12 p-4 mb-40 m-auto rounded-md"
       editor={editor}
       onChange={() => {
