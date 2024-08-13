@@ -22,7 +22,7 @@ const DocPage = () => {
   
   if(isLoading) return <div>Cargando...</div>
 
-if(data.length === 0) return (
+if(!data ||data.length === 0) return (
   <Layout>
     
 <div className=" bg-gray-100 dark:bg-neutral-800  w-full px-28 py-8 ">
@@ -38,7 +38,7 @@ if(data.length === 0) return (
 </div>
 
 <div>
-  <p className="text-center text-2xl font-semibold dark:text-white">Sin documentos creados.</p>
+  <p className="text-center text-2xl font-semibold dark:text-white mt-24">Sin documentos creados.</p>
 </div>
   </Layout>
 )
