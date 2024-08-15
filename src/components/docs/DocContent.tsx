@@ -8,7 +8,7 @@ import Layout from '../../Layout';
 import Navbar from '../navbar/Navbar';
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { Divider } from '@chakra-ui/react'
+import { Divider, Spinner } from '@chakra-ui/react'
 
 
 
@@ -43,7 +43,12 @@ const DocContent = () => {
     }
   };
 
-  if (isLoading) return <div>Cargando...</div>;
+  if (isLoading) return <Layout>
+    <div className='flex justify-center items-center text-3xl pt-24 dark:text-white'>
+      <Spinner/>
+    </div>
+    
+    </Layout>;
 
   if (!data || !data.description) {
     return <Layout>
