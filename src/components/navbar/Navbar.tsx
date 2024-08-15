@@ -16,7 +16,7 @@ const Navbar = () => {
     <aside className="flex flex-col z-50 fixed items-center  w-20  min-h-screen py-8 overflow-y-auto bg-gray-100 border-r rtl:border-l rtl:border-r-0 dark:bg-[#181b20] dark:border-neutral-800">
 
 
-     <nav className="flex flex-col flex-1 mt-12 space-y-14">
+     <nav className="flex flex-col flex-1 mt-12  space-y-14 overflow-x-auto">
             <DarkMode/>
             
         
@@ -88,7 +88,7 @@ const Navbar = () => {
      
     </nav>
 
-    <div className="flex flex-col space-y-6">
+    <div className="flex flex-col space-y-6 mt-auto">
 
             <div className="flex flex-col items-center mt-4 space-y-4 ">
         <Tooltip label="Salir" aria-label="A tooltip">

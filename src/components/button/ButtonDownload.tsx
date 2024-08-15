@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { downloadFileRequest } from "../../api/notas";
 
 interface ButtonDownloadProps {
@@ -45,11 +46,13 @@ const ButtonDownload: React.FC<ButtonDownloadProps> = ({ fileId, nameFile }) => 
                 }else if (res.data.type === "application/pdf"){
                     link.setAttribute('download', `${fileNameWithoutExtension}.pdf`);
                 }else if (res.data.type === "application/txt"){
-                    link.setAttribute('download', `${fileNameWithoutExtension}.txt`);
-                }else if(res.data.type === "application/rar"){
+                    link.setAttribute('download', `${fileNameWithoutExtension}.text/plain`);
+                }else if(res.data.type === "application/x-rar-compressed"){
                     link.setAttribute('download', `${fileNameWithoutExtension}.rar`);
-                }else {
+                }else if(res.data.type === "application/zip"){
                     link.setAttribute('download', `${fileNameWithoutExtension}.zip`);
+                }else {
+                    toast.error("No se puede descargar este tipo de archivos")
                 }
           
                 
