@@ -14,6 +14,9 @@ const DocList = () => {
     queryFn: () => getAllDocRequest(userId)
 });
 
+
+
+
 if(isLoading){
     return <div>Cargando..</div>
 }
@@ -27,6 +30,7 @@ if(data)
           <div className='mt-auto text-center border p-2'>
                 <p className='text-black font-medium '> {item.title}</p> 
                 <p className='text-sm mt-4'>Fecha</p>
+
           </div>
        
         </div>

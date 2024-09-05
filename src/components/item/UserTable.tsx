@@ -3,7 +3,8 @@ import { User } from "../../interface/notas"
 import { deleteUser, getUsers } from "../../api/auth"
 import { toast } from "react-toastify"
 import { TiUserDeleteOutline } from "react-icons/ti";
-import { useDisclosure, Modal, Button, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, ModalFooter, ModalHeader } from "@chakra-ui/react";
+import { useDisclosure, Modal, Button, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, ModalFooter, ModalHeader, Spinner } from "@chakra-ui/react";
+import Layout from "../../Layout";
 
 
 const UserTable = () => {
@@ -30,9 +31,11 @@ const UserTable = () => {
 
     if(isLoading)
         return (
-            <div className="w-10/12 m-auto">
-                <p>Cargando...</p>
-            </div>
+            <Layout>
+               <Spinner/>
+            </Layout>
+               
+            
         )
 
     if(data)

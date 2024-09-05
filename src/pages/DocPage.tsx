@@ -3,8 +3,9 @@ import Layout from "../Layout"
 import {  getAllDocRequest } from "../api/doc"
 import { useAuthStore } from "../context/auth/store"
 import { Link } from "react-router-dom"
-import { SimpleGrid, Spinner, Tooltip } from "@chakra-ui/react"
+import {  SimpleGrid, Spinner, Tooltip } from "@chakra-ui/react"
 import DateFormat from "../components/utils/DateFormat"
+
 
 
 
@@ -19,6 +20,7 @@ const DocPage = () => {
       queryKey: ['docId', userId],
       queryFn: () => getAllDocRequest(userId|| "")
   });
+
 
   
   if(isLoading) return 
@@ -71,10 +73,10 @@ if(!data ||data.length === 0) return (
  <article className="">
  <div className="mt-auto flex flex-col justify-between w-full border h-24 rounded-b-md  bg-slate-100">
     <p className="text-center text-xl p-1">{item.title}</p>
-  
-      <p className=" text-sm text-center mt-auto pb-1 pl-1 font-medium"><DateFormat item={item.createdAt}/></p>
- 
- </div> 
+
+          <p className=" text-sm text-center mt-auto pb-1 pl-1 font-medium"><DateFormat item={item.createdAt}/></p>   
+
+  </div>
  </article>
 
  </Link>

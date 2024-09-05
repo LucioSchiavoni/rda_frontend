@@ -44,3 +44,13 @@ export const updateDocRequest = async(data: any): Promise<any>=> {
         console.log(error)
     }
 }
+
+
+export const deleteDocRequest = async(id:string) => {
+    try {
+        const res = await clienteAxios.delete(`/docs/${id}`)
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
