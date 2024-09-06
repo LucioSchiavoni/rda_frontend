@@ -54,3 +54,12 @@ export const deleteDocRequest = async(id:string) => {
         console.log(error)
     }
 }
+
+export const addCollaborators = async(data: any): Promise<any> => {
+    try {
+        const res = await clienteAxios.post("/collab", data)
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}

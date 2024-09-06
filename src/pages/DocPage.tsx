@@ -5,6 +5,7 @@ import { useAuthStore } from "../context/auth/store"
 import { Link } from "react-router-dom"
 import {  SimpleGrid, Spinner, Tooltip } from "@chakra-ui/react"
 import DateFormat from "../components/utils/DateFormat"
+import AddCollaborators from "../components/Modal/AddCollaborators"
 
 
 
@@ -66,22 +67,24 @@ if(!data ||data.length === 0) return (
 </div>
 
 <SimpleGrid spacing={4} ml={24} p={24} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-  {data.map((item: any, index: number) => (
-    <>
- <Link to={`/docId/${userId}/${item.id}`}  key={index}  className="hover:scale-110 transition-all delay-150 duration-300 h-80 w-52 rounded-md border dark:border-neutral-700 flex flex-col justify-between">
- <img src="https://icones.pro/wp-content/uploads/2022/06/icone-microsoft-word.png" alt="google-doc-icons" className=" w-36 m-auto" />
- <article className="">
- <div className="mt-auto flex flex-col justify-between w-full border h-24 rounded-b-md  bg-slate-100">
-    <p className="text-center text-xl p-1">{item.title}</p>
-
-          <p className=" text-sm text-center mt-auto pb-1 pl-1 font-medium"><DateFormat item={item.createdAt}/></p>   
-
-  </div>
- </article>
-
- </Link>
- 
- </>
+{data.map((item: any, index: number) => (
+  <div className="hover:scale-110 transition-all delay-150 duration-300 h-71 w-52 rounded-md border dark:border-neutral-700 flex flex-col ">
+  
+    <Link to={`/docId/${userId}/${item.id}`} key={index} className="">
+        <img src="https://icones.pro/wp-content/uploads/2022/06/icone-microsoft-word.png" alt="google-doc-icons" className="w-36 m-auto" />
+        <article className="">
+            <div className="mt-auto flex flex-col w-full  h-24 rounded-t-md bg-slate-100">
+                <p className="text-center text-xl p-1">{item.title}</p>
+                <p className="text-sm text-center  font-medium">
+                    <DateFormat item={item.createdAt} />
+                </p>
+            </div>
+        </article>
+    </Link>
+    <div className="bg-slate-100 w-full">
+                    <AddCollaborators documentId={item.id}/>
+                </div>
+    </div>
 ))}
 </SimpleGrid>
     </Layout>

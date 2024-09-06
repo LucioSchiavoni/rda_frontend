@@ -9,7 +9,6 @@ import Layout from "../../Layout";
 
 const UserTable = () => {
 
-
     const {data, isLoading} = useQuery<User[], Error>({
         queryKey: ['users'],
         queryFn: getUsers
