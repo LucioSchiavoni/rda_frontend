@@ -25,6 +25,12 @@ const handleRowClick = (id: number) => {
   navigate(`/${id}`);
 };
 
+const [query, setQuery] = useState<string>("");
+
+const filteredItems = data?.filter(item =>
+  item?.title?.toLowerCase().includes(query.toLowerCase())
+);
+
 
 if(isLoading)
   return (
@@ -44,13 +50,45 @@ if(isLoading)
     )
   }
 
+  if(!filteredItems || filteredItems.length === 0){
+    return(
+      <div className="w-full py-8 m-auto flex flex-col ">
+        <div className="flex justify-start ml-32">
+                <input
+        type="text"
+        placeholder="Buscar..."
+        className="px-3 py-2 rounded-md shadow-xl w-4/12 mb-4 focus:border-cyan-800 outline-none focus:ring-2"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
+        </div>
+        <div className="flex flex-col  dark:bg-[#181b20] rounded-md w-11/12 mr-10 m-auto">
+        <div className="-m-1.5 overflow-x-auto py-8 pt-4">
+        <p className="text-center text-2xl font-medium dark:text-white mt-4">No se encontraron repositorios</p>
+        </div>
+        </div>
+   
+      </div>
+    )
+  }
+
 if(data)
   return (
       <div className="py-8 w-full dark:bg-neutral-900">
-
+        <div className="flex justify-start ml-32">
+                <input
+        type="text"
+        placeholder="Buscar..."
+        className="px-3 py-2 rounded-md shadow-xl w-4/12 mb-4 focus:border-cyan-800 outline-none focus:ring-2"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+      />
+        </div>
+      
    
     <div className="flex flex-col  dark:bg-[#181b20] rounded-md w-11/12 mr-10 m-auto">
   <div className="-m-1.5 overflow-x-auto">
+
     <div className="p-1.5 min-w-full inline-block align-middle">
       <div className="border rounded-lg overflow-hidden dark:border-neutral-700">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
@@ -66,9 +104,7 @@ if(data)
            
               {
               
-       
-              
-                data.map((item, index) => (
+              filteredItems?.map((item, index) => (
 
                      <tr key={index} onClick={() => handleRowClick(item.id)} className="tr-button hover:font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 hover:shadow-xl ">  
               <td className="px-2 flex items-center py-2 whitespace-nowrap   text-gray-800 dark:text-neutral-200">
@@ -83,10 +119,7 @@ if(data)
                   </button>
                   {
                     check === true ?
-                   
-                      
                       <DeletePost id={item.id}/>
-                    
                     :
                     null
                   }
