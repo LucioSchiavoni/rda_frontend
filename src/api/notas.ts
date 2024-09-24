@@ -97,6 +97,15 @@ export const getNotasByIdRequest = async(id: string): Promise<Post> => {
     }
 }
 
+export const getNotasByPermission = async(id: string): Promise<any>=> {
+    try {
+        const res = await clienteAxios.get(`/notas/collaborators/${id}`)
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 export const createFileRequest = async(formdata:FormData) => {
     try {

@@ -38,6 +38,26 @@ export default function PostForm({errors, register}: NotasFormProps){
   <ErrorMessage>{errors.title.message}</ErrorMessage>
 )}
         </div>
+
+        <div className="flex flex-col w-full text-xl">
+           <div className="relative mb-10">
+          <p className="dark:text-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0  font-medium text-gray-600
+              absolute">Visibilidad del repositorio</p>
+         <select
+              id="title"
+              className="border dark:text-white px-3 py-3 mt-5 w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              {...register("state", {
+                required: "Seleccione un campo",
+              })}
+            >
+              <option disabled value="">Seleccione una opcion</option>
+              <option value="PUBLIC">Publico</option>
+              <option value="PRIVATE">Privado</option>
+            </select>
+              {errors.state && (
+  <ErrorMessage>{errors.state.message}</ErrorMessage>
+)}
+        </div>
        
 <div className="">
        <p className="font-medium  text-gray-600 dark:text-white p-2">Asunto</p>
@@ -58,7 +78,7 @@ export default function PostForm({errors, register}: NotasFormProps){
         </div>
   </div>
   </div>
-
+  </div>
   )
 }
 

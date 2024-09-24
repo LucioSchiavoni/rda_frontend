@@ -13,7 +13,7 @@ export default function CreatePost() {
     const initialValues: NotaFormData = {
     title:"",
     content: "",
-    state: "PUBLIC",
+    state: "",
     authorId:"",   
     }
 
