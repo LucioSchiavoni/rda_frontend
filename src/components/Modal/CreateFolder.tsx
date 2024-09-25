@@ -14,6 +14,7 @@ import { HiOutlineFolderPlus } from "react-icons/hi2";
 import { createFolderRequest } from "../../api/notas";
 import { toast } from "react-toastify";
 import React from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
@@ -38,7 +39,7 @@ const CreateFolder: React.FC<PostIdPorps> = ({id}) => {
 
 
   const { register, handleSubmit } = useForm<FolderData>(); 
-
+  const queryClient = useQueryClient();
 
   const handleForm: SubmitHandler<FolderData> = async(data) =>{
       try {  
@@ -47,10 +48,12 @@ const CreateFolder: React.FC<PostIdPorps> = ({id}) => {
              postId: id.id
           }
           const res = await createFolderRequest(jsonData)
-          toast.info(res.message)
-          setTimeout(() =>{
-            window.location.reload()
-          }, 2000)
+    
+          queryClient.invalidateQueries({
+            queryKey:['folder'],
+            exact:true
+          });
+      toast.info(res.message)
       } catch (error) {
           console.log(error)
       }

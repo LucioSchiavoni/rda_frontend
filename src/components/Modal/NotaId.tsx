@@ -12,6 +12,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { useAuthStore } from "../../context/auth/store";
 import FileCard from "../item/FileCard";
 import { Spinner } from '@chakra-ui/react';
+import AddPermissions from "./AddPermissions";
   
 
 
@@ -22,7 +23,7 @@ const NotaId = () => {
     const user = useAuthStore((state) => state.profile)
 
     const {data , isLoading, error} = useQuery<Post>({
-        queryKey: ['post', id],
+        queryKey: ['folder', id],
         queryFn: () => getNotasByIdRequest(id || ""),
         enabled: !!id,
     })
@@ -38,7 +39,6 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
            <aside className="dark:text-white ">
              <Spinner/>
            </aside>
-           <p className="font-medium px-4">Cargando...</p>
            </div> ;
         if (error) return <div><p>Error: {error.message}</p></div>;
         if (!data) return <div><p>No se encontraron datos.</p></div>;
@@ -63,6 +63,7 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
     <div className=''>
         <ButtonCreate id={data.id}/> 
       </div>
+      <AddPermissions postId={data.id}/>
 </aside>
 <section className=" w-10/12 mt-32 ">    
 

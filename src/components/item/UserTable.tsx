@@ -3,7 +3,7 @@ import { User } from "../../interface/notas"
 import { deleteUser, getUsers } from "../../api/auth"
 import { toast } from "react-toastify"
 import { TiUserDeleteOutline } from "react-icons/ti";
-import { useDisclosure, Modal, Button, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, ModalFooter, ModalHeader, Spinner } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import Layout from "../../Layout";
 
 
@@ -14,7 +14,7 @@ const UserTable = () => {
         queryFn: getUsers
     })
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+  
     
     const handleDelete = async(id: number) => {
         try {
@@ -65,29 +65,10 @@ const UserTable = () => {
 
                
                   
-                  <Button onClick={onOpen}>
+                  <button className="px-3 py-2 bg-white rounded-md text-xl" onClick={() => handleDelete(item.id)}>
                     <TiUserDeleteOutline />
-                  </Button>
-                  <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-                  <ModalOverlay />
-                <ModalContent>
-                <ModalHeader>Borrar usuario</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                    <p>Desea eliminar esta cuenta?</p>
-            
-          </ModalBody>
+                  </button>
 
-          <ModalFooter className="gap-4">
-          <Button variant='ghost'  type="button" className="inline-flex bg-gray-100 hover:bg-gray-300 dark:bg-neutral-900 dark:hover:bg-neutral-800 items-center gap-x-2 text-2xl font-semibold rounded-lg border border-transparent text-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:text-white " onClick={() => handleDelete(item.id)}>Eliminar usuario</Button>
-            <Button mr={3} onClick={onClose} className="dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 bg-gray-100 hover:bg-gray-300">
-              Cancelar
-            </Button> 
-          </ModalFooter>
-        </ModalContent>
-
-                  </Modal>
-                
 
               </td>
             </tr>
