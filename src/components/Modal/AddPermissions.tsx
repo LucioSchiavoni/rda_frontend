@@ -31,7 +31,7 @@ const AddPermissions: React.FC<postIdProps> = ({postId}) => {
                     postId: postId
                 } 
             const result = await addPermissions(jsonData)
-                toast.info(result?.data)
+                toast.info(result?.info)
         } catch (error) {
             console.log(error)
         }

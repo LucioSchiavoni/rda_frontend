@@ -76,8 +76,8 @@ export const editNotasRequest = async(id: string, data: EditData) => {
 
 export const addPermissions = async(dataJson: any) => {
     try {
-        const newAdd = clienteAxios.post("/collaborators/notas", dataJson)
-        return newAdd;
+        const newAdd = await clienteAxios.post("/collaborators/notas", dataJson)
+        return newAdd.data;
     } catch (error) {
         console.log(error)
     }
