@@ -63,7 +63,13 @@ const handleRowClick = (postId: number, folderId: number, titlePost: string, nam
     <div className=''>
         <ButtonCreate id={data.id}/> 
       </div>
-      <AddPermissions postId={data.id}/>
+      {
+        data.state === "PRIVATE" ?
+    <AddPermissions postId={data.id}/>
+        :
+        null
+      }
+      
 </aside>
 <section className=" w-10/12 mt-32 ">    
 
