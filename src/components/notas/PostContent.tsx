@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { Post } from "../../interface/notas";
-import { getNotasRequest, getNotasByPermission } from "../../api/notas";
+import {  getNotasByPermission } from "../../api/notas";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import DateFormat from "../utils/DateFormat";
@@ -16,10 +16,7 @@ const PostContent = () => {
 
 
   const [check, setCheck] = useState(false)
-//   const { data, isLoading } = useQuery<Post[], Error>({
-//     queryKey: ['notas'],
-//     queryFn: getNotasRequest
-// });
+
 
 const { data, isLoading } = useQuery<Post[], Error>({
   queryKey: ['id', user.id],
