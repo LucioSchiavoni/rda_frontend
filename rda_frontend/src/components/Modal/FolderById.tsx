@@ -4,8 +4,8 @@ import {  getFolderById } from "../../api/notas";
 import { MdArrowBack } from "react-icons/md";
 import SubirArchivo from "./ArchivoModal";
 import FileCard from "../item/FileCard";
-import { useEffect, useState } from "react";
 import { Spinner } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 
 const FolderById = () => {
     const { postId, folderId, titlePost, nameFolder } = useParams<{ postId: any, folderId: string, titlePost: string, nameFolder:string }>();
@@ -13,34 +13,21 @@ const FolderById = () => {
     const postIdInt = parseInt(postId || "");
     const folderIdInt = parseInt(folderId || "");
 
-    const [data, setData] = useState([])
-    const [load, setLoad] = useState(false)
 
-    const getFolderData = async() => {
-        try {
-            setLoad(true)
-            const res = await getFolderById(postIdInt, folderIdInt)
-            setData(res)
-        } catch (error) {
-            console.log(error)
-        }finally{
-            setLoad(false)
-        }
-    }
+    const {data, isLoading} = useQuery({
+        queryKey: ['notas', postIdInt, folderIdInt],
+        queryFn: () => getFolderById(postIdInt, folderIdInt),
+        enabled: !!postIdInt && !!folderIdInt
+    })
 
-        useEffect(() => {
-            getFolderData();
-        }, [])
-
-        if (load) {
-            return (
-                <div className="dark:text-white flex justify-center items-center mt-24">
-
-                     <Spinner/>
-                </div>
+        if(isLoading) return <div className="flex-col flex justify-center items-center  mt-24 dark:text-white ">
               
-            )
-        }
+            <aside className="dark:text-white ">
+              <Spinner/>
+            </aside>
+            </div> ;
+
+    if(data)
     return (
 
       <div className="dark:text-white">

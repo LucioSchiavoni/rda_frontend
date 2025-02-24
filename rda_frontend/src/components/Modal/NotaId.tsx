@@ -23,7 +23,7 @@ const NotaId = () => {
     const user = useAuthStore((state) => state.profile)
 
     const {data , isLoading, error} = useQuery<Post>({
-        queryKey: ['folder', id],
+        queryKey: ['notas', id],
         queryFn: () => getNotasByIdRequest(id || ""),
         enabled: !!id,
     })

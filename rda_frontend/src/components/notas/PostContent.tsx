@@ -19,7 +19,7 @@ const PostContent = () => {
 
 
 const { data, isLoading } = useQuery<Post[], Error>({
-  queryKey: ['id', user.id],
+  queryKey: ['notas', user.id],
   queryFn:() => getNotasByPermission(user.id),
 
 });

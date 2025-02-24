@@ -9,7 +9,7 @@ import {
   import { MdOutlineDelete } from "react-icons/md";
 import { deletePostRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
-
+import {useMutation, useQueryClient} from '@tanstack/react-query'
 
 interface IdProps {
     id: number;
@@ -19,14 +19,23 @@ const DeletePost: React.FC<IdProps> = ({id}) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn: async({id}: {id: number}) => { return await deletePostRequest(id)},
+        onError: (error) => {
+            toast.error(error.message)
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['notas'] })
+            toast.success(data.success)
+        }
+    })
+
 
     const handleDelete = async() => {
         try {
-           const res =  await deletePostRequest(id)
-            toast.info(res.success)
-            setTimeout(() => {
-                window.location.reload()
-            }, 2000)
+          mutation.mutate({id})
         } catch (error) {
             console.log(error)
         }

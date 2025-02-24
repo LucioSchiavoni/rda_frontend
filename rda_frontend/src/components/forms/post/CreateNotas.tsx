@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form"
 import { NotaFormData } from "../../../types"
 import { createNotasRequest } from "../../../api/notas"
-import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import {useMutation} from '@tanstack/react-query'
+import {useMutation, useQueryClient} from '@tanstack/react-query'
 import { useAuthStore } from "../../../context/auth/store"
 import PostForm from "./PostForm"
+import { useNavigate } from "react-router-dom"
 
 export default function CreatePost() {
 
+
+    const queryClient = useQueryClient()
+
     const navigate = useNavigate()
+
     const initialValues: NotaFormData = {
     title:"",
     content: "",
@@ -30,9 +34,9 @@ export default function CreatePost() {
     
         },
         onSuccess: (data) => {
-            console.log(data.success)
+            queryClient.invalidateQueries({queryKey: ['notas']})
             toast.success(data.success)
-            navigate("/auth")
+            navigate('/auth')
         }
     })
 

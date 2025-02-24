@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { createFileInFolder, createFileRequest } from '../../api/notas';
 import { toast } from 'react-toastify';
 import { HiOutlineDocumentPlus } from 'react-icons/hi2';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 
 
 interface ArchivoProps {
@@ -27,6 +28,31 @@ const SubirArchivo: React.FC<ArchivoProps> = ({id, folderId}) => {
 
 
  const {handleSubmit} = useForm()
+
+ const queryClient = useQueryClient()
+
+  const mutationFileInFolder = useMutation({
+    mutationFn: createFileInFolder,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['notas'] })
+      toast.success(data.message)
+    }
+  })
+
+  const mutationFile = useMutation({
+    mutationFn: createFileRequest,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['notas'] })
+      toast.success(data.message)
+    }
+  })
+
 
 
 const [file, setFile] = useState<File | null>(null);
@@ -49,15 +75,11 @@ const [file, setFile] = useState<File | null>(null);
       if (folderId) {
         formData.append('postId', id.toString()); 
         formData.append('folderId', folderId);
-        data = await createFileInFolder(formData)
+        data = mutationFileInFolder.mutate(formData)
       } else {
         formData.append('id', id.id); 
-        data = await createFileRequest(formData)
+        data = mutationFile.mutate(formData)
       }
-      toast.success(data.success);
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     } catch (error) {
       console.error(error);
       toast.error('Error al subir el archivo');
