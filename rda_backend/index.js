@@ -14,7 +14,7 @@ const PORT = process.env.PORT
 
 
 const opcionesCors = {
-    origin: process.env.FRONTEND_URL_DEV,
+    origin: process.env.FRONTEND_URL,
     credentials: true 
 };
 

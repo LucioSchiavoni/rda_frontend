@@ -40,7 +40,7 @@ export const createCarpetaService = async (dataCarpetas) => {
         }
     })
     if(findFolder){
-        return {message: "Ya existe la carpeta"} 
+        return {error: "Ya existe la carpeta"} 
     }
     const newCarpeta = await prisma.folder.create({
         data:{
@@ -48,7 +48,7 @@ export const createCarpetaService = async (dataCarpetas) => {
             postId: postId
         }
     })
-    return { message: "Carpeta creada con exito"};
+    return { message: "Carpeta creada con exito", data: newCarpeta};
 }
 
 export const deleteCarpetaService = async(data) => {
